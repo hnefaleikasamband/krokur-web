@@ -1,0 +1,6 @@
+.table-row {
+  cursor: pointer;
+}
+.table-row:hover {
+  background: pink;
+}

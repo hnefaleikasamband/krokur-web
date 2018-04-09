@@ -1,0 +1,45 @@
+<h1>
+  athletes works!
+</h1>
+<div class="example-container mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let athlete"> {{ athlete.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="kt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kennitala </mat-header-cell>
+      <mat-cell *matCellDef="let athlete"> {{ athlete.kt }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="club">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Club </mat-header-cell>
+      <mat-cell *matCellDef="let athlete"> {{ athlete.club }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="diploma">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Diploma </mat-header-cell>
+      <mat-cell *matCellDef="let athlete"> {{ athlete.achievements?.diploma | date:'MMM d, y' }} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="achievements">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Bronz / Silver / Gold </mat-header-cell>
+      <mat-cell *matCellDef="let athlete"> 
+        {{ !!athlete.achievements?.bronz ? (athlete.achievements?.bronz | date:'MMM d, y') : "-" }} /
+        {{ !!athlete.achievements?.silver ? (athlete.achievements?.silver | date:'MMM d, y') : "-" }} /
+        {{ !!athlete.achievements?.gold ? (athlete.achievements?.gold | date:'MMM d, y') : "-" }}
+      </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay" 
+            (click)="alertMe(row)" class="table-row"></mat-row>
+  </mat-table>
+</div>
+<button mat-raised-button (click)="addRow()">Add row</button>
