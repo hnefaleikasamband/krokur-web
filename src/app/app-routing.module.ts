@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AthletesComponent } from './athletes/athletes.component'
+import { Routes, RouterModule } from '@angular/router'
 
 const routes: Routes = [
-  { path: '', component: AthletesComponent},
+  { 
+    path: '', 
+    loadChildren: 'app/athletes/athletes.module#AthletesModule'
+  },
   //{ path: 'login', component: Login },
   //{ path: 'dashboard', component: }
 

@@ -6,16 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
-import { AthletesComponent } from './athletes/athletes.component';
 
-import { AthletesService } from './service/athletes.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AthletesComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [AthletesService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

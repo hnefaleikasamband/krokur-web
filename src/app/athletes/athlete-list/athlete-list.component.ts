@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Athlete, AthletesService } from '../service/athletes.service';
+import { Athlete, AthletesService } from '../../service/athletes.service';
 import { MatTableDataSource , MatSort} from '@angular/material';
 
 @Component({
-  selector: 'app-athletes',
-  templateUrl: './athletes.component.html',
-  styleUrls: ['./athletes.component.css'],
+  selector: 'app-athlete-list',
+  templateUrl: './athlete-list.component.html',
+  styleUrls: ['./athlete-list.component.css']
 })
-export class AthletesComponent implements OnInit {
+export class AthleteListComponent implements OnInit {
 
   //athletes: Athlete[] = [];
   dataSource = new MatTableDataSource();
@@ -44,7 +44,3 @@ export class AthletesComponent implements OnInit {
 
 
 }
-
-const DATA: Athlete[] = [
-  {_id: '0102301203102', name: 'test', kt: '0123456999', club: 'HFH'}
-]
