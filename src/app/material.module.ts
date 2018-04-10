@@ -5,20 +5,23 @@ import {
     MatButtonModule,
     MatTableModule,
     MatInputModule,
-    MatSortModule, } from '@angular/material';
+    MatSortModule,
+    MatCardModule } from '@angular/material';
 
 @NgModule({
     imports: [ 
         MatButtonModule,
         MatTableModule,
         MatInputModule,
-        MatSortModule
+        MatSortModule,
+        MatCardModule
     ], 
     exports: [ 
         MatButtonModule,
         MatTableModule,
         MatInputModule,
-        MatSortModule
+        MatSortModule,
+        MatCardModule
     ]
 })
 
