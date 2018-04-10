@@ -6,6 +6,7 @@ import { AthletesRoutingModule } from './athletes-routing.module';
 import { AthletesService } from '../service/athletes.service';
 import { AthleteListComponent } from './athlete-list/athlete-list.component';
 import { AthleteDetailComponent } from './athlete-detail/athlete-detail.component';
+import { AthleteBoutsComponent } from './athlete-bouts/athlete-bouts.component';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { AthleteDetailComponent } from './athlete-detail/athlete-detail.componen
     AthletesRoutingModule,
     MaterialModule,
   ],
-  declarations: [AthleteListComponent, AthleteDetailComponent],
+  declarations: [AthleteListComponent, AthleteDetailComponent, AthleteBoutsComponent],
   providers: [AthletesService]
 })
 export class AthletesModule { }
