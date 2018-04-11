@@ -1,3 +1,65 @@
-<p>
-  athlete-detail works!
-</p>
+<h1> Athlete details temp title</h1>
+<div class="athlete-top">
+  <mat-card class="top-left">
+
+    <mat-card-header>
+      <mat-card-title><h3>Details</h3></mat-card-title>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+    <br />
+    <mat-card-content>
+      <form class="athlete-form">
+        <!-- Name input -->
+        <mat-form-field class="athlete-input">
+          <input matInput placeholder="Name" [formControl]="nameFormControl" [value]="fullName ? fullName : ''">
+          <mat-error *ngIf="nameFormControl.invalid">
+            {{ getNameError() }}
+          </mat-error>
+        </mat-form-field>
+        <!-- kt input -->
+        <mat-form-field class="athlete-input">
+          <input matInput placeholder="SSN" [formControl]="ssnFormControl" [value]="ssn ? ssn : ''">
+          <mat-error *ngIf="ssnFormControl.invalid">
+            {{ getSsnError() }}
+          </mat-error>
+        </mat-form-field>
+        <!-- Group input -->
+        <mat-form-field class="athlete-input">
+          <input matInput placeholder="Club" [formControl]="clubFormControl" [value]="club ? club : ''">
+          <mat-error *ngIf="clubFormControl.invalid">
+            {{ getClubError() }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary">edit</button>
+      <button mat-button>Save</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="top-right">
+    <mat-card-header>
+      <mat-card-title><h3>Achievements</h3></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <br />
+      <mat-list>
+        <mat-list-item>Diploma</mat-list-item>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-list-item>Bronz</mat-list-item>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-list-item>Silver</mat-list-item>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-list-item>Gold</mat-list-item>
+      </mat-list>  
+    </mat-card-content>
+  </mat-card>
+</div>
+  
+
+  
+
+<app-athlete-list></app-athlete-list>
