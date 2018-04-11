@@ -7,6 +7,7 @@ import { AthletesService } from '../service/athletes.service';
 import { AthleteListComponent } from './athlete-list/athlete-list.component';
 import { AthleteDetailComponent } from './athlete-detail/athlete-detail.component';
 import { AthleteBoutsComponent } from './athlete-bouts/athlete-bouts.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +15,8 @@ import { AthleteBoutsComponent } from './athlete-bouts/athlete-bouts.component';
     CommonModule,
     AthletesRoutingModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [AthleteListComponent, AthleteDetailComponent, AthleteBoutsComponent],
   providers: [AthletesService]
