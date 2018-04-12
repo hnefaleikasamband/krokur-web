@@ -1,0 +1,19 @@
+.card-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin-top: -4em;
+}
+
+.main-card {
+    width: 75%;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.new-button{
+    margin-top: 4em;
+    margin-right: 5%;
+}

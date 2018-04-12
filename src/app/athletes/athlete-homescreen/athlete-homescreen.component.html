@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>group</mat-icon>
+        <span>Manage Users</span>
+      </button>
+    </mat-menu>
+    <span> {{user.name}} </span>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span class="spacer"></span>
+    <button mat-fab (click)="printTabIndex()" class="new-button">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="card-container">
+  <mat-card class="main-card">   
+
+    <mat-card-content>
+      <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+        <mat-tab label="Athletes">
+          <ng-template mat-tab-label>
+            <mat-icon>group</mat-icon>
+          </ng-template>
+          <div>
+            <app-athlete-list (selectedRow)="selectAthlete($event)"></app-athlete-list>
+          </div>
+        </mat-tab>
+        <mat-tab *ngFor="let athlete of openAthletesTab; let index;" label="{{athlete.name}}">
+          <ng-template mat-tab-label>
+            {{athlete.name}}
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="removeTab(index)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </ng-template>
+          <app-athlete-detail [athlete]="athlete"></app-athlete-detail>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

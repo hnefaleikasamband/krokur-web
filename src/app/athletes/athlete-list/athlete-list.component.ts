@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Athlete, AthletesService } from '../../service/athletes.service';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { AthletesService } from '../../service/athletes.service';
 import { MatTableDataSource , MatSort} from '@angular/material';
+import Athlete from '../../models/athlete';
 
 @Component({
   selector: 'app-athlete-list',
@@ -11,9 +12,10 @@ export class AthleteListComponent implements OnInit {
 
   //athletes: Athlete[] = [];
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['name', 'kt', 'club', 'diploma', 'achievements'];
+  columnsToDisplay = ['name', 'ssn', 'club', 'diploma', 'achievements'];
 
   @ViewChild(MatSort) sort: MatSort;
+  @Output() selectedRow = new EventEmitter<Athlete>();
 
   constructor(private _athleteService: AthletesService) { }
 
@@ -33,13 +35,8 @@ export class AthleteListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  addRow() {
-    this.dataSource.data.push(this._athleteService.get()[0]);
-    //this.athleteTable.renderRows();
-  }
-
-  alertMe(item) {
-    console.log("Hello kids:", item);
+  selectAthlete(athlete) {
+    this.selectedRow.emit(athlete);
   }
 
 

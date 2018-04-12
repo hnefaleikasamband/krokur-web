@@ -2,41 +2,34 @@
 <div class="athlete-top">
   <mat-card class="top-left">
 
-    <mat-card-header>
-      <mat-card-title><h3>Details</h3></mat-card-title>
+    <mat-card-header class="card-header-container">
+      <mat-card-title class="top-left"><h3>Details</h3></mat-card-title>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="top-right">
+        <mat-icon>more_vert</mat-icon>
+      </button>
     </mat-card-header>
 
     <mat-divider></mat-divider>
     <br />
-    <mat-card-content>
-      <form class="athlete-form">
-        <!-- Name input -->
-        <mat-form-field class="athlete-input">
-          <input matInput placeholder="Name" [formControl]="nameFormControl" [value]="fullName ? fullName : ''">
-          <mat-error *ngIf="nameFormControl.invalid">
-            {{ getNameError() }}
-          </mat-error>
-        </mat-form-field>
-        <!-- kt input -->
-        <mat-form-field class="athlete-input">
-          <input matInput placeholder="SSN" [formControl]="ssnFormControl" [value]="ssn ? ssn : ''">
-          <mat-error *ngIf="ssnFormControl.invalid">
-            {{ getSsnError() }}
-          </mat-error>
-        </mat-form-field>
-        <!-- Group input -->
-        <mat-form-field class="athlete-input">
-          <input matInput placeholder="Club" [formControl]="clubFormControl" [value]="club ? club : ''">
-          <mat-error *ngIf="clubFormControl.invalid">
-            {{ getClubError() }}
-          </mat-error>
-        </mat-form-field>
-      </form>
+    <mat-card-content class="athlete-info">
+      <mat-list >
+        <mat-list-item class="athlete-input"> {{athlete.name}} </mat-list-item>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-list-item>{{athlete.ssn}}</mat-list-item>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-list-item>{{athlete.club}}</mat-list-item>
+      </mat-list>
     </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button color="primary">edit</button>
-      <button mat-button>Save</button>
-    </mat-card-actions>
   </mat-card>
 
   <mat-card class="top-right">
@@ -45,21 +38,15 @@
     </mat-card-header>
     <mat-card-content>
       <mat-divider></mat-divider>
-      <br />
       <mat-list>
-        <mat-list-item>Diploma</mat-list-item>
+        <mat-list-item>Diploma: {{athlete.achievements?.diploma | date:'MMM d, y'}} </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>Bronz</mat-list-item>
+        <mat-list-item>Bronz: {{athlete.achievements?.bronz | date:'MMM d, y'}} </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>Silver</mat-list-item>
+        <mat-list-item>Silver: {{athlete.achievements?.silver | date:'MMM d, y'}} </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>Gold</mat-list-item>
-      </mat-list>  
+        <mat-list-item>Gold: {{athlete.achievements?.gold | date:'MMM d, y'}}</mat-list-item>
+      </mat-list>
     </mat-card-content>
   </mat-card>
 </div>
-  
-
-  
-
-<app-athlete-list></app-athlete-list>

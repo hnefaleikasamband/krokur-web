@@ -1,5 +1,5 @@
 <h1>
-    athletes works!
+    Athletes
   </h1>
   <div class="example-container mat-elevation-z8">
     <mat-form-field>
@@ -13,9 +13,9 @@
         <mat-cell *matCellDef="let athlete"> {{ athlete.name }} </mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="kt">
+      <ng-container matColumnDef="ssn">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Kennitala </mat-header-cell>
-        <mat-cell *matCellDef="let athlete"> {{ athlete.kt }} </mat-cell>
+        <mat-cell *matCellDef="let athlete"> {{ athlete.ssn }} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="club">
@@ -39,7 +39,6 @@
       
       <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
       <mat-row *matRowDef="let row; columns: columnsToDisplay" 
-              (click)="alertMe(row)" class="table-row"></mat-row>
+              (click)="selectAthlete(row)" class="table-row"></mat-row>
     </mat-table>
   </div>
-  <button mat-raised-button (click)="addRow()">Add row</button>

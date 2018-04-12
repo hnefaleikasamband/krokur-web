@@ -8,6 +8,7 @@ import { AthleteListComponent } from './athlete-list/athlete-list.component';
 import { AthleteDetailComponent } from './athlete-detail/athlete-detail.component';
 import { AthleteBoutsComponent } from './athlete-bouts/athlete-bouts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AthleteHomescreenComponent } from './athlete-homescreen/athlete-homescreen.component';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [AthleteListComponent, AthleteDetailComponent, AthleteBoutsComponent],
+  declarations: [AthleteListComponent, AthleteDetailComponent, AthleteBoutsComponent, AthleteHomescreenComponent],
   providers: [AthletesService]
 })
 export class AthletesModule { }

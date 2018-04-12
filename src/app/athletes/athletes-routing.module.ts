@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AthleteListComponent } from './athlete-list/athlete-list.component';
 import { AthleteDetailComponent } from './athlete-detail/athlete-detail.component';
+import { AthleteHomescreenComponent } from './athlete-homescreen/athlete-homescreen.component'
 
 const routes: Routes = [ {
     path: '', redirectTo: 'list', pathMatch: 'full'
@@ -12,6 +13,9 @@ const routes: Routes = [ {
   }, {
     path: 'detail',
     component: AthleteDetailComponent
+  }, {
+    path: 'home',
+    component: AthleteHomescreenComponent
   }
 ];
 

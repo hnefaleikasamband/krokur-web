@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import Athlete from '../models/athlete';
 
 @Injectable()
 export class AthletesService {
@@ -25,12 +26,4 @@ export class AthletesService {
   get(): Athlete[] {
     return this.athletes;
   }
-}
-
-export interface Athlete {
-  _id?: string,
-  name: string,
-  kt: string,
-  club: string,
-  achievements?: any
 }

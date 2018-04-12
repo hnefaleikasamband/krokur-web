@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Athlete, AthletesService } from '../../service/athletes.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { AthletesService } from '../../service/athletes.service';
 import { FormControl, Validators } from '@angular/forms';
+import Athlete from '../../models/athlete';
 
 @Component({
   selector: 'app-athlete-detail',
@@ -13,25 +14,11 @@ export class AthleteDetailComponent implements OnInit {
   ssn: String;
   club: String;
 
-  nameFormControl = new FormControl('', [ Validators.required]);
-  ssnFormControl = new FormControl('', [Validators.required]);
-  clubFormControl = new FormControl('', [Validators.required]);
+  @Input() athlete: Athlete;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  getNameError() {
-    return this.nameFormControl.hasError('required') ? 'You must enter a name ' : 'Error in errors :O';
-  }
-
-  getSsnError() {
-    return this.ssnFormControl.hasError('required') ? 'You must enter a Social Security Number ' : 'Error in errors :O';
-  }
-
-  getClubError() {
-    return this.clubFormControl.hasError('required') ? 'You must enter a club ' : 'Error in errors :O';
   }
 
 }
