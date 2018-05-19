@@ -1,0 +1,24 @@
+.card-header-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.boutFormContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.shorterInput {
+    max-width: 5em;
+    flex: 0 1 auto;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.longerInput {
+    flex: 1 1 auto;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}

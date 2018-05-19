@@ -13,7 +13,6 @@
     flex: 1 1 auto;
 }
 
-.new-button{
-    margin-top: 4em;
-    margin-right: 5%;
+.spacer-2 {
+    flex: 0.97 1 auto;
 }

@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-add-edit.component';
+
+/* Services & models */
 import User from '../../models/user';
-import Athlete from '../../models/athlete';
+import { Athlete, AthleteTab } from '../../models/athlete';
+import { AthletesService } from '../../service/athletes.service';
+
 
 @Component({
   selector: 'app-athlete-homescreen',
@@ -10,26 +17,36 @@ import Athlete from '../../models/athlete';
 export class AthleteHomescreenComponent implements OnInit {
 
   user: User;
-  openAthletesTab: Athlete[] = [];
+  openAthletesTab: AthleteTab[] = [];
   selectedTabIndex = 0;
 
 
-  constructor() { }
+  constructor( 
+    private athletesService: AthletesService,
+    private router: Router,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.user = {
       name: 'Ásdís Rósa Gunnarsdóttir',
       email: 'disa@diploma.is'
     }
+    console.log(this.athletesService.get());
   }
 
   selectAthlete(athlete) {
     console.log('I got the athlete click in the homescreen: ', athlete);
     const alreadyOpen = this.openAthletesTab.find(a => a._id === athlete._id);
     if(!alreadyOpen || alreadyOpen === undefined) {
-      this.openAthletesTab.push(athlete);
+      this.athletesService.getAthleteBouts(athlete._id).subscribe( response => {
+        athlete.bouts = response;
+        this.openAthletesTab.push(athlete);
+        this.selectedTabIndex = this.openAthletesTab.indexOf(athlete) + 1;
+      })
+    } else {
+      this.selectedTabIndex = this.openAthletesTab.indexOf(athlete) + 1;
     }
-    this.selectedTabIndex = this.openAthletesTab.indexOf(athlete) + 1;
   }
 
   printTabIndex() {
@@ -37,7 +54,23 @@ export class AthleteHomescreenComponent implements OnInit {
   }
 
   removeTab(index) {
-    this.openAthletesTab.splice(index+1,1);
+    console.log('Index being removed:', index);
+    this.openAthletesTab.splice(index,1);
+  }
+
+  goToRoute(path: string) {
+    console.log('the path: ', path);
+    this.router.navigateByUrl('/' + path);
+  }
+
+  newButtonPushed() {
+    let editDialogRef = this.dialog.open(AthleteAddEditComponent, {
+      width: '30%'
+    });
+    
+    editDialogRef.afterClosed().subscribe( result => {
+      console.log('Closing dialog:',result);
+    })
   }
 
 }

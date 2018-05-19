@@ -1,3 +1,92 @@
-<p>
-  athlete-bouts works!
-</p>
+
+<mat-card-title class="card-header-container">
+  <h3>Bouts</h3>
+</mat-card-title>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="boutForm" #formDirective="ngForm">
+  <div class="boutFormContainer">
+
+    <mat-form-field style="min-width: 8em; max-width:10em; flex: 0 1 auto">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="shorterInput">
+      <mat-select placeholder="Type" formControlName="type" required>
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="typeControl.hasError('required')">Please choose a type</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="longerInput">
+      <input matInput placeholder="Oppponent" formControlName="opponent" [matAutocomplete]="auto" required>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let athlete of filteredAthletes | async" [value]="athlete">
+          {{ athlete.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="longerInput">
+      <mat-select placeholder="Club" formControlName="club" required>
+        <mat-option *ngFor="let club of clubs" [value]="club.shortName">
+          {{club.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="shorterInput">
+      <input matInput type="number" #points max maxlength="2" placeholder="Points" min="9" max="45" required>
+    </mat-form-field>
+
+    <mat-form-field class="longerInput">
+      <mat-select placeholder="Event organizer" formControlName="organizer" required>
+        <mat-option *ngFor="let club of clubs" [value]="club.shortName">
+          {{club.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button type="submit" [disabled]="!boutForm.valid"><mat-icon>add</mat-icon></button>
+    <!-- <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button> -->
+  </div>
+</form>
+
+<mat-table #table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+    <mat-cell *matCellDef="let bout"> {{ bout.date | date: 'MMM d, y' }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+    <mat-cell *matCellDef="let bout"> {{ bout.type }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="opponent">
+    <mat-header-cell *matHeaderCellDef> Opponent </mat-header-cell>
+    <mat-cell *matCellDef="let bout"> {{ bout.opponent?.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="club">
+    <mat-header-cell *matHeaderCellDef> club </mat-header-cell>
+    <mat-cell *matCellDef="let bout"> {{ bout.opponent?.club }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="points">
+    <mat-header-cell *matHeaderCellDef> points </mat-header-cell>
+    <mat-cell *matCellDef="let bout"> {{ bout.points }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="eventOrganizer">
+      <mat-header-cell *matHeaderCellDef> Event Organizer </mat-header-cell>
+      <mat-cell *matCellDef="let bout"> {{ bout.eventOrganizer }} </mat-cell>
+    </ng-container>-->
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplay" class="table-row"></mat-row>
+</mat-table>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import Athlete from '../models/athlete';
+import Bout from '../models/bout';
 
 @Injectable()
 export class AthletesService {
@@ -25,5 +26,12 @@ export class AthletesService {
 
   get(): Athlete[] {
     return this.athletes;
+  }
+
+  getAthleteBouts(athleteID: String): Observable<Bout[]> {
+    return this.http.get(`http://localhost:3000/api/v1/athletes/${athleteID}/bouts`)
+      .pipe( map (response => {
+        return <Bout[]>response['bouts'];
+      }));
   }
 }

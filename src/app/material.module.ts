@@ -14,7 +14,33 @@ import {
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    MatTabsModule } from '@angular/material';
+    MatTabsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatAutocompleteModule } from '@angular/material';
+
+const MatModules = [
+    MatButtonModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSortModule,
+    MatCardModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatListModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatAutocompleteModule
+];
 
 @NgModule({
     imports: [ 
@@ -30,7 +56,12 @@ import {
         MatMenuModule,
         MatIconModule,
         MatToolbarModule,
-        MatTabsModule
+        MatTabsModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatAutocompleteModule
     ], 
     exports: [ 
         MatButtonModule,
@@ -45,7 +76,12 @@ import {
         MatMenuModule,
         MatIconModule,
         MatToolbarModule,
-        MatTabsModule
+        MatTabsModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatAutocompleteModule
     ]
 })
 

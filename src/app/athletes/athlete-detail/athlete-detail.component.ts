@@ -1,7 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AthletesService } from '../../service/athletes.service';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { NgSwitch } from '@angular/common';
+import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-add-edit.component';
+
+/* Service & model imports */
 import Athlete from '../../models/athlete';
+import Bout from '../../models/bout';
+import { AthletesService } from '../../service/athletes.service';
 
 @Component({
   selector: 'app-athlete-detail',
@@ -10,15 +16,26 @@ import Athlete from '../../models/athlete';
 })
 export class AthleteDetailComponent implements OnInit {
 
-  fullName: String;
-  ssn: String;
-  club: String;
-
   @Input() athlete: Athlete;
+  @Input() bouts: Bout[];
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }
 
+  editAthlete() {
+    let editDialogRef = this.dialog.open(AthleteAddEditComponent, {
+      width: '30%',
+      data: {
+        athlete: this.athlete
+      }
+    });
+    
+    editDialogRef.afterClosed().subscribe( result => {
+      console.log('Closing dialog:',result);
+    })
+  }
 }

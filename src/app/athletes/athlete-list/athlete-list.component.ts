@@ -13,6 +13,7 @@ export class AthleteListComponent implements OnInit {
   //athletes: Athlete[] = [];
   dataSource = new MatTableDataSource();
   columnsToDisplay = ['name', 'ssn', 'club', 'diploma', 'achievements'];
+  filterInput: String;
 
   @ViewChild(MatSort) sort: MatSort;
   @Output() selectedRow = new EventEmitter<Athlete>();
@@ -32,7 +33,8 @@ export class AthleteListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.filterInput = filterValue;
+    this.dataSource.filter = filterValue.trim().toLowerCase();;
   }
 
   selectAthlete(athlete) {

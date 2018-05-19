@@ -9,12 +9,14 @@ import { AthleteDetailComponent } from './athlete-detail/athlete-detail.componen
 import { AthleteBoutsComponent } from './athlete-bouts/athlete-bouts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AthleteHomescreenComponent } from './athlete-homescreen/athlete-homescreen.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
     AthletesRoutingModule,
+    SharedModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,

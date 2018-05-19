@@ -1,11 +1,11 @@
-<h1> Athlete details temp title</h1>
+<br />
 <div class="athlete-top">
-  <mat-card class="top-left">
+  <mat-card class="top-left" style="min-width: 35%;">
 
     <mat-card-header class="card-header-container">
       <mat-card-title class="top-left"><h3>Details</h3></mat-card-title>
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="editAthlete()">
           <mat-icon>edit</mat-icon>
           <span>Edit</span>
         </button>
@@ -20,33 +20,58 @@
     </mat-card-header>
 
     <mat-divider></mat-divider>
-    <br />
-    <mat-card-content class="athlete-info">
-      <mat-list >
-        <mat-list-item class="athlete-input"> {{athlete.name}} </mat-list-item>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item class="athlete-input"> 
+          <h2 mat-line>{{athlete.name}}</h2>
+        </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>{{athlete.ssn}}</mat-list-item>
+        <mat-list-item class="athlete-input"> 
+          <h2 mat-line>{{athlete.ssn}}</h2>
+          <p mat-line> SSN </p>
+        </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>{{athlete.club}}</mat-list-item>
+        <mat-list-item class="athlete-input"> 
+          <h2 mat-line>{{athlete.club}}</h2>
+          <p mat-line> Club </p>
+        </mat-list-item>
       </mat-list>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="top-right">
+  <mat-card class="top-right" style="min-width: 35%;">
     <mat-card-header>
       <mat-card-title><h3>Achievements</h3></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-divider></mat-divider>
       <mat-list>
-        <mat-list-item>Diploma: {{athlete.achievements?.diploma | date:'MMM d, y'}} </mat-list-item>
+        <mat-list-item>
+          <h2 mat-line>{{athlete.achievements?.diploma | date:'MMM d, y'}}</h2>
+          <p mat-line>Diploma</p> 
+        </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>Bronz: {{athlete.achievements?.bronz | date:'MMM d, y'}} </mat-list-item>
+        <mat-list-item>
+            <h2 mat-line>{{athlete.achievements?.bronz | date:'MMM d, y'}}</h2>
+          <p mat-line>Bronz</p> 
+        </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>Silver: {{athlete.achievements?.silver | date:'MMM d, y'}} </mat-list-item>
+        <mat-list-item>
+          <h2 mat-line>{{athlete.achievements?.silver | date:'MMM d, y'}}</h2>
+          <p mat-line>Silver</p> 
+        </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
-        <mat-list-item>Gold: {{athlete.achievements?.gold | date:'MMM d, y'}}</mat-list-item>
+        <mat-list-item>
+          <h2 mat-line>{{athlete.achievements?.gold | date:'MMM d, y'}}</h2>
+          <p mat-line>Gold</p> 
+        </mat-list-item>
       </mat-list>
     </mat-card-content>
+  </mat-card>
+</div>
+<br />
+<div class="bout-container" style="margin-bottom: 2em;">
+  <mat-card class="mat-elevation-z8" style="width: 90%">
+    <app-athlete-bouts [bouts]="bouts"></app-athlete-bouts>
   </mat-card>
 </div>

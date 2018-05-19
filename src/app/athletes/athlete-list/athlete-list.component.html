@@ -1,9 +1,12 @@
 <h1>
     Athletes
   </h1>
-  <div class="example-container mat-elevation-z8">
+  <div class="mat-elevation-z8">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterInput" placeholder="Search">
+      <button mat-button *ngIf="filterInput" matSuffix mat-icon-button aria-label="Clear" (click)="applyFilter('')">
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
   
     <mat-table #table [dataSource]="dataSource" matSort>
