@@ -1,0 +1,23 @@
+<h3 mat-dialog-title> Athlete information</h3>
+
+<form (ngSubmit)="onSave()" #athleteForm="ngForm">
+  <mat-form-field class="fullWidthInput">
+    <input matInput placeholder="Name" [(ngModel)]="athlete.name" name="name">
+  </mat-form-field>
+
+  <mat-form-field class="fullWidthInput">
+    <input matInput placeholder="Social Security Number" [(ngModel)]="athlete.ssn" name="ssn">
+  </mat-form-field>
+
+
+  <mat-form-field class="fullWidthInput">
+    <input matInput placeholder="Club" [(ngModel)]="athlete.club" name="club">
+  </mat-form-field>
+
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button type="submit" mat-button>Save</button>
+</mat-dialog-actions>
+
+</form>

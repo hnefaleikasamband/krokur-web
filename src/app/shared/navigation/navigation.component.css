@@ -1,0 +1,10 @@
+.secondNavContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.new-button{
+    margin-top: 4em;
+    z-index: 5;
+}
