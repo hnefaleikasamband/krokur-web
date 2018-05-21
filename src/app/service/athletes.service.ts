@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import Athlete from '../models/athlete';
 import Bout from '../models/bout';
+import Club from '../models/club';
 
 @Injectable()
 export class AthletesService {
@@ -33,5 +34,12 @@ export class AthletesService {
       .pipe( map (response => {
         return <Bout[]>response['bouts'];
       }));
+  }
+
+  getClubs(): Observable<Club[]> {
+    return this.http.get(`http://localhost:3000/api/v1/clubs`)
+      .pipe( map (response => {
+        return <Club[]>response['clubs'];
+      }))
   }
 }
