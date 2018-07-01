@@ -17,32 +17,37 @@
     </mat-form-field>
 
     <mat-form-field class="longerInput">
-      <input matInput placeholder="Oppponent" formControlName="opponent" [matAutocomplete]="auto" required>
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <input matInput placeholder="Oppponent" formControlName="opponent" [matAutocomplete]="autoAthlete" required>
+      <mat-autocomplete #autoAthlete="matAutocomplete" [displayWith]="displayOpponent">
         <mat-option *ngFor="let athlete of filteredAthletes | async" [value]="athlete">
-          {{ athlete.name }}
+          <span> {{ athlete.name }} </span>
+          <small> ( {{athlete.club}} ) </small>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="longerInput">
-      <mat-select placeholder="Club" formControlName="club" required>
-        <mat-option *ngFor="let club of clubs" [value]="club.shortName">
-          {{club.name}}
+      <input matInput placeholder="Club" formControlName="club" [matAutocomplete]="autoClub" required>
+      <mat-autocomplete #autoClub="matAutocomplete" [displayWith]="displayClub">
+        <mat-option *ngFor="let club of filteredOpponentClubs | async" [value]="club">
+          <span> {{ club.name }} </span>
+          <small> ( {{club.shorthand}} ) </small>
         </mat-option>
-      </mat-select>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="shorterInput">
-      <input matInput type="number" #points max maxlength="2" placeholder="Points" min="9" max="45" required>
+      <input matInput type="number" #points formControlName="points" maxlength="2" placeholder="Points" min="9" max="45" required>
     </mat-form-field>
 
     <mat-form-field class="longerInput">
-      <mat-select placeholder="Event organizer" formControlName="organizer" required>
-        <mat-option *ngFor="let club of clubs" [value]="club.shortName">
-          {{club.name}}
+      <input matInput placeholder="Organizer" formControlName="organizer" [matAutocomplete]="autoOrganizer" required>
+      <mat-autocomplete #autoOrganizer="matAutocomplete" [displayWith]="displayClub">
+        <mat-option *ngFor="let club of filteredOrganizerClubs | async" [value]="club">
+          <span> {{ club.name }} </span>
+          <small> ( {{club.shorthand}} ) </small>
         </mat-option>
-      </mat-select>
+      </mat-autocomplete>
     </mat-form-field>
 
     <button mat-icon-button type="submit" [disabled]="!boutForm.valid"><mat-icon>add</mat-icon></button>
