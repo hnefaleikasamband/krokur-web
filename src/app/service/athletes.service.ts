@@ -42,4 +42,11 @@ export class AthletesService {
         return <Club[]>response['clubs'];
       }))
   }
+
+  addBoutToAthlete( athlete: string, boutInfo: any): Observable<Bout> {  
+    return this.http.post(`http://localhost:3000/api/v1/athletes/${athlete}/bouts`, boutInfo)
+        .pipe( map (response => {
+          return <Bout> response['bout'];
+        }));
+  }
 }

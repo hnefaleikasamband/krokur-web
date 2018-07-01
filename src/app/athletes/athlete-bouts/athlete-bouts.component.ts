@@ -20,12 +20,17 @@ export class AthleteBoutsComponent implements OnInit {
   columnsToDisplay = ['date','type','opponent','club','points','eventOrganizer'];
 
   @Input() bouts: Bout[];
+  @Input() athlete: Athlete;
 
   constructor() { }
 
   ngOnInit() {
     this.dataSource.data = this.bouts;
+  }
 
+  newBout(bout: Bout) {
+    console.log('We got an event: ', bout);
+    this.dataSource.data = [...this.dataSource.data, bout];
   }
 
 }

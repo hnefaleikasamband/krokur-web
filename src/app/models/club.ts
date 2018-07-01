@@ -1,6 +1,6 @@
 export default  interface Club {
-    _id?: String,
-    name: String,
-    shorthand: String,
-    info?: String
+    _id?: string,
+    name: string,
+    shorthand: string,
+    info?: string
 }

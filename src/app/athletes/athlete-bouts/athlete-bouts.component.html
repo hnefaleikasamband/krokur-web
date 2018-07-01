@@ -3,7 +3,7 @@
   <h3>Bouts</h3>
 </mat-card-title>
 
-<app-add-single-bout></app-add-single-bout>
+<app-add-single-bout [athlete]="athlete" (newBout)="newBout($event)" ></app-add-single-bout>
 
 <mat-table #table [dataSource]="dataSource">
 
