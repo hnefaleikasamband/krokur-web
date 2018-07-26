@@ -1,18 +1,23 @@
-<mat-card class="loginFormContainer">
-  <mat-card-title>Login</mat-card-title>
+<div class="loginVertCenter">
+  <mat-card class="loginFormContainer">
+    <mat-card-title>Login</mat-card-title>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    
-    <mat-form-field>
-      <input matInput placeholder="email" formControlName="email">
-    </mat-form-field>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <mat-form-field>
+        <input matInput placeholder="email" formControlName="email" autocomplete>
 
-    <mat-form-field>
-        <input matInput type="password" placeholder="Password" formControlName="password">
-    </mat-form-field>
+      <mat-error *ngIf="">Email invalid</mat-error>
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
-
-    <a href="#" id="forPass">Forgot password?</a>
-  </form>
-</mat-card>
+      <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
+      
+      <div class="buttons">
+        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+        <a href="#" id="forPass">Forgot password?</a>
+    </div>
+    </form>
+  </mat-card>
+</div>
