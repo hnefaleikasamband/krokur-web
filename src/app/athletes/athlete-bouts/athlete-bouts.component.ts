@@ -2,8 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AthletesService } from '../../service/athletes.service';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import Bout from '../../models/bout';
 import Athlete from '../../models/athlete';
 
