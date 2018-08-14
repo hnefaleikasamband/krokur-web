@@ -14,10 +14,11 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 this.authenticationService.logout();
-                location.reload(true);
-                console.log("This was an 401 should relocate");
+                const login = "/login";
+                if ( location.pathname.slice(0, login.length) !== login) {
+                    location.reload(true);
+                }
             }
-            console.log("Got the error, but it might be unkown:", err);
             const error = err.error.message || err.statusText;
             return throwError(error);
         }))

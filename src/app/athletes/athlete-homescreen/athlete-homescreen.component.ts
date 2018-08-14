@@ -36,7 +36,6 @@ export class AthleteHomescreenComponent implements OnInit {
   }
 
   selectAthlete(athlete) {
-    console.log('I got the athlete click in the homescreen: ', athlete);
     const alreadyOpen = this.openAthletesTab.find(a => a._id === athlete._id);
     if(!alreadyOpen || alreadyOpen === undefined) {
       this.athletesService.getAthleteBouts(athlete._id).subscribe( response => {

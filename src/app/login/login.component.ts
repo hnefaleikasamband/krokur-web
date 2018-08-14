@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material'
 
 import { AuthService } from "../_services/auth.service";
+import { debuglog } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -44,8 +45,8 @@ export class LoginComponent implements OnInit {
     // out and make them login again in case a new user is trying to log in.
     this.authService.logout();
 
-      // Save the return url from route parameters or default to '/'
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // Save the return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit(){
@@ -61,13 +62,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-            this.router.navigate([this.returnUrl]);
-            this.snackBar.open('','', { duration: 2000 })
+          this.router.navigate([this.returnUrl]);
         },
         error => {
-            this.loading = false;
-            console.log(error);
-            this.snackBar.open('Unable to sign in, please try again.','X', { duration: 4000});
+          this.loading = false;
+          console.log(error);
+          this.snackBar.open('Unable to sign in, please try again.','X', { duration: 4000});
         });
 
   }
