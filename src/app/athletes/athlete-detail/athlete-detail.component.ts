@@ -7,7 +7,7 @@ import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-a
 /* Service & model imports */
 import Athlete from '../../models/athlete';
 import Bout from '../../models/bout';
-import { AthletesService } from '../../service/athletes.service';
+import { AthletesService } from '../../_services/athletes.service';
 
 @Component({
   selector: 'app-athlete-detail',

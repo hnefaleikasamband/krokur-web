@@ -6,7 +6,7 @@ import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-a
 /* Services & models */
 import User from '../../models/user';
 import { Athlete, AthleteTab } from '../../models/athlete';
-import { AthletesService } from '../../service/athletes.service';
+import { AthletesService } from '../../_services/athletes.service';
 
 
 @Component({

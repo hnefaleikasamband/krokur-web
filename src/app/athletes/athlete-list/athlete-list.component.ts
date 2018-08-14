@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { AthletesService } from '../../service/athletes.service';
+import { AthletesService } from '../../_services/athletes.service';
 import { MatTableDataSource , MatSort} from '@angular/material';
 import Athlete from '../../models/athlete';
 

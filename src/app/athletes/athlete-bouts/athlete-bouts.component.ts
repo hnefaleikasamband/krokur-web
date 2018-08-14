@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { AthletesService } from '../../service/athletes.service';
+import { AthletesService } from '../../_services/athletes.service';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
