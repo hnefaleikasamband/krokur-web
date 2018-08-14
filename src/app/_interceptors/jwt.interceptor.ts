@@ -13,7 +13,6 @@ export class JwtInterceptor implements HttpInterceptor {
                     Authorization: `${currentUser.token}`
                 }
             });
-            console.log("I have intercepted the request and set header:", currentUser.token);
         }
 
         return next.handle(request);
