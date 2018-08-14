@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { AthletesService } from '../../_services/athletes.service';
 import { MatTableDataSource , MatSort} from '@angular/material';
-import Athlete from '../../models/athlete';
+import Athlete from '../../_models/athlete';
 
 @Component({
   selector: 'app-athlete-list',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
-import { Athlete } from '../../models/athlete';
+import { Athlete } from '../../_models/athlete';
 
 @Component({
   selector: 'app-athlete-add-edit',

@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material';
 import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-add-edit.component';
 
 /* Services & models */
-import User from '../../models/user';
-import { Athlete, AthleteTab } from '../../models/athlete';
+import User from '../../_models/user';
+import { Athlete, AthleteTab } from '../../_models/athlete';
 import { AthletesService } from '../../_services/athletes.service';
 
 

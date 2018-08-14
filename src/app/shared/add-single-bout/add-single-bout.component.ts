@@ -4,9 +4,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import Bout from '../../models/bout';
-import Athlete from '../../models/athlete';
-import Club from '../../models/club';
+import Bout from '../../_models/bout';
+import Athlete from '../../_models/athlete';
+import Club from '../../_models/club';
 
 @Component({
   selector: 'app-add-single-bout',

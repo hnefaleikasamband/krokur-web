@@ -5,8 +5,8 @@ import { NgSwitch } from '@angular/common';
 import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-add-edit.component';
 
 /* Service & model imports */
-import Athlete from '../../models/athlete';
-import Bout from '../../models/bout';
+import Athlete from '../../_models/athlete';
+import Bout from '../../_models/bout';
 import { AthletesService } from '../../_services/athletes.service';
 
 @Component({
