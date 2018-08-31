@@ -66,8 +66,11 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          console.log(error);
-          this.snackBar.open('Unable to sign in, please try again.','X', { duration: 4000});
+          if (error === "Unauthorized") {
+            this.snackBar.open('email or password not correct, please try again.','X', { duration: 4000});  
+          } else {
+            this.snackBar.open('Unkown error occured while trying to login.','X', { duration: 4000});
+          }
         });
 
   }

@@ -4,9 +4,10 @@ import { MatDialog } from '@angular/material';
 import { AthleteAddEditComponent } from '../../shared/athlete-add-edit/athlete-add-edit.component';
 
 /* Services & models */
-import User from '../../_models/user';
 import { Athlete, AthleteTab } from '../../_models/athlete';
+import authedUser from '../../_models/authedUser';
 import { AthletesService } from '../../_services/athletes.service';
+import { AuthService } from '../../_services/auth.service';
 
 
 @Component({
@@ -16,22 +17,21 @@ import { AthletesService } from '../../_services/athletes.service';
 })
 export class AthleteHomescreenComponent implements OnInit {
 
-  user: User;
+  user: authedUser;
   openAthletesTab: AthleteTab[] = [];
   selectedTabIndex = 0;
 
 
   constructor( 
     private athletesService: AthletesService,
+    private authService: AuthService,
     private router: Router,
     public dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.user = {
-      name: 'Ásdís Rósa Gunnarsdóttir',
-      email: 'disa@diploma.is'
-    }
+    this.user = this.authService.getLoggedInUser();
+    console.log("authed user:", this.user);
     console.log(this.athletesService.get());
   }
 

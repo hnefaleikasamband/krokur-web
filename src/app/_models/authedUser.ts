@@ -1,5 +1,6 @@
 export default  interface AuthedUser {
-    email: String,
-    name: String,
-    token: String
+    email: string,
+    name: string,
+    token: string,
+    roles: Array<string>,
 }
