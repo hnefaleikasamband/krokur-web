@@ -1,23 +1,30 @@
 <h3 mat-dialog-title> Athlete information</h3>
 
-<form (ngSubmit)="onSave()" #athleteForm="ngForm">
+<form (ngSubmit)="onSave()" [formGroup]="athleteFormGroup" #athleteForm="ngForm">
   <mat-form-field class="fullWidthInput">
-    <input matInput placeholder="Name" [(ngModel)]="athlete.name" name="name">
+    <input matInput placeholder="Athlete name" formControlName="name" required>
+    <mat-error *ngIf="nameControl.hasError('ssnvalidator')">The name can't be less than 5 characters</mat-error>
   </mat-form-field>
 
   <mat-form-field class="fullWidthInput">
-    <input matInput placeholder="Social Security Number" [(ngModel)]="athlete.ssn" name="ssn">
+    <input matInput placeholder="Social Security Number" formControlName="ssn" required>
+    <mat-error *ngIf="ssnControl.hasError('ssnValidator')">Input does not contain a valid SSN</mat-error>
   </mat-form-field>
 
 
   <mat-form-field class="fullWidthInput">
-    <input matInput placeholder="Club" [(ngModel)]="athlete.club" name="club">
+    <input matInput placeholder="Club" formControlName="club" [matAutocomplete]="autoClub" required>
+    <mat-autocomplete #autoClub="matAutocomplete" [displayWith]="displayClub">
+      <mat-option *ngFor="let club of filteredClubs | async" [value]="club">
+        <span> {{ club.name }} </span>
+        <small> ( {{club.shorthand}} ) </small>
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 
-
-<mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">Cancel</button>
-  <button type="submit" mat-button>Save</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button type="submit" mat-button [disabled]="!athleteFormGroup.valid">Save</button>
+  </mat-dialog-actions>
 
 </form>
