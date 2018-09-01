@@ -15,13 +15,11 @@ import { AuthService } from '../../_services/auth.service';
   styleUrls: ['./athlete-homescreen.component.css']
 })
 export class AthleteHomescreenComponent implements OnInit {
-  user: authedUser;
   openAthletesTab: AthleteTab[] = [];
   selectedTabIndex = 0;
 
   constructor(
     private athletesService: AthletesService,
-    private authService: AuthService,
     private router: Router,
     public dialog: MatDialog
   ) {}
@@ -56,11 +54,11 @@ export class AthleteHomescreenComponent implements OnInit {
   }
 
   newButtonPushed() {
-    const editDialogRef = this.dialog.open(AthleteAddEditComponent, {
+    const addDialogRef = this.dialog.open(AthleteAddEditComponent, {
       width: '30%'
     });
 
-    editDialogRef.afterClosed().subscribe(result => {
+    addDialogRef.afterClosed().subscribe(result => {
       console.log('Closing dialog:', result);
     });
   }
