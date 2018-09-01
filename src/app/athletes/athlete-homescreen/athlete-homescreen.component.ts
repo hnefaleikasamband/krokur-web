@@ -53,7 +53,7 @@ export class AthleteHomescreenComponent implements OnInit {
     this.router.navigateByUrl('/' + path);
   }
 
-  newButtonPushed() {
+  newButtonPushed(event) {
     const addDialogRef = this.dialog.open(AthleteAddEditComponent, {
       width: '30%'
     });
