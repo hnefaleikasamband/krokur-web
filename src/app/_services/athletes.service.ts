@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { map, catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import Athlete from '../_models/athlete';
 import Bout from '../_models/bout';
@@ -9,21 +9,20 @@ import Club from '../_models/club';
 
 @Injectable()
 export class AthletesService {
-  public athletes: Athlete[];
+  private athletes = new BehaviorSubject<Athlete[]>([]);
+  public athleteList = this.athletes.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getAthletes(): Observable<Athlete[]> {
-    // TODO: The path should come from a config file instead of hard-coded.
+  getAthletes(): Observable<boolean> {
     return this.http.get<any>(`${environment.baseUrl}/athletes`).pipe(
+      retry(2),
       map(response => {
-        return (this.athletes = <Athlete[]>response['athletes']);
-      })
+        this.athletes.next(<Athlete[]>response['athletes']);
+        return true;
+      }),
+      catchError(this.handleError)
     );
-  }
-
-  get(): Athlete[] {
-    return this.athletes;
   }
 
   getAthleteBouts(athleteID: String): Observable<Bout[]> {
@@ -48,9 +47,28 @@ export class AthletesService {
     return this.http.post(`${environment.baseUrl}/athletes`, athlete).pipe(
       catchError(this.handleError),
       map(response => {
-        return <Athlete>response['athlete'];
+        const newAthlete = <Athlete>response['athlete'];
+        this.athletes.next([...this.athletes.value, newAthlete]);
+        return newAthlete;
       })
     );
+  }
+
+  editAthlete(athlete: Athlete): Observable<Athlete> {
+    return this.http
+      .put(`${environment.baseUrl}/athletes/${athlete._id}`, athlete)
+      .pipe(
+        catchError(this.handleError),
+        map(response => {
+          const updatedAthlete = <Athlete>response['athlete'];
+          this.athletes.next(
+            this.athletes.value.map(
+              data => (data._id === athlete._id ? athlete : data)
+            )
+          );
+          return updatedAthlete;
+        })
+      );
   }
 
   addBoutToAthlete(athlete: string, boutInfo: any): Observable<Bout> {

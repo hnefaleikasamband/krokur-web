@@ -1,6 +1,12 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { AthletesService } from '../../_services/athletes.service';
-import { MatTableDataSource , MatSort} from '@angular/material';
+import { MatTableDataSource, MatSort } from '@angular/material';
 import Athlete from '../../_models/athlete';
 
 @Component({
@@ -9,20 +15,24 @@ import Athlete from '../../_models/athlete';
   styleUrls: ['./athlete-list.component.css']
 })
 export class AthleteListComponent implements OnInit {
-
-  //athletes: Athlete[] = [];
+  athletes: Athlete[];
   dataSource = new MatTableDataSource();
   columnsToDisplay = ['name', 'ssn', 'club', 'diploma', 'achievements'];
   filterInput: String;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @Output() selectedRow = new EventEmitter<Athlete>();
+  @ViewChild(MatSort)
+  sort: MatSort;
+  @Output()
+  selectedRow = new EventEmitter<Athlete>();
 
-  constructor(private _athleteService: AthletesService) { }
+  constructor(private _athleteService: AthletesService) {}
 
   ngOnInit() {
     this._athleteService.getAthletes().subscribe(result => {
-      this.dataSource.data = result
+      this._athleteService.athleteList.subscribe(athletes => {
+        this.dataSource.data = athletes;
+        console.log('Got a new athletes emit in athlete-list.component');
+      });
       console.log(result);
     });
   }
@@ -34,12 +44,10 @@ export class AthleteListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.filterInput = filterValue;
-    this.dataSource.filter = filterValue.trim().toLowerCase();;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   selectAthlete(athlete) {
     this.selectedRow.emit(athlete);
   }
-
-
 }

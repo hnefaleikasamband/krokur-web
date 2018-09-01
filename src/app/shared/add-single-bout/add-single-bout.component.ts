@@ -90,7 +90,9 @@ export class AddSingleBoutComponent implements OnInit {
   fillOpponentArrayWithAthletes() {
     this.athleteService.getAthletes().subscribe(
       athletes => {
-        this.athletes = athletes;
+        this.athleteService.athleteList.subscribe(response => {
+          this.athletes = response;
+        });
         this.initiateFilteredAthletes();
       },
       error => {

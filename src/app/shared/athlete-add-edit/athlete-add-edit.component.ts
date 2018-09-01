@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import {
   FormGroup,
   FormControl,
@@ -20,7 +20,7 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./athlete-add-edit.component.css']
 })
 export class AthleteAddEditComponent implements OnInit {
-  private newAthlete = true;
+  private isNewAthlete = true;
   athlete: Athlete;
   clubs: Array<Club>;
   filteredClubs: Observable<Club[]>;
@@ -44,7 +44,8 @@ export class AthleteAddEditComponent implements OnInit {
     public dialogRef: MatDialogRef<AthleteAddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private athletesService: AthletesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -65,10 +66,14 @@ export class AthleteAddEditComponent implements OnInit {
       clubs => {
         this.clubs = clubs;
         this.initiateFilteredClub();
+        this.checkIfEditAthlete();
       },
       error => {
-        // TODO: Make the user aware of that there is a problem with the bout form.
-        console.log('error in fillClubsArray() :', error);
+        this.snackBar.open(
+          'Error fetching available clubs, please reopen dialog.',
+          'X',
+          { duration: 4000 }
+        );
       }
     );
   }
@@ -104,25 +109,46 @@ export class AthleteAddEditComponent implements OnInit {
     return club ? `${club.name}` : undefined;
   }
 
+  checkIfEditAthlete() {
+    if (this.data && this.data.athlete) {
+      this.isNewAthlete = false;
+      this.athlete = this.data.athlete;
+      this.nameControl.setValue(this.data.athlete.name);
+      this.ssnControl.setValue(this.data.athlete.ssn);
+      this.clubControl.setValue(
+        this.clubs.filter(c => c.shorthand === this.data.athlete.club)[0]
+      );
+    } else {
+      this.athlete = {
+        name: '',
+        ssn: '',
+        club: ''
+      };
+    }
+  }
+
   onSave() {
     if (!this.athleteFormGroup.valid) {
       return;
     }
 
+    const saveFn = this.isNewAthlete
+      ? data => this.athletesService.addAthlete(data)
+      : data => this.athletesService.editAthlete(data);
+
     const formValues = this.athleteFormGroup.value;
-    const athlete: Athlete = {
-      name: formValues.name,
-      ssn: formatSsn(formValues.ssn),
-      club: formValues.club.shorthand
-    };
-    this.athletesService.addAthlete(athlete).subscribe(
+    this.athlete.name = formValues.name;
+    this.athlete.ssn = formatSsn(formValues.ssn);
+    this.athlete.club = formValues.club.shorthand;
+
+    saveFn(this.athlete).subscribe(
       newAthlete => {
-        console.log('New athlete', newAthlete);
         this.dialogRef.close({ athlete: newAthlete });
       },
       error => {
-        console.log('Unable to add athlete:', error);
-        console.log(error);
+        this.snackBar.open(`Unable to save, ${error}.`, 'X', {
+          duration: 5000
+        });
       }
     );
   }
