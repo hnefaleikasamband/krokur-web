@@ -28,15 +28,15 @@
   
       <ng-container matColumnDef="diploma">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Diploma </mat-header-cell>
-        <mat-cell *matCellDef="let athlete"> {{ athlete.achievements?.diploma | date:'MMM d, y' }} </mat-cell>
+        <mat-cell *matCellDef="let athlete"> {{ athlete.achievements.diploma?.date | date:'MMM d, y' }} </mat-cell>
       </ng-container>
       
       <ng-container matColumnDef="achievements">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Bronz / Silver / Gold </mat-header-cell>
         <mat-cell *matCellDef="let athlete"> 
-          {{ !!athlete.achievements?.bronz ? (athlete.achievements?.bronz | date:'MMM d, y') : "-" }} /
-          {{ !!athlete.achievements?.silver ? (athlete.achievements?.silver | date:'MMM d, y') : "-" }} /
-          {{ !!athlete.achievements?.gold ? (athlete.achievements?.gold | date:'MMM d, y') : "-" }}
+          {{ !!athlete.achievements.bronz?.date ? (athlete.achievements.bronz?.date | date:'MMM d, y') : "-" }} /
+          {{ !!athlete.achievements.silver?.date ? (athlete.achievements.silver?.date | date:'MMM d, y') : "-" }} /
+          {{ !!athlete.achievements.gold?.date ? (athlete.achievements.gold?.date | date:'MMM d, y') : "-" }}
         </mat-cell>
       </ng-container>
       

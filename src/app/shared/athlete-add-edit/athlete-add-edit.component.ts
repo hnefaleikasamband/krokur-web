@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { SsnValidator, formatSsn } from '../../_validators/ssn.validator';
 import { AthletesService } from '../../_services/athletes.service';
-import Athlete from '../../_models/athlete';
+import { newAthlete as Athlete } from '../../_models/athlete';
 import Club from '../../_models/club';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';

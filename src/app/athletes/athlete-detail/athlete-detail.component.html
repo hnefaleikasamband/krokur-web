@@ -47,22 +47,22 @@
       <mat-divider></mat-divider>
       <mat-list>
         <mat-list-item>
-          <h2 mat-line>{{athlete.achievements?.diploma | date:'MMM d, y'}}</h2>
+          <h2 mat-line>{{athlete.achievements.diploma?.date | date:'MMM d, y'}}</h2>
           <p mat-line>Diploma</p> 
         </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
         <mat-list-item>
-            <h2 mat-line>{{athlete.achievements?.bronz | date:'MMM d, y'}}</h2>
+            <h2 mat-line>{{athlete.achievements.bronz?.date | date:'MMM d, y'}}</h2>
           <p mat-line>Bronz</p> 
         </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
         <mat-list-item>
-          <h2 mat-line>{{athlete.achievements?.silver | date:'MMM d, y'}}</h2>
+          <h2 mat-line>{{athlete.achievements.silver?.date | date:'MMM d, y'}}</h2>
           <p mat-line>Silver</p> 
         </mat-list-item>
         <mat-divider [inset]="true"></mat-divider>
         <mat-list-item>
-          <h2 mat-line>{{athlete.achievements?.gold | date:'MMM d, y'}}</h2>
+          <h2 mat-line>{{athlete.achievements.gold?.date | date:'MMM d, y'}}</h2>
           <p mat-line>Gold</p> 
         </mat-list-item>
       </mat-list>
