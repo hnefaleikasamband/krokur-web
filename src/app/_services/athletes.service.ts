@@ -25,6 +25,13 @@ export class AthletesService {
     );
   }
 
+  getAthlete(id: string): Observable<Athlete> {
+    return this.http.get<Athlete>(`${environment.baseUrl}/athletes/${id}`).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+  }
+
   getAthleteBouts(athleteID: String): Observable<Bout[]> {
     return this.http
       .get(`${environment.baseUrl}/athletes/${athleteID}/bouts`)

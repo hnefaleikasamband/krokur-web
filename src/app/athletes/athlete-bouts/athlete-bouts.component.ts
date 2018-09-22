@@ -33,7 +33,7 @@ export class AthleteBoutsComponent implements OnInit {
   @Input()
   athlete: Athlete;
 
-  constructor() {}
+  constructor(private athletesService: AthletesService) {}
 
   ngOnInit() {
     this.dataSource.data = this.bouts;
@@ -41,5 +41,6 @@ export class AthleteBoutsComponent implements OnInit {
 
   newBout(bout: Bout) {
     this.dataSource.data = [...this.dataSource.data, bout];
+    this.athletesService.getAthletes().subscribe();
   }
 }
