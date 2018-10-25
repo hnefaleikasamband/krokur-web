@@ -15,27 +15,25 @@ import { AthletesService } from '../../_services/athletes.service';
   styleUrls: ['./athlete-detail.component.css']
 })
 export class AthleteDetailComponent implements OnInit {
+  @Input()
+  athlete: Athlete;
+  @Input()
+  bouts: Bout[];
 
-  @Input() athlete: Athlete;
-  @Input() bouts: Bout[];
+  constructor(public dialog: MatDialog) {}
 
-  constructor(
-    public dialog: MatDialog
-  ) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   editAthlete() {
-    let editDialogRef = this.dialog.open(AthleteAddEditComponent, {
+    const editDialogRef = this.dialog.open(AthleteAddEditComponent, {
       width: '30%',
       data: {
         athlete: this.athlete
       }
     });
-    
-    editDialogRef.afterClosed().subscribe( result => {
-      console.log('Closing dialog:',result);
-    })
+
+    editDialogRef.afterClosed().subscribe(result => {
+      console.log('Closing dialog:', result);
+    });
   }
 }
