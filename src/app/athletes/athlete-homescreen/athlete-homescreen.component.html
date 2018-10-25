@@ -13,7 +13,7 @@
             <mat-icon>group</mat-icon>
           </ng-template>
           <div>
-            <app-athlete-list (selectedRow)="selectAthlete($event)"></app-athlete-list>
+            <app-athlete-list (selectedRow)="selectAthlete($event)" [athletes]="athletes"></app-athlete-list>
           </div>
         </mat-tab>
         <mat-tab *ngFor="let athlete of openAthletesTab;" label="{{athlete.name}}">

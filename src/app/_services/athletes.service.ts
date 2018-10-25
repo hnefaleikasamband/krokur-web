@@ -28,6 +28,9 @@ export class AthletesService {
   getAthlete(id: string): Observable<Athlete> {
     return this.http.get<Athlete>(`${environment.baseUrl}/athletes/${id}`).pipe(
       retry(2),
+      map(response => {
+        return <Athlete>response['athlete'];
+      }),
       catchError(this.handleError)
     );
   }

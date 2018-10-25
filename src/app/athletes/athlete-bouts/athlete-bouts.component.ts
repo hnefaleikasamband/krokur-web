@@ -37,10 +37,33 @@ export class AthleteBoutsComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.data = this.bouts;
+    console.log('athlete in bout component:', this.athlete);
   }
 
   newBout(bout: Bout) {
     this.dataSource.data = [...this.dataSource.data, bout];
-    this.athletesService.getAthletes().subscribe();
+    this.athletesService.getAthlete(this.athlete._id).subscribe(athlete => {
+      if (
+        !this.checkForAchievement(
+          this.athlete.achievements,
+          athlete.achievements
+        )
+      ) {
+        this.athlete.achievements = athlete.achievements;
+        this.athletesService.getAthletes().subscribe();
+      }
+    });
+  }
+
+  checkForAchievement(
+    oldObj: Athlete['achievements'],
+    newObj: Athlete['achievements']
+  ) {
+    return (
+      oldObj.diploma.date === newObj.diploma.date &&
+      oldObj.bronz.date === newObj.bronz.date &&
+      oldObj.silver.date === newObj.silver.date &&
+      oldObj.gold.date === newObj.gold.date
+    );
   }
 }

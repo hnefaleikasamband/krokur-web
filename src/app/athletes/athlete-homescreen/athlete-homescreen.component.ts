@@ -8,6 +8,7 @@ import { Athlete, AthleteTab } from '../../_models/athlete';
 import authedUser from '../../_models/authedUser';
 import { AthletesService } from '../../_services/athletes.service';
 import { AuthService } from '../../_services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-athlete-homescreen',
@@ -17,6 +18,7 @@ import { AuthService } from '../../_services/auth.service';
 export class AthleteHomescreenComponent implements OnInit {
   openAthletesTab: AthleteTab[] = [];
   selectedTabIndex = 0;
+  athletes: Athlete[] = [];
 
   constructor(
     private athletesService: AthletesService,
@@ -24,7 +26,14 @@ export class AthleteHomescreenComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.athletesService.getAthletes().subscribe();
+    this.athletesService.athleteList.subscribe(athletes => {
+      this.athletes = athletes;
+      console.log('Got a new athletes list emit in athlete-list.component');
+      console.log('new athletes', athletes);
+    });
+  }
 
   selectAthlete(athlete) {
     const alreadyOpen = this.openAthletesTab.find(a => a._id === athlete._id);
@@ -35,16 +44,16 @@ export class AthleteHomescreenComponent implements OnInit {
         this.selectedTabIndex = this.openAthletesTab.indexOf(athlete) + 1;
       });
     } else {
-      this.selectedTabIndex = this.openAthletesTab.indexOf(athlete) + 1;
+      const openAthletesTabIndex = this.openAthletesTab.indexOf(alreadyOpen);
+      this.selectedTabIndex = openAthletesTabIndex + 1;
+      this.athletesService.getAthleteBouts(athlete._id).subscribe(response => {
+        athlete.bouts = response;
+        this.openAthletesTab[openAthletesTabIndex] = athlete;
+      });
     }
   }
 
-  printTabIndex() {
-    console.log('Current tab index: ', this.selectedTabIndex);
-  }
-
   removeTab(index) {
-    console.log('Index being removed:', index);
     this.openAthletesTab.splice(index, 1);
   }
 
@@ -55,7 +64,8 @@ export class AthleteHomescreenComponent implements OnInit {
 
   newButtonPushed(event) {
     const addDialogRef = this.dialog.open(AthleteAddEditComponent, {
-      width: '30%'
+      width: '30%',
+      minWidth: 350
     });
 
     addDialogRef.afterClosed().subscribe(result => {
