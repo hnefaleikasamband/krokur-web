@@ -1,0 +1,23 @@
+language: node_js
+
+script:
+  - npm i -g @angular/cli@latest
+  - npm ci
+  - npm run build
+
+branches:
+  only:
+    - master
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy.sh prod
+    on:
+      branch: master
+      tags: true
+  - provider: script
+    skip_cleanup: true
+    script: bash scripts/deploy.sh staging
+    on:
+      branch: master

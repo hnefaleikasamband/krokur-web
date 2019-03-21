@@ -5,11 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:prod": "ng build -prod --configuration=production",
-    "build:staging": "ng build --configuration=staging",
+    "build:prod": "ng build --prod --configuration=production --build-optimizer",
+    "build:staging": "ng build --configuration=staging --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "zip": "tar -cvf ./deploy.tar --exclude='*.map' ./captain-definition ./dist/*"
   },
   "private": true,
   "dependencies": {
