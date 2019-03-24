@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { SsnValidator, formatSsn } from '../../_validators/ssn.validator';
 import { AthletesService } from '../../_services/athletes.service';
-import { newAthlete as Athlete } from '../../_models/athlete';
+import { NewAthlete as Athlete } from '../../_models/athlete';
 import Club from '../../_models/club';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
@@ -81,9 +81,8 @@ export class AthleteAddEditComponent implements OnInit {
   initiateFilteredClub() {
     this.filteredClubs = this.clubControl.valueChanges.pipe(
       startWith<string | Club>(''),
-      map(
-        value =>
-          typeof value === 'string' ? value : value === null ? '' : value.name
+      map(value =>
+        typeof value === 'string' ? value : value === null ? '' : value.name
       ),
       map(name => (name ? this.filterClubs(name) : this.clubs.slice()))
     );

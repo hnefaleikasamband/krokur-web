@@ -18,13 +18,13 @@ function validateSSN(data: string): boolean {
     return false;
   }
   const sum = kt.split('').reduce((prev, curr, i) => {
-    return prev + parseInt(curr) * MAGIC_NUMBERS[i];
+    return prev + parseInt(curr, 10) * MAGIC_NUMBERS[i];
   }, 0);
 
   const remainder = 11 - (sum % 11);
   const secretNr = parseInt(kt.substr(8, 1), 0);
 
-  return (remainder == 11 && secretNr === 0) || remainder === secretNr;
+  return (remainder === 11 && secretNr === 0) || remainder === secretNr;
 }
 
 export function formatSsn(p_kennitala) {

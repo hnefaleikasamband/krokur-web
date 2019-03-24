@@ -7,15 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSingleBoutComponent } from './add-single-bout/add-single-bout.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   declarations: [
-    NavigationComponent, 
-    AthleteAddEditComponent, 
+    NavigationComponent,
+    AthleteAddEditComponent,
     AddSingleBoutComponent
   ],
   exports: [
@@ -24,8 +19,6 @@ import { AddSingleBoutComponent } from './add-single-bout/add-single-bout.compon
     MaterialModule,
     AddSingleBoutComponent
   ],
-  entryComponents: [
-    AthleteAddEditComponent
-  ]
+  entryComponents: [AthleteAddEditComponent]
 })
-export class SharedModule { }
+export class SharedModule {}
