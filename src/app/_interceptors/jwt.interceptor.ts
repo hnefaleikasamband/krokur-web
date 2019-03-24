@@ -19,7 +19,7 @@ export class JwtInterceptor implements HttpInterceptor {
     if (request.url.startsWith(environment.baseUrl)) {
       // add authorization header with jwt token if available
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      //if (currentUser && currentUser.token) {
+      // if (currentUser && currentUser.token) {
       if (currentUser) {
         request = request.clone({
           setHeaders: {

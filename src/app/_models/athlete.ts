@@ -1,7 +1,5 @@
 import Bout from './bout';
 
-export default Athlete;
-
 export interface Athlete {
   _id?: string;
   name: string;
@@ -53,7 +51,7 @@ export interface AthleteTab {
   bouts: Bout[];
 }
 
-export interface newAthlete {
+export interface NewAthlete {
   _id?: string;
   name: string;
   ssn: string;
@@ -68,3 +66,5 @@ export class AthleteForm {
     public club?: string
   ) {}
 }
+
+export default Athlete;

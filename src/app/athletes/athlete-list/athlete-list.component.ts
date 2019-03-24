@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  AfterViewInit,
   ViewChild,
   Output,
   Input,
@@ -15,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './athlete-list.component.html',
   styleUrls: ['./athlete-list.component.css']
 })
-export class AthleteListComponent implements OnInit {
+export class AthleteListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   columnsToDisplay = ['name', 'ssn', 'club', 'diploma', 'achievements'];
   filterInput: String;

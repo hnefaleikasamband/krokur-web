@@ -9,15 +9,14 @@ import User from '../../_models/user';
   styleUrls: ['./user-homescreen.component.css']
 })
 export class UserHomescreenComponent implements OnInit {
-
   user: User;
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.user = {
       name: 'Ásdís Rósa Gunnarsdóttir',
       email: 'disa@diploma.is'
-    }
+    };
   }
 
   goToRoute(path: string) {
@@ -28,5 +27,4 @@ export class UserHomescreenComponent implements OnInit {
   newButtonPushed(event) {
     console.log('I got event: ', event);
   }
-
 }
