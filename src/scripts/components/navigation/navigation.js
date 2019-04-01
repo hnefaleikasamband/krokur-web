@@ -17,6 +17,7 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
 import MemoryIcon from "@material-ui/icons/Memory";
 import ViewList from "@material-ui/icons/ViewList";
+import AssignmentIcon from "@material-ui/icons/Assignment"
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import styles from "./navStyles";
@@ -72,6 +73,12 @@ class ResponsiveDrawer extends React.Component {
               <ViewList />
             </ListItemIcon>
             <ListItemText primary={"Bout logs"} />
+          </MenuItem>
+          <MenuItem component={Link} to="/guide">
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Diploma guide"} />
           </MenuItem>
           <MenuItem component={Link} to="/users/some-text">
             <ListItemIcon>
