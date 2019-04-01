@@ -39,9 +39,13 @@ function* getUserIfTokenPresent() {
     const authedUser = yield call(api.getUserByToken, token);
     authedUser.isLoggedIn = true;
     authedUser.userInfo = { ...authedUser.user };
-    console.log(authedUser);
     yield put(actions.receiveUserData(authedUser));
-  } catch (e) {}
+  } catch (e) {
+    if (e && e.response && e.response.status === 401) {
+      yield call(removeFromLocalStorage, "token");
+      yield put(actions.receiveUserData({}));
+    }
+  }
 }
 
 function* logout() {
