@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   attemptLogin: userActions.login,
-  getUseByToken: userActions.getUserByToken
+  getUserByToken: userActions.getUserByToken
 };
 
 const enhance = compose(
@@ -21,7 +21,7 @@ const enhance = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  renderWithActions(["getUseByToken"])
+  renderWithActions(["getUserByToken"])
 );
 
 const MainComponent = enhance(Login);
