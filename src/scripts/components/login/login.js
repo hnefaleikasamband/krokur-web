@@ -24,6 +24,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirectToReferrer: false,
       email: "",
       password: "",
       showPassword: false
@@ -47,9 +48,10 @@ class SignIn extends Component {
   render() {
     const { classes, isLoading, isLoggedIn } = this.props;
     const { showPassword, email } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
 
     if (isLoggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to={from} />;
     }
 
     return (
