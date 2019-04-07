@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 
@@ -13,7 +13,7 @@ import { CssBaseline } from "@material-ui/core";
 import { Login, PrivateRoute } from "./scripts/components";
 
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import theme from "./themes";
+import themes from "./themes";
 
 const ProtectedApp = () => (
   <Navigation>
@@ -31,7 +31,7 @@ const ProtectedApp = () => (
 
 const App = () => {
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={themes.lightTheme}>
       <CssBaseline />
       <Router>
         <Switch>
