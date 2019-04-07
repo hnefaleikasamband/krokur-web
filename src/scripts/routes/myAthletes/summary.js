@@ -3,18 +3,29 @@ import MUIDataTable from "mui-datatables";
 import { StarHighlighter } from "../../components";
 import copy from "copy-to-clipboard";
 
-const starHighlighterFn = tableMeta => {
-  const dates = tableMeta.rowData ? tableMeta.rowData.slice(-4) : [];
+const starHighlighterHelper = tableMeta => {
+  const dates = tableMeta.rowData ? tableMeta.rowData.slice(-8, -4) : [];
   const [diploma, bronz, silver, gold] = dates;
-  return <StarHighlighter achievements={{ diploma, bronz, silver, gold }} />;
+  const boutsLeft = tableMeta.rowData ? tableMeta.rowData.slice(-4) : [];
+  const [diplomaLeft, bronzLeft, silverLeft, goldLeft] = boutsLeft;
+  return (
+    <StarHighlighter
+      achievements={{ diploma, bronz, silver, gold }}
+      boutsLeftToAchievement={{ diplomaLeft, bronzLeft, silverLeft, goldLeft }}
+    />
+  );
 };
 
-const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {
+const Summary = ({ isFetching, athletes, club }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: "id", options: hideColumnOptions },
     { name: "name", label: "Name", options: { filter: false, sort: true } },
-    { name: "club", label: "Club" },
+    {
+      name: "ssn",
+      label: "Kennitala",
+      options: { filter: false, sort: false }
+    },
     {
       name: "achievements",
       label: "Achievements",
@@ -23,13 +34,17 @@ const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {
         filter: false,
         sort: false,
         empty: true,
-        customBodyRender: (value, tableMeta) => starHighlighterFn(tableMeta)
+        customBodyRender: (value, tableMeta) => starHighlighterHelper(tableMeta)
       }
     },
     { name: "diplomaDate", options: hideColumnOptions },
     { name: "bronzDate", options: hideColumnOptions },
     { name: "silverDate", options: hideColumnOptions },
-    { name: "goldDate", options: hideColumnOptions }
+    { name: "goldDate", options: hideColumnOptions },
+    { name: "diplomaBoutsLeft", options: hideColumnOptions },
+    { name: "bronzBoutsLeft", options: hideColumnOptions },
+    { name: "silverBoutsLeft", options: hideColumnOptions },
+    { name: "goldBoutsLeft", options: hideColumnOptions }
   ];
 
   const tableOptions = {
@@ -55,9 +70,9 @@ const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {
   };
   return (
     <div>
-      {!isEmpty && (
+      {!isFetching && (
         <MUIDataTable
-          title={"Athlete List"}
+          title={club.name}
           data={athletes}
           columns={columns}
           options={tableOptions}
@@ -67,4 +82,4 @@ const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {
   );
 };
 
-export default AllAthletes;
+export default Summary;
