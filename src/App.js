@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 
@@ -9,7 +9,11 @@ import {
   MyAthletes,
   ManageAthletes
 } from "./scripts/routes";
+import { CssBaseline } from "@material-ui/core";
 import { Login, PrivateRoute } from "./scripts/components";
+
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import theme from "./themes";
 
 const ProtectedApp = () => (
   <Navigation>
@@ -25,17 +29,18 @@ const ProtectedApp = () => (
   </Navigation>
 );
 
-class App extends Component {
-  render() {
-    return (
+const App = () => {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
           <PrivateRoute path="/" component={ProtectedApp} />
         </Switch>
       </Router>
-    );
-  }
-}
+    </MuiThemeProvider>
+  );
+};
 
 export default App;

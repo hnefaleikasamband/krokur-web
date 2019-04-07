@@ -11,8 +11,6 @@ import { combineSagas } from "./scripts/redux/sagas/helpers";
 import sagas from "./scripts/redux/sagas";
 import reducers from "./scripts/redux/reducers";
 
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
 // Store setup
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -22,17 +20,9 @@ let store = createStore(
 );
 sagaMiddleware.run(combineSagas(sagas));
 
-// Theme setup
-const theme = createMuiTheme({
-  typography: { useNextVariants: true },
-  type: "dark"
-});
-
 render(
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      <App />
-    </MuiThemeProvider>
+    <App />
   </Provider>,
   document.getElementById("root")
 );
