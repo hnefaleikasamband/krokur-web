@@ -17,11 +17,75 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
 import MemoryIcon from "@material-ui/icons/Memory";
 import ViewList from "@material-ui/icons/ViewList";
-import AssignmentIcon from "@material-ui/icons/Assignment"
+import SchoolIcon from "@material-ui/icons/School";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import styles from "./navStyles";
 import AppBar from "./appBar";
+
+const NavItem = ({ path, navText, show = true, icon }) => {
+  return (
+    show && (
+      <MenuItem component={Link} to={path}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={navText} />
+      </MenuItem>
+    )
+  );
+};
+
+const showNavItem = (roles = [], role) => roles.includes(role);
+
+const drawer = (classes, user) => (
+  <div>
+    <Hidden xsDown>
+      <div className={classes.toolbar} />
+    </Hidden>
+    <Hidden smUp>
+      <ListItem>
+        <ListItemText primary={"Krókur"} />
+      </ListItem>
+    </Hidden>
+    <Divider />
+    <MenuList>
+      <NavItem path="/" navText="Dashboard" icon={<DashboardIcon />} />
+      <NavItem
+        path="/all-athletes"
+        navText="All Athletes"
+        icon={<SupervisorAccountIcon />}
+      />
+      <NavItem
+        path="/my-athletes"
+        navText="My Athletes"
+        show={showNavItem(["COACH"], user.userInfo.role)}
+        icon={<SupervisedUserCircle />}
+      />
+      <NavItem
+        path="/manage-athletes"
+        navText="Manage Athletes"
+        show={showNavItem(["ADMIN"], user.userInfo.role)}
+        icon={<SupervisedUserCircle />}
+      />
+    </MenuList>
+    <Divider />
+    <MenuList>
+      <NavItem
+        path="/bout-logs"
+        navText="Bout logs"
+        show={showNavItem(["ADMIN"], user.userInfo.role)}
+        icon={<ViewList />}
+      />
+      <NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />
+      <NavItem
+        path="/system"
+        navText="System"
+        show={showNavItem(["ADMIN"], user.userInfo.role)}
+        icon={<MemoryIcon />}
+      />
+      <NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />
+    </MenuList>
+  </div>
+);
 
 class ResponsiveDrawer extends React.Component {
   state = {
@@ -35,66 +99,6 @@ class ResponsiveDrawer extends React.Component {
   render() {
     const { children, classes, user, logout } = this.props;
 
-    const drawer = (
-      <div>
-        <Hidden xsDown>
-          <div className={classes.toolbar} />
-        </Hidden>
-        <Hidden smUp>
-          <ListItem>
-            <ListItemText primary={"Krókur"} />
-          </ListItem>
-        </Hidden>
-        <Divider />
-        <MenuList>
-          <MenuItem component={Link} to="/">
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Dashboard"} />
-          </MenuItem>
-          <MenuItem component={Link} to="/athletes">
-            <ListItemIcon>
-              <SupervisorAccountIcon />
-            </ListItemIcon>
-            <ListItemText primary={"All Athletes"} />
-          </MenuItem>
-          <MenuItem component={Link} to="/team-athletes">
-            <ListItemIcon>
-              <SupervisedUserCircle />
-            </ListItemIcon>
-            <ListItemText primary={"My Athletes"} />
-          </MenuItem>
-        </MenuList>
-        <Divider />
-        <MenuList>
-          <MenuItem component={Link} to="/users/some-text">
-            <ListItemIcon>
-              <ViewList />
-            </ListItemIcon>
-            <ListItemText primary={"Bout logs"} />
-          </MenuItem>
-          <MenuItem component={Link} to="/guide">
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Diploma guide"} />
-          </MenuItem>
-          <MenuItem component={Link} to="/users/some-text">
-            <ListItemIcon>
-              <MemoryIcon />
-            </ListItemIcon>
-            <ListItemText primary={"System"} />
-          </MenuItem>
-          <MenuItem component={Link} to="/users/some-text">
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary={"My Account"} />
-          </MenuItem>
-        </MenuList>
-      </div>
-    );
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -114,7 +118,7 @@ class ResponsiveDrawer extends React.Component {
                 paper: classes.drawerPaper
               }}
             >
-              {drawer}
+              {drawer(classes, user)}
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation="css">
@@ -125,7 +129,7 @@ class ResponsiveDrawer extends React.Component {
               variant="permanent"
               open
             >
-              {drawer}
+              {drawer(classes, user)}
             </Drawer>
           </Hidden>
         </nav>
