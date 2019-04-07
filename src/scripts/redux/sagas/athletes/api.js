@@ -4,19 +4,18 @@ import axios from "axios";
 // const host = configuration["TrustpilotApi.Host"];
 const host = "https://krokur-api-staging.test.mikligardur.com";
 
-const signIn = ({ email, password }) =>
+const getAllAthletes = token =>
   axios
-    .post(`${host}/api/v1/auth/login`, {
-      email,
-      password
-    })
-    .then(response => response.data);
-
-const getUserByToken = token =>
-  axios
-    .get(`${host}/api/v1/auth/user`, {
+    .get(`${host}/api/v1/athletes`, {
       headers: { Authorization: `JWT ${token}` }
     })
     .then(response => response.data);
 
-export default { signIn, getUserByToken };
+const getManagedAthletes = token =>
+  axios
+    .get(`${host}/api/v1/athletes/manage-view`, {
+      headers: { Authorization: `JWT ${token}` }
+    })
+    .then(response => response.data);
+
+export default { getAllAthletes, getManagedAthletes };

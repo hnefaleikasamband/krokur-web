@@ -6,6 +6,7 @@ const initialState = {
   isLoggedIn: false,
   token: null,
   userInfo: {
+    id: null,
     email: null,
     name: null,
     club: null,

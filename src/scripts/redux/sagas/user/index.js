@@ -19,7 +19,7 @@ function* login({ payload }) {
   try {
     const authedUser = yield call(api.signIn, payload);
     authedUser.isLoggedIn = true;
-    authedUser.userInfo = { ...authedUser.user };
+    console.log(authedUser);
     yield put(actions.receiveUserData(authedUser));
     yield call(updateLocalStorage, "token", authedUser.token);
   } catch (e) {
@@ -32,14 +32,16 @@ function* getUserIfTokenPresent() {
   try {
     const token = yield call(getFromLocalStorage, "token");
     if (!token) {
-      console.log("no token present");
       yield put(actions.receiveUserData({}));
       return;
     }
     const authedUser = yield call(api.getUserByToken, token);
-    authedUser.isLoggedIn = true;
-    authedUser.userInfo = { ...authedUser.user };
-    yield put(actions.receiveUserData(authedUser));
+    const user = {
+      isLoggedIn: true,
+      token,
+      userInfo: authedUser
+    };
+    yield put(actions.receiveUserData(user));
   } catch (e) {
     if (e && e.response && e.response.status === 401) {
       yield call(removeFromLocalStorage, "token");

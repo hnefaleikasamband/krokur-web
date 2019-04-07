@@ -1,13 +1,23 @@
 import { createActions } from "redux-actions";
 
 export const {
-  athletes: { getAthletes, updateAthletes }
+  athletes: {
+    getAllAthletes,
+    receiveAllAthletes,
+    getManagedAthletes,
+    receiveManagedAthletes
+  }
 } = createActions({
   ATHLETES: {
-    GET_ATHLETES: null,
-    UPDATE_ATHLETES: data => ({
+    GET_ALL_ATHLETES: null,
+    RECEIVE_ALL_ATHLETES: data => ({
       isFetching: false,
-      data
+      ...data
+    }),
+    GET_MANAGED_ATHLETES: null,
+    RECEIVE_MANAGED_ATHLETES: data => ({
+      isFetching: false,
+      ...data
     })
   }
 });
