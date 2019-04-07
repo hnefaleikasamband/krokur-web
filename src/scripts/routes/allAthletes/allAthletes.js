@@ -4,16 +4,9 @@ import { StarHighlighter } from "../../components";
 import copy from "copy-to-clipboard";
 
 const starHighlighterFn = tableMeta => {
-  const data = tableMeta.rowData ? tableMeta.rowData.slice(-4) : [];
-  const [diploma, bronz, silver, gold] = data;
-  return (
-    <StarHighlighter
-      diploma={diploma}
-      bronz={bronz}
-      silver={silver}
-      gold={gold}
-    />
-  );
+  const dates = tableMeta.rowData ? tableMeta.rowData.slice(-4) : [];
+  const [diploma, bronz, silver, gold] = dates;
+  return <StarHighlighter achievements={{ diploma, bronz, silver, gold }} />;
 };
 
 const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {

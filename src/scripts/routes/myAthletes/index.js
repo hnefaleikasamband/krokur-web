@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => ({
   isFetching: state.athletes.managedAthletes.isFetching,
   athletes: state.athletes.managedAthletes.data,
   isEmpty: state.athletes.managedAthletes.data.length <= 0,
+  club: state.user.userInfo.club,
   ...ownProps
 });
 

@@ -6,8 +6,12 @@ import yellow from "@material-ui/core/colors/yellow";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import orage from "@material-ui/core/colors/deepOrange";
 import Tooltip from "@material-ui/core/Tooltip";
+import Badge from "@material-ui/core/Badge";
 
 const styles = theme => ({
+  badge: {
+    margin: theme.spacing.unit
+  },
   iconBronz: {
     color: orage["A400"]
   },
@@ -22,45 +26,91 @@ const styles = theme => ({
   }
 });
 
-const getDateString = locale => date =>
-  date
-    ? `- ${new Date(date).toLocaleDateString(locale, {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      })}`
-    : "- not achieved";
+const AchievementDisplay = ({
+  tooltipTitle,
+  badge = undefined,
+  classes,
+  icon
+}) => {
+  return (
+    <Tooltip title={tooltipTitle} placement="top">
+      <Badge
+        className={classes.badge}
+        badgeContent={badge ? badge : null}
+        color="primary"
+      >
+        {icon}
+      </Badge>
+    </Tooltip>
+  );
+};
+
+const getDateStrings = locale => dates =>
+  Object.keys(dates).map(key =>
+    dates[key]
+      ? `- ${new Date(dates[key]).toLocaleDateString(locale, {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        })}`
+      : "- not achieved"
+  );
 
 const StarHighlighter = ({
-  diploma = null,
-  bronz = null,
-  silver = null,
-  gold = null,
+  achievements,
+  boutsLeftToAchievement = {},
   classes,
   ...props
 }) => {
-  const diplomaDate = getDateString("en-GB")(diploma);
-  const bronzDate = getDateString("en-GB")(bronz);
-  const silverDate = getDateString("en-GB")(silver);
-  const goldDate = getDateString("en-GB")(gold);
+  const { diploma, bronz, silver, gold } = achievements;
+  const dates = getDateStrings("en-GB")(achievements);
+  const [diplomaDate, bronzDate, silverDate, goldDate] = dates;
+  const {
+    diplomaLeft,
+    bronzLeft,
+    silverLeft,
+    goldLeft
+  } = boutsLeftToAchievement;
+  console.log("bouts left:", boutsLeftToAchievement);
+  console.log("achievements: ", achievements, "\n\n");
   return (
     <Fragment>
-      <Tooltip title={`Diploma ${diplomaDate}`} placement="top">
-        <SchoolIcon color={diploma ? "inherit" : "disabled"} />
-      </Tooltip>
-      <Tooltip title={`Bronz ${bronzDate}`} placement="top">
-        <StarIcon
-          className={bronz ? classes.iconBronz : classes.iconDisabled}
-        />
-      </Tooltip>
-      <Tooltip title={`Silver ${silverDate}`} placement="top">
-        <StarIcon
-          className={silver ? classes.iconSilver : classes.iconDisabled}
-        />
-      </Tooltip>
-      <Tooltip title={`Gold ${goldDate}`} placement="top">
-        <StarIcon className={gold ? classes.iconGold : classes.iconDisabled} />
-      </Tooltip>
+      <AchievementDisplay
+        tooltipTitle={`Diploma ${diplomaDate}`}
+        badge={diploma ? null : diplomaLeft + 1}
+        classes={classes}
+        icon={<SchoolIcon color={diploma ? "inherit" : "disabled"} />}
+      />
+      <AchievementDisplay
+        tooltipTitle={`Bronz ${bronzDate}`}
+        badge={bronz ? null : bronzLeft + 1}
+        classes={classes}
+        icon={
+          <StarIcon
+            className={bronz ? classes.iconBronz : classes.iconDisabled}
+          />
+        }
+      />
+      <AchievementDisplay
+        tooltipTitle={`Silver ${silverDate}`}
+        badge={silver ? null : silverLeft + 1}
+        classes={classes}
+        icon={
+          <StarIcon
+            className={silver ? classes.iconSilver : classes.iconDisabled}
+          />
+        }
+      />
+      <AchievementDisplay
+        tooltipTitle={`Gold ${goldDate}`}
+        badge={gold ? null : goldLeft + 1}
+        classes={classes}
+        icon={
+          <StarIcon
+            className={gold ? classes.iconGold : classes.iconDisabled}
+          />
+        }
+      />
     </Fragment>
   );
 };
