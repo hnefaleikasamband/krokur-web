@@ -71,8 +71,6 @@ const StarHighlighter = ({
     silverLeft,
     goldLeft
   } = boutsLeftToAchievement;
-  console.log("bouts left:", boutsLeftToAchievement);
-  console.log("achievements: ", achievements, "\n\n");
   return (
     <Fragment>
       <AchievementDisplay
