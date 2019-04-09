@@ -1,5 +1,5 @@
 import { handleActions, combineActions } from "redux-actions";
-import { dashboard as actions } from "../../../actions";
+import { dashboard as actions } from "../../actions";
 
 const initialState = {
   isFetching: false,

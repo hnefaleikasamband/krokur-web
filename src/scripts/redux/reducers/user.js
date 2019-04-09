@@ -1,5 +1,5 @@
 import { handleActions, combineActions } from "redux-actions";
-import { user as actions } from "../../../actions";
+import { user as actions } from "../../actions";
 
 const initialState = {
   isFetching: false,

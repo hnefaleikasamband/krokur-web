@@ -1,5 +1,5 @@
 import { handleActions, combineActions } from "redux-actions";
-import { athletes as actions } from "../../../actions";
+import { athletes as actions } from "../../actions";
 
 const initialState = {
   allAthletes: {
