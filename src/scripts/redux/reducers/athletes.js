@@ -16,7 +16,7 @@ const athletes = handleActions(
   new Map([
     [
       combineActions(actions.getAllAthletes),
-      (state, action) => ({
+      state => ({
         ...state,
         allAthletes: {
           ...state.allAthletes,
@@ -35,7 +35,7 @@ const athletes = handleActions(
     ],
     [
       combineActions(actions.getManagedAthletes),
-      (state, action) => ({
+      state => ({
         ...state,
         managedAthletes: {
           ...state.managedAthletes,
