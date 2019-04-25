@@ -1,8 +1,7 @@
 import axios from "axios";
-// import configuration from '../../../appConfiguration';
+import config from "../../../appConfiguration";
 
-// const host = configuration["TrustpilotApi.Host"];
-const host = "https://krokur-api-staging.test.mikligardur.com";
+const host = config.krokurApi;
 
 const getUsers = token =>
   axios
