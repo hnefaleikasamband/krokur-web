@@ -7,7 +7,8 @@ import {
   Dashboard,
   AllAthletes,
   MyAthletes,
-  ManageAthletes
+  ManageAthletes,
+  System
 } from "./scripts/routes";
 import { CssBaseline } from "@material-ui/core";
 import { Login, PrivateRoute } from "./scripts/components";
@@ -24,7 +25,7 @@ const ProtectedApp = () => (
     <Route path="/manage-athletes" component={ManageAthletes} />
     <Route path="/my-athletes/:userId" component={Dashboard} />
     <Route path="/bout-logs" component={Dashboard} />
-    <Route path="/system" component={Dashboard} />
+    <Route path="/system" component={System} />
     <Route path="/account" component={Dashboard} />
   </Navigation>
 );
