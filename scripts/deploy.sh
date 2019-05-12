@@ -5,12 +5,12 @@ PRODUCTION="prod"
 
 case "$STAGE" in
   "$STAGING")
-    echo -e "\u001b[33;1m Environment set to staging \u001b[0m"
+    echo -e "\u001b[32;7m Environment set to staging \u001b[0m"
     APP_NAME=$APP_NAME_STAGING
     REACT_APP_API_GATEWAY=$API_STAGING
     ;;
   "$PRODUCTION")
-    echo -e "\u001b[33;1m Environment set to production \u001b[0m"
+    echo -e "\u001b[32;7m Environment set to production \u001b[0m"
     APP_NAME=$APP_NAME_PRODUCTION
     REACT_APP_API_GATEWAY=$API_PROD
     ;;
@@ -18,6 +18,8 @@ case "$STAGE" in
     echo -e $"\u001b[31;1m Usage: $0 {staging|prod}\u001b[0m"
     exit 1
 esac
+
+export REACT_APP_API_GATEWAY="$REACT_APP_API_GATEWAY"
 
 yarn add global caprover
 rm -r ./build
