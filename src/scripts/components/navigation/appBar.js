@@ -97,7 +97,7 @@ class AppBar extends React.Component {
               {userInfo.name}
             </Typography>
             <IconButton
-              aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+              aria-owns={isMenuOpen ? 'material-appbar' : null}
               aria-haspopup="true"
               onClick={this.handleProfileMenuOpen}
               color="inherit"
@@ -113,7 +113,7 @@ class AppBar extends React.Component {
 }
 
 AppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default withStyles(styles, { withTheme: true })(AppBar);

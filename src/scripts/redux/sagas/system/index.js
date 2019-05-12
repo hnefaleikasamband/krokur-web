@@ -3,7 +3,7 @@ import { matchesType } from '../helpers';
 import api from './api';
 import { system as actions } from '../../../actions';
 
-function* fetchUsers({ payload }) {
+function* fetchUsers() {
   try {
     const { token } = yield select((state) => state.user);
     const {
@@ -17,7 +17,7 @@ function* fetchUsers({ payload }) {
       const name = clubs.find((c) => c.id === user.club);
       return {
         ...user,
-        clubDisplayName: !name ? undefined : name.shorthand,
+        clubDisplayName: !name ? null : name.shorthand,
       };
     });
     yield put(actions.receiveUsers({ data: users }));
@@ -27,7 +27,7 @@ function* fetchUsers({ payload }) {
   }
 }
 
-function* fetchClubs({ payload }) {
+function* fetchClubs() {
   try {
     const { token } = yield select((state) => state.user);
     const data = yield call(api.getClubs, token);

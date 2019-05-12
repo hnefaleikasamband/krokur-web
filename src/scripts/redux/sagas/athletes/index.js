@@ -3,13 +3,7 @@ import { matchesType } from '../helpers';
 import api from './api';
 import { athletes as actions } from '../../../actions';
 
-const takeTimeFunction = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(), 1000);
-  });
-};
-
-function* fetchAthletes({ payload }) {
+function* fetchAthletes() {
   try {
     const { token } = yield select((state) => state.user);
     const data = yield call(api.getAllAthletes, token);
@@ -20,7 +14,7 @@ function* fetchAthletes({ payload }) {
   }
 }
 
-function* fetchManagedAthletes({ payload }) {
+function* fetchManagedAthletes() {
   try {
     const { token } = yield select((state) => state.user);
     const data = yield call(api.getManagedAthletes, token);

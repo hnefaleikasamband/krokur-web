@@ -135,7 +135,7 @@ class ResponsiveDrawer extends React.Component {
 }
 
 ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);

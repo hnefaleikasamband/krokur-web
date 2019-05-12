@@ -19,6 +19,7 @@ const styles = (theme) => ({
 });
 
 const System = ({ usersData, clubsData, classes }) => {
+  console.log('classes:', classes);
   return (
     <Fragment>
       <Grid container spacing={16} direction="row">
@@ -35,7 +36,7 @@ const System = ({ usersData, clubsData, classes }) => {
 };
 
 System.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default withStyles(styles)(System);

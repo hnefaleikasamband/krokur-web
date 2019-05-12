@@ -1,4 +1,4 @@
-import { takeLatest, all, put, select, call } from 'redux-saga/effects';
+import { takeLatest, all, put, call } from 'redux-saga/effects';
 import { matchesType } from '../helpers';
 import { user as actions } from '../../../actions';
 import api from './api';
@@ -8,12 +8,6 @@ import {
   removeFromLocalStorage,
 } from '../../../helpers/localStorage';
 import { receiveUserData } from '../../../actions/user';
-
-const takeTimeFunction = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(), 1000);
-  });
-};
 
 function* login({ payload }) {
   try {
@@ -54,7 +48,9 @@ function* logout() {
   try {
     yield call(removeFromLocalStorage, 'token');
     yield put(receiveUserData({}));
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error logging out.');
+  }
 }
 
 export default function*() {

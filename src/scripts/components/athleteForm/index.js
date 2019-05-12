@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';

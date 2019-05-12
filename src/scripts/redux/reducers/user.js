@@ -25,7 +25,7 @@ const user = handleActions(
     ],
     [
       actions.login,
-      (state, action) => ({
+      (state) => ({
         ...state,
         isFetching: true,
       }),

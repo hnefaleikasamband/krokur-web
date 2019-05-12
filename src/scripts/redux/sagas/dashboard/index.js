@@ -1,4 +1,4 @@
-import { takeLatest, all, put, select, call } from 'redux-saga/effects';
+import { takeLatest, all, put, select } from 'redux-saga/effects';
 import { matchesType } from '../helpers';
 import { dashboard as actions } from '../../../actions';
 

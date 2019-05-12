@@ -95,7 +95,7 @@ class SpeedDials extends React.Component {
 }
 
 SpeedDials.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default withStyles(styles)(SpeedDials);

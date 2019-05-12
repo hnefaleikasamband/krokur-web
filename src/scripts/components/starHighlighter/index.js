@@ -26,7 +26,7 @@ const styles = (theme) => ({
   },
 });
 
-const AchievementDisplay = ({ tooltipTitle, badge = undefined, classes, icon }) => {
+const AchievementDisplay = ({ tooltipTitle, badge, classes, icon }) => {
   return (
     <Tooltip title={tooltipTitle} placement="top">
       <Badge className={classes.badge} badgeContent={badge ? badge : null} color="primary">
@@ -47,6 +47,7 @@ const getDateStrings = (locale) => (dates) =>
       : '- not achieved'
   );
 
+// eslint-disable-next-line
 const StarHighlighter = ({ achievements, boutsLeftToAchievement = {}, classes, ...props }) => {
   const { diploma, bronz, silver, gold } = achievements;
   const dates = getDateStrings('en-GB')(achievements);

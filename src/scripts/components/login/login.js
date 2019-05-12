@@ -5,8 +5,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -67,7 +67,7 @@ class SignIn extends Component {
           {isLoading ? (
             <CircularProgress className={classes.progress} />
           ) : (
-            <form ref="form" className={classes.form} onSubmit={this.handleSubmit}>
+            <form className={classes.form} onSubmit={this.handleSubmit}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
@@ -121,7 +121,7 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line
   isLoading: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
