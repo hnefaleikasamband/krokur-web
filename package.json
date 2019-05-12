@@ -2,6 +2,14 @@
   "name": "krokur-web",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/scripts/"
+  },
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
@@ -15,17 +23,10 @@
     "react-dom": "^16.8.5",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.0.1",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.0.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint src/scripts/"
   },
   "eslintConfig": {
     "extends": "react-app"
