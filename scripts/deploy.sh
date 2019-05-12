@@ -2,13 +2,27 @@
 STAGE=$1
 STAGING="staging"
 PRODUCTION="prod"
-if [ "$STAGE" != "$STAGING" ] && [ "$STAGE" != "$PRODUCTION" ]; then
-  echo "you must pass in either \"staging\" or \"prod\""
-  exit 1
-fi
 
-npm i -g caprover
+case "$STAGE" in
+  "$STAGING")
+    echo -e "\u001b[33;1m Environment set to staging \u001b[0m"
+    APP_NAME = $APP_NAME_STAGING
+    REACT_APP_API_GATEWAY=$API_STAGING
+    ;;
+  "$PRODUCTION")
+    echo -e "\u001b[33;1m Environment set to production \u001b[0m"
+    APP_NAME = $APP_NAME_PRODUCTION
+    REACT_APP_API_GATEWAY=$API_PROD
+    ;;
+  *)
+    echo -e $"\u001b[31;1m Usage: $0 {staging|prod}\u001b[0m"
+    exit 1
+esac
+
+$REACT_APP_API_GATEWAY=$STAGE
+
+yarn global caprover
 rm -r ./dist
-npm run build:$STAGE
-tar -cvf ./deploy.tar --exclude="*.map" ./captain-definition ./dist/*
+yarn build --prod
+tar -cvf ./deploy.tar --exclude="*.map" ./captain-definition ./build/*
 caprover deploy -t ./deploy.tar -h $CAP_HOST -a $APP_NAME -p $CAP_PASS > /dev/null 2>&1
