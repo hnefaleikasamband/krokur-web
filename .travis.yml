@@ -3,8 +3,8 @@ node_js: 10
 
 script:
   - yarn
-  - yarn lint
-  #- npm run test
+  #- yarn lint
+  #- yarn test
   - yarn build
 
 branches:
