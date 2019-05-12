@@ -10,7 +10,7 @@ case "$STAGE" in
     REACT_APP_API_GATEWAY=$API_STAGING
     ;;
   "$PRODUCTION")
-    echo -e "\u001b[33;1m Environment set to production \u001b[0m"
+    echo -e "\u001b[32;7m Environment set to production \u001b[0m"
     APP_NAME=$APP_NAME_PRODUCTION
     REACT_APP_API_GATEWAY=$API_PROD
     ;;
