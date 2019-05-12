@@ -1,23 +1,18 @@
-import { createActions } from "redux-actions";
+import { createActions } from 'redux-actions';
 
 export const {
-  athletes: {
-    getAllAthletes,
-    receiveAllAthletes,
-    getManagedAthletes,
-    receiveManagedAthletes
-  }
+  athletes: { getAllAthletes, receiveAllAthletes, getManagedAthletes, receiveManagedAthletes },
 } = createActions({
   ATHLETES: {
     GET_ALL_ATHLETES: null,
-    RECEIVE_ALL_ATHLETES: data => ({
+    RECEIVE_ALL_ATHLETES: (data) => ({
       isFetching: false,
-      ...data
+      ...data,
     }),
     GET_MANAGED_ATHLETES: null,
-    RECEIVE_MANAGED_ATHLETES: data => ({
+    RECEIVE_MANAGED_ATHLETES: (data) => ({
       isFetching: false,
-      ...data
-    })
-  }
+      ...data,
+    }),
+  },
 });

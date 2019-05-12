@@ -1,22 +1,22 @@
-import { createActions } from "redux-actions";
+import { createActions } from 'redux-actions';
 
 export const {
-  system: { receiveUsers, fetchAllUsers, receiveClubs, fetchClubs }
+  system: { receiveUsers, fetchAllUsers, receiveClubs, fetchClubs },
 } = createActions({
   SYSTEM: {
-    RECEIVE_USERS: users => ({
+    RECEIVE_USERS: (users) => ({
       users: {
         isFetching: false,
-        ...users
-      }
+        ...users,
+      },
     }),
     FETCH_ALL_USERS: null,
-    RECEIVE_CLUBS: clubs => ({
+    RECEIVE_CLUBS: (clubs) => ({
       clubs: {
         isFetching: false,
-        ...clubs
-      }
+        ...clubs,
+      },
     }),
-    FETCH_CLUBS: null
-  }
+    FETCH_CLUBS: null,
+  },
 });

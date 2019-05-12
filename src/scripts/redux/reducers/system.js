@@ -1,15 +1,15 @@
-import { handleActions, combineActions } from "redux-actions";
-import { system as actions } from "../../actions";
+import { handleActions, combineActions } from 'redux-actions';
+import { system as actions } from '../../actions';
 
 const initialState = {
   clubs: {
     isFetching: false,
-    data: []
+    data: [],
   },
   users: {
     isFetching: false,
-    data: []
-  }
+    data: [],
+  },
 };
 
 const system = handleActions(
@@ -18,29 +18,29 @@ const system = handleActions(
       combineActions(actions.receiveClubs, actions.receiveUsers),
       (state, action) => ({
         ...state,
-        ...action.payload
-      })
+        ...action.payload,
+      }),
     ],
     [
       actions.fetchAllUsers,
-      state => ({
+      (state) => ({
         ...state,
         users: {
           ...state.users,
-          isFetching: true
-        }
-      })
+          isFetching: true,
+        },
+      }),
     ],
     [
       actions.fetchClubs,
-      state => ({
+      (state) => ({
         ...state,
         clubs: {
           ...state.clubs,
-          isFetching: true
-        }
-      })
-    ]
+          isFetching: true,
+        },
+      }),
+    ],
   ]),
   initialState
 );

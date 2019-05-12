@@ -1,8 +1,8 @@
-import React from "react";
-import Summary from "./summary";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { AthleteForm } from "../../components";
+import React from 'react';
+import Summary from './summary';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { AthleteForm } from '../../components';
 
 const ManageAthletes = ({ isFetching, athletes, club }) => {
   return (

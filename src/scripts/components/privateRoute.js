@@ -1,18 +1,16 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       isLoggedIn ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
+        <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
       )
     }
   />
@@ -21,7 +19,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => (
 function mapStateToProps(state, ownProps) {
   return {
     isLoggedIn: state.user.isLoggedIn,
-    ownProps
+    ownProps,
   };
 }
 

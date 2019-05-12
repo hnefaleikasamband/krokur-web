@@ -1,5 +1,5 @@
-import { handleActions, combineActions } from "redux-actions";
-import { user as actions } from "../../actions";
+import { handleActions, combineActions } from 'redux-actions';
+import { user as actions } from '../../actions';
 
 const initialState = {
   isFetching: false,
@@ -10,8 +10,8 @@ const initialState = {
     email: null,
     name: null,
     club: null,
-    role: null
-  }
+    role: null,
+  },
 };
 
 const user = handleActions(
@@ -20,23 +20,23 @@ const user = handleActions(
       combineActions(actions.receiveUserData, actions.getUserByToken),
       (state, action) => ({
         ...state,
-        ...action.payload
-      })
+        ...action.payload,
+      }),
     ],
     [
       actions.login,
       (state, action) => ({
         ...state,
-        isFetching: true
-      })
+        isFetching: true,
+      }),
     ],
     [
       actions.logout,
-      state => ({
+      (state) => ({
         ...state,
-        ...initialState
-      })
-    ]
+        ...initialState,
+      }),
+    ],
   ]),
   initialState
 );

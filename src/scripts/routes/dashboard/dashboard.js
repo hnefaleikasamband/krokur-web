@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const Dashboard = ({ refreshDashboard, myText, match }) => {
   return (
     <div>
       <p>
-        {myText} ...or {match.params.myText}{" "}
+        {myText} ...or {match.params.myText}{' '}
       </p>
     </div>
   );

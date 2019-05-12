@@ -1,55 +1,52 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import SpeedDial from "@material-ui/lab/SpeedDial";
-import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
-import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
-import PersonIcon from "@material-ui/icons/Person";
-import HomeIcon from "@material-ui/icons/Home";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import PersonIcon from '@material-ui/icons/Person';
+import HomeIcon from '@material-ui/icons/Home';
 
-const actions = [
-  { icon: <PersonIcon />, name: "User" },
-  { icon: <HomeIcon />, name: "Club" }
-];
+const actions = [{ icon: <PersonIcon />, name: 'User' }, { icon: <HomeIcon />, name: 'Club' }];
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    width: "100%"
+    width: '100%',
   },
   controls: {
-    margin: theme.spacing.unit * 3
+    margin: theme.spacing.unit * 3,
   },
   exampleWrapper: {
-    position: "relative",
-    height: 380
+    position: 'relative',
+    height: 380,
   },
   speedDial: {
-    position: "absolute",
-    "&$directionUp, &$directionLeft": {
+    position: 'absolute',
+    '&$directionUp, &$directionLeft': {
       bottom: theme.spacing.unit * 2,
-      right: theme.spacing.unit * 3
-    }
-  }
+      right: theme.spacing.unit * 3,
+    },
+  },
 });
 
 class SpeedDials extends React.Component {
   state = {
     open: false,
-    hidden: false
+    hidden: false,
   };
 
   handleClick = () => {
-    this.setState(state => ({
-      open: !state.open
+    this.setState((state) => ({
+      open: !state.open,
     }));
   };
 
   handleHiddenChange = (event, hidden) => {
-    this.setState(state => ({
+    this.setState((state) => ({
       hidden,
       // hidden implies !open
-      open: hidden ? false : state.open
+      open: hidden ? false : state.open,
     }));
   };
 
@@ -65,10 +62,7 @@ class SpeedDials extends React.Component {
     const { classes } = this.props;
     const { hidden, open } = this.state;
 
-    const speedDialClassName = classNames(
-      classes.speedDial,
-      classes[`directionUp`]
-    );
+    const speedDialClassName = classNames(classes.speedDial, classes.directionUp);
 
     return (
       <div className={classes.exampleWrapper}>
@@ -86,7 +80,7 @@ class SpeedDials extends React.Component {
           open={open}
           direction="up"
         >
-          {actions.map(action => (
+          {actions.map((action) => (
             <SpeedDialAction
               key={action.name}
               icon={action.icon}
@@ -101,7 +95,7 @@ class SpeedDials extends React.Component {
 }
 
 SpeedDials.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SpeedDials);

@@ -1,41 +1,41 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import withStyles from "@material-ui/core/styles/withStyles";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import styles from "./styles";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import styles from './styles';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       redirectToReferrer: false,
-      email: "",
-      password: "",
-      showPassword: false
+      email: '',
+      password: '',
+      showPassword: false,
     };
   }
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({ ...this.state, [name]: event.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     this.props.attemptLogin({ email, password });
@@ -48,7 +48,7 @@ class SignIn extends Component {
   render() {
     const { classes, isLoading, isLoggedIn } = this.props;
     const { showPassword, email } = this.state;
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
 
     if (isLoggedIn) {
       return <Redirect to={from} />;
@@ -67,11 +67,7 @@ class SignIn extends Component {
           {isLoading ? (
             <CircularProgress className={classes.progress} />
           ) : (
-            <form
-              ref="form"
-              className={classes.form}
-              onSubmit={this.handleSubmit}
-            >
+            <form ref="form" className={classes.form} onSubmit={this.handleSubmit}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
@@ -79,7 +75,7 @@ class SignIn extends Component {
                   name="email"
                   autoComplete="email"
                   autoFocus
-                  onChange={this.handleChange("email")}
+                  onChange={this.handleChange('email')}
                   value={email}
                 />
               </FormControl>
@@ -87,8 +83,8 @@ class SignIn extends Component {
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   id="password"
-                  type={showPassword ? "text" : "password"}
-                  onChange={this.handleChange("password")}
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={this.handleChange('password')}
                   autoComplete="current-password"
                   endAdornment={
                     <InputAdornment position="end">
@@ -96,11 +92,7 @@ class SignIn extends Component {
                         aria-label="Toggle password visibility"
                         onClick={this.handleClickShowPassword}
                       >
-                        {showPassword ? (
-                          <VisibilityIcon />
-                        ) : (
-                          <VisibilityOffIcon />
-                        )}
+                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -131,7 +123,7 @@ class SignIn extends Component {
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles)(SignIn);

@@ -1,20 +1,20 @@
-import axios from "axios";
-import config from "../../../appConfiguration";
+import axios from 'axios';
+import config from '../../../appConfiguration';
 
 const host = config.krokurApi;
 
-const getUsers = token =>
+const getUsers = (token) =>
   axios
     .get(`${host}/api/v1/users`, {
-      headers: { Authorization: `JWT ${token}` }
+      headers: { Authorization: `JWT ${token}` },
     })
-    .then(response => response.data);
+    .then((response) => response.data);
 
-const getClubs = token =>
+const getClubs = (token) =>
   axios
     .get(`${host}/api/v1/clubs`, {
-      headers: { Authorization: `JWT ${token}` }
+      headers: { Authorization: `JWT ${token}` },
     })
-    .then(response => response.data);
+    .then((response) => response.data);
 
 export default { getUsers, getClubs };

@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import {
   AppBar as ApplicationBar,
   IconButton,
@@ -7,39 +7,39 @@ import {
   Typography,
   Badge,
   Menu,
-  MenuItem
-} from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MenuIcon from "@material-ui/icons/Menu";
-import { withStyles } from "@material-ui/core/styles";
+  MenuItem,
+} from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import MenuIcon from '@material-ui/icons/Menu';
+import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   appBar: {
-    zIndex: theme.zIndex.drawer + 1
+    zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
   toolbar: theme.mixins.toolbar,
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   displayName: {
-    paddingLeft: "5px"
-  }
+    paddingLeft: '5px',
+  },
 });
 
 class AppBar extends React.Component {
   state = {
     mobileOpen: false,
-    profileMenuEl: null
+    profileMenuEl: null,
   };
 
-  handleProfileMenuOpen = event => {
+  handleProfileMenuOpen = (event) => {
     this.setState({ profileMenuEl: event.currentTarget });
   };
 
@@ -62,8 +62,8 @@ class AppBar extends React.Component {
     const renderMenu = (
       <Menu
         anchorEl={profileMenuEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
@@ -93,16 +93,11 @@ class AppBar extends React.Component {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Typography
-              className={classes.displayName}
-              variant="subtitle1"
-              color="inherit"
-              noWrap
-            >
+            <Typography className={classes.displayName} variant="subtitle1" color="inherit" noWrap>
               {userInfo.name}
             </Typography>
             <IconButton
-              aria-owns={isMenuOpen ? "material-appbar" : undefined}
+              aria-owns={isMenuOpen ? 'material-appbar' : undefined}
               aria-haspopup="true"
               onClick={this.handleProfileMenuOpen}
               color="inherit"
@@ -118,7 +113,7 @@ class AppBar extends React.Component {
 }
 
 AppBar.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(AppBar);

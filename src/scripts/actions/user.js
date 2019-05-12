@@ -1,20 +1,20 @@
-import { createActions } from "redux-actions";
+import { createActions } from 'redux-actions';
 
 export const {
-  user: { login, receiveUserData, getUserByToken, setRedirectUrl, logout }
+  user: { login, receiveUserData, getUserByToken, setRedirectUrl, logout },
 } = createActions({
   USER: {
     LOGIN: null,
-    RECEIVE_USER_DATA: userData => ({
+    RECEIVE_USER_DATA: (userData) => ({
       isFetching: false,
-      ...userData
+      ...userData,
     }),
     GET_USER_BY_TOKEN: () => ({
-      isFetching: true
+      isFetching: true,
     }),
-    SET_REDIRECT_URL: url => ({
-      setRedirectUrl: url
+    SET_REDIRECT_URL: (url) => ({
+      setRedirectUrl: url,
     }),
-    LOGOUT: null
-  }
+    LOGOUT: null,
+  },
 });

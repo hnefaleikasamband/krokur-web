@@ -1,25 +1,25 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap",
-    padding: theme.spacing.unit * 2
+    display: 'flex',
+    flexWrap: 'wrap',
+    padding: theme.spacing.unit * 2,
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    width: '100%',
   },
   button: {
     margin: theme.spacing.unit,
-    width: "100%"
-  }
+    width: '100%',
+  },
 });
 
 const AthleteForm = ({ providedClub, classes }) => {
@@ -33,7 +33,7 @@ const AthleteForm = ({ providedClub, classes }) => {
           className={classes.textField}
           onChange={() => {}}
           margin="normal"
-          required={true}
+          required
         />
         <TextField
           id="ssn"
@@ -41,7 +41,7 @@ const AthleteForm = ({ providedClub, classes }) => {
           className={classes.textField}
           onChange={() => {}}
           margin="normal"
-          required={true}
+          required
         />
         <TextField
           id="club"
@@ -50,7 +50,7 @@ const AthleteForm = ({ providedClub, classes }) => {
           onChange={() => {}}
           margin="normal"
           value={providedClub}
-          required={true}
+          required
           disabled={!!providedClub}
         />
         <Button variant="contained" className={classes.button} color="primary">

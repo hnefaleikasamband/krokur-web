@@ -1,15 +1,15 @@
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { user as userActions } from "../../actions";
-import Navigation from "./navigation";
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { user as userActions } from '../../actions';
+import Navigation from './navigation';
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
 });
 
 const mapDispatchToProps = {
-  logout: userActions.logout
+  logout: userActions.logout,
 };
 
 const enhance = compose(

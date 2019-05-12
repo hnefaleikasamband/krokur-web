@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   CssBaseline,
   Divider,
@@ -9,19 +9,19 @@ import {
   MenuItem,
   ListItem,
   ListItemIcon,
-  ListItemText
-} from "@material-ui/core";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import SettingsIcon from "@material-ui/icons/Settings";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
-import MemoryIcon from "@material-ui/icons/Memory";
-import ViewList from "@material-ui/icons/ViewList";
-import SchoolIcon from "@material-ui/icons/School";
-import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import styles from "./navStyles";
-import AppBar from "./appBar";
+  ListItemText,
+} from '@material-ui/core';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SettingsIcon from '@material-ui/icons/Settings';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SupervisedUserCircle from '@material-ui/icons/SupervisedUserCircle';
+import MemoryIcon from '@material-ui/icons/Memory';
+import ViewList from '@material-ui/icons/ViewList';
+import SchoolIcon from '@material-ui/icons/School';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import styles from './navStyles';
+import AppBar from './appBar';
 
 const NavItem = ({ path, navText, show = true, icon }) => {
   return (
@@ -43,27 +43,23 @@ const drawer = (classes, user) => (
     </Hidden>
     <Hidden smUp>
       <ListItem>
-        <ListItemText primary={"Krókur"} />
+        <ListItemText primary={'Krókur'} />
       </ListItem>
     </Hidden>
     <Divider />
     <MenuList>
       <NavItem path="/" navText="Dashboard" icon={<DashboardIcon />} />
-      <NavItem
-        path="/all-athletes"
-        navText="All Athletes"
-        icon={<SupervisorAccountIcon />}
-      />
+      <NavItem path="/all-athletes" navText="All Athletes" icon={<SupervisorAccountIcon />} />
       <NavItem
         path="/my-athletes"
         navText="My Athletes"
-        show={showNavItem(["COACH"], user.userInfo.role)}
+        show={showNavItem(['COACH'], user.userInfo.role)}
         icon={<SupervisedUserCircle />}
       />
       <NavItem
         path="/manage-athletes"
         navText="Manage Athletes"
-        show={showNavItem(["ADMIN"], user.userInfo.role)}
+        show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<SupervisedUserCircle />}
       />
     </MenuList>
@@ -72,14 +68,14 @@ const drawer = (classes, user) => (
       <NavItem
         path="/bout-logs"
         navText="Bout logs"
-        show={showNavItem(["ADMIN"], user.userInfo.role)}
+        show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<ViewList />}
       />
       <NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />
       <NavItem
         path="/system"
         navText="System"
-        show={showNavItem(["ADMIN"], user.userInfo.role)}
+        show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<MemoryIcon />}
       />
       <NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />
@@ -89,11 +85,11 @@ const drawer = (classes, user) => (
 
 class ResponsiveDrawer extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
   };
 
   handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+    this.setState((state) => ({ mobileOpen: !state.mobileOpen }));
   };
 
   render() {
@@ -102,11 +98,7 @@ class ResponsiveDrawer extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar
-          openDrawer={this.handleDrawerToggle}
-          userInfo={user.userInfo}
-          logout={logout}
-        />
+        <AppBar openDrawer={this.handleDrawerToggle} userInfo={user.userInfo} logout={logout} />
         <nav className={classes.drawer}>
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
@@ -115,7 +107,7 @@ class ResponsiveDrawer extends React.Component {
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
             >
               {drawer(classes, user)}
@@ -124,7 +116,7 @@ class ResponsiveDrawer extends React.Component {
           <Hidden xsDown implementation="css">
             <Drawer
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               variant="permanent"
               open
@@ -143,7 +135,7 @@ class ResponsiveDrawer extends React.Component {
 }
 
 ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);

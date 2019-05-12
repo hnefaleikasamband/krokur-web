@@ -1,16 +1,16 @@
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import renderWithActions from "../../helpers/renderWithActions";
-import { dashboard as dashboardActions } from "../../actions";
-import Dashboard from "./dashboard";
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import renderWithActions from '../../helpers/renderWithActions';
+import { dashboard as dashboardActions } from '../../actions';
+import Dashboard from './dashboard';
 
 const mapStateToProps = (state, ownProps) => ({
-  ...ownProps
+  ...ownProps,
 });
 
 const mapDispatchToProps = {
-  refreshDashboard: dashboardActions.refreshDashboard
+  refreshDashboard: dashboardActions.refreshDashboard,
 };
 
 const enhance = compose(
@@ -18,7 +18,7 @@ const enhance = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  renderWithActions(["refreshDashboard"])
+  renderWithActions(['refreshDashboard'])
 );
 
 const MainComponent = enhance(Dashboard);

@@ -1,13 +1,13 @@
-import { createActions } from "redux-actions";
+import { createActions } from 'redux-actions';
 
 export const {
-  dashboard: { refreshDashboard, receiveDashboard }
+  dashboard: { refreshDashboard, receiveDashboard },
 } = createActions({
   DASHBOARD: {
     REFRESH_DASHBOARD: null,
-    RECEIVE_DASHBOARD: data => ({
+    RECEIVE_DASHBOARD: (data) => ({
       isFetching: false,
-      data
-    })
-  }
+      data,
+    }),
+  },
 });
