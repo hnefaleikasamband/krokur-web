@@ -21,8 +21,8 @@ esac
 
 $REACT_APP_API_GATEWAY=$STAGE
 
-yarn global caprover
-rm -r ./dist
+yarn add global caprover
+rm -r ./build
 yarn build --prod
 tar -cvf ./deploy.tar --exclude="*.map" ./captain-definition ./build/*
 caprover deploy -t ./deploy.tar -h $CAP_HOST -a $APP_NAME -p $CAP_PASS > /dev/null 2>&1
