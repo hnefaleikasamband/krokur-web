@@ -2,9 +2,10 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import UsersSummary from './usersSummary';
-import ClubsSummary from './clubsSummary';
+import { UsersSummary } from './users';
+import { ClubsSummary } from './clubs';
 import SpeedDial from './speedDial';
+import { ClubFormDialog } from './clubs';
 
 const styles = (theme) => ({
   root: {
@@ -22,6 +23,7 @@ const System = ({ usersData, clubsData, classes }) => {
   console.log('classes:', classes);
   return (
     <Fragment>
+      <ClubFormDialog />
       <Grid container spacing={16} direction="row">
         <Grid item xs={12} md={7}>
           <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />
