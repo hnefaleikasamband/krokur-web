@@ -17,4 +17,8 @@ const getClubs = (token) =>
     })
     .then((response) => response.data);
 
-export default { getUsers, getClubs };
+const addClub = (club, token) => axios.post(`${host}/api/v1/clubs`, club, {
+  headers: { Authorization: `JWT ${token}` }
+}).then((response) => response.data);
+
+export default { getUsers, getClubs, addClub };

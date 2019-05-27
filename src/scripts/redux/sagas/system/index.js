@@ -38,9 +38,24 @@ function* fetchClubs() {
   }
 }
 
-export default function*() {
+function* addClub({ payload }) {
+  try {
+    const { token } = yield select((state) => state.user);
+    if (payload.id === null) {
+      delete payload.id;
+    }
+
+    const data = yield call(api.addClub, payload, token);
+    yield put(actions.fetchClubs());
+  } catch (e) {
+    console.log('addClub error:', e);
+  }
+}
+
+export default function* () {
   yield all([
     takeLatest(matchesType(actions.fetchAllUsers), fetchUsers),
     takeLatest(matchesType(actions.fetchClubs), fetchClubs),
+    takeLatest(matchesType(actions.addClub), addClub)
   ]);
 }
