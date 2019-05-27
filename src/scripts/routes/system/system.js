@@ -19,11 +19,11 @@ const styles = (theme) => ({
   },
 });
 
-const System = ({ usersData, clubsData, classes }) => {
+const System = ({ usersData, clubsData, addClub, classes }) => {
   console.log('classes:', classes);
   return (
     <Fragment>
-      <ClubFormDialog />
+      <ClubFormDialog addClub={addClub} />
       <Grid container spacing={4} direction="row">
         <Grid item xs={12} md={7}>
           <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />

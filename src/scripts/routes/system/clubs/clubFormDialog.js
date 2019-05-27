@@ -5,12 +5,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { ClubForm } from '../../../components';
 
-const FormDialog = () => {
+const FormDialog = ({ addClub }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (data) => {
     setOpen(false);
     console.log(data);
+    addClub(data)
   }
 
   return (

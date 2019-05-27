@@ -14,6 +14,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   fetchAllUsers: systemActions.fetchAllUsers,
   fetchClubs: systemActions.fetchClubs,
+  addClub: systemActions.addClub,
 };
 
 const enhance = compose(

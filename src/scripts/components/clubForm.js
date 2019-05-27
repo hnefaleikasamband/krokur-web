@@ -22,6 +22,7 @@ const styles = (theme) => ({
     width: '100%',
   },
   buttonContainer: {
+    marginTop: theme.spacing(2),
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
