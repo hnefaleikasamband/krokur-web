@@ -10,7 +10,7 @@ import Badge from '@material-ui/core/Badge';
 
 const styles = (theme) => ({
   badge: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
   },
   iconBronz: {
     color: orage.A400,
@@ -40,10 +40,10 @@ const getDateStrings = (locale) => (dates) =>
   Object.keys(dates).map((key) =>
     dates[key]
       ? `- ${new Date(dates[key]).toLocaleDateString(locale, {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        })}`
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })}`
       : '- not achieved'
   );
 
