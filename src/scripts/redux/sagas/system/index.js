@@ -45,17 +45,29 @@ function* addClub({ payload }) {
       delete payload.id;
     }
 
-    const data = yield call(api.addClub, payload, token);
+    yield call(api.addClub, payload, token);
     yield put(actions.fetchClubs());
   } catch (e) {
     console.log('addClub error:', e);
   }
 }
 
-export default function* () {
+function* updateClub({ payload }) {
+  try {
+    const { token } = yield select((state) => state.user);
+
+    yield call(api.updateClub, payload, token);
+    yield put(actions.fetchClubs());
+  } catch (e) {
+    console.log('updateClub error:', e);
+  }
+}
+
+export default function*() {
   yield all([
     takeLatest(matchesType(actions.fetchAllUsers), fetchUsers),
     takeLatest(matchesType(actions.fetchClubs), fetchClubs),
-    takeLatest(matchesType(actions.addClub), addClub)
+    takeLatest(matchesType(actions.addClub), addClub),
+    takeLatest(matchesType(actions.updateClub), updateClub),
   ]);
 }

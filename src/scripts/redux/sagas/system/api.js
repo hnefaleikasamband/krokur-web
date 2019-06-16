@@ -17,8 +17,16 @@ const getClubs = (token) =>
     })
     .then((response) => response.data);
 
-const addClub = (club, token) => axios.post(`${host}/api/v1/clubs`, club, {
-  headers: { Authorization: `JWT ${token}` }
-}).then((response) => response.data);
+const addClub = (club, token) =>
+  axios
+    .post(`${host}/api/v1/clubs`, club, {
+      headers: { Authorization: `JWT ${token}` },
+    })
+    .then((response) => response.data);
 
-export default { getUsers, getClubs, addClub };
+const updateClub = (club, token) =>
+  axios.put(`${host}/api/v1/clubs/${club.id}`, club, {
+    headers: { Authorization: `JWT ${token}` },
+  });
+
+export default { getUsers, getClubs, addClub, updateClub };

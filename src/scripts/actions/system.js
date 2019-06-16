@@ -1,7 +1,7 @@
 import { createActions } from 'redux-actions';
 
 export const {
-  system: { receiveUsers, fetchAllUsers, receiveClubs, fetchClubs, addClub },
+  system: { receiveUsers, fetchAllUsers, receiveClubs, fetchClubs, addClub, updateClub },
 } = createActions({
   SYSTEM: {
     RECEIVE_USERS: (users) => ({
@@ -19,7 +19,10 @@ export const {
     }),
     FETCH_CLUBS: null,
     ADD_CLUB: (club) => ({
-      ...club
-    })
+      ...club,
+    }),
+    UPDATE_CLUB: (club) => ({
+      ...club,
+    }),
   },
 });
