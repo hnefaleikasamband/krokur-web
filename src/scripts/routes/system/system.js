@@ -4,10 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { UsersSummary } from './users';
 import { ClubsSummary } from './clubs';
-import SpeedDial from './speedDial';
 import { ClubFormDialog } from './clubs';
 
 const styles = (theme) => ({
+  buttonContainer: {
+    margin: '0 0 24px',
+  },
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing(2),
@@ -19,20 +21,29 @@ const styles = (theme) => ({
   },
 });
 
-const System = ({ usersData, clubsData, addClub, classes }) => {
-  console.log('classes:', classes);
+const System = ({ usersData, clubsData, addClubAction, editClubAction, classes }) => {
   return (
     <Fragment>
-      <ClubFormDialog addClub={addClub} />
-      <Grid container spacing={4} direction="row">
-        <Grid item xs={12} md={7}>
-          <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />
+      <Grid container spacing={1} direction="row" className={classes.buttonContainer}>
+        <Grid item>
+          <ClubFormDialog submitAction={addClubAction} buttonText="Add a User" />
         </Grid>
-        <Grid item xs={12} md={5}>
-          <ClubsSummary isFetching={clubsData.isFetching} clubs={clubsData.data} />
+        <Grid item>
+          <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
         </Grid>
       </Grid>
-      <SpeedDial />
+      <Grid container spacing={4} direction="row">
+        <Grid item xs={12} lg={7}>
+          <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />
+        </Grid>
+        <Grid item xs={12} lg={5}>
+          <ClubsSummary
+            isFetching={clubsData.isFetching}
+            clubs={clubsData.data}
+            editAction={editClubAction}
+          />
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };
