@@ -29,22 +29,19 @@ const styles = (theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
     },
-  }
+  },
 });
-
 
 const ClubSchema = Yup.object().shape({
   name: Yup.string().required(),
-  shorthand: Yup.string().min(2).max(5).required(),
+  shorthand: Yup.string()
+    .min(2)
+    .max(5)
+    .required(),
 });
 
-
 const ClubForm = ({ initialValues, onSubmit, classes, submitText, onCancel }) => (
-  <Formik
-    initialValues={initialValues}
-    validationSchema={ClubSchema}
-    onSubmit={onSubmit}
-  >
+  <Formik initialValues={initialValues} validationSchema={ClubSchema} onSubmit={onSubmit}>
     {({ values, errors, touched, handleSubmit, handleChange }) => (
       <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
         <TextField
@@ -67,8 +64,13 @@ const ClubForm = ({ initialValues, onSubmit, classes, submitText, onCancel }) =>
           error={errors.shorthand && touched.shorthand}
           required
         />
-        <div className={classes.buttonContainer} >
-          <Button variant="contained" className={classes.button} color="secondary" onClick={onCancel}>
+        <div className={classes.buttonContainer}>
+          <Button
+            variant="contained"
+            className={classes.button}
+            color="secondary"
+            onClick={onCancel}
+          >
             Cancel
           </Button>
           <Button type="submit" variant="contained" className={classes.button} color="primary">
@@ -80,7 +82,6 @@ const ClubForm = ({ initialValues, onSubmit, classes, submitText, onCancel }) =>
   </Formik>
 );
 
-
 ClubForm.propTypes = {
   initialValues: PropTypes.shape({
     id: PropTypes.string,
@@ -88,14 +89,14 @@ ClubForm.propTypes = {
     shorthand: PropTypes.string,
   }),
   onSubmit: PropTypes.func.isRequired,
-}
+};
 
 ClubForm.defaultProps = {
   initialValues: {
     id: null,
     name: '',
-    shorthand: ''
-  }
-}
+    shorthand: '',
+  },
+};
 
 export default withStyles(styles)(ClubForm);
