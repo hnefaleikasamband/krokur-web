@@ -15,7 +15,7 @@
     "@material-ui/icons": "^4.0.1",
     "@material-ui/lab": "^4.0.0-alpha.14",
     "@material-ui/styles": "^4.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "copy-to-clipboard": "^3.1.0",
     "formik": "^1.5.7",
     "ilenia": "^8.4.0",
