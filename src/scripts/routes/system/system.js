@@ -2,9 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { UsersSummary } from './users';
-import { ClubsSummary } from './clubs';
-import { ClubFormDialog } from './clubs';
+import { UsersSummary, UserFormDialog } from './users';
+import { ClubsSummary, ClubFormDialog } from './clubs';
 
 const styles = (theme) => ({
   buttonContainer: {
@@ -26,7 +25,7 @@ const System = ({ usersData, clubsData, addClubAction, editClubAction, classes }
     <Fragment>
       <Grid container spacing={1} direction="row" className={classes.buttonContainer}>
         <Grid item>
-          <ClubFormDialog submitAction={addClubAction} buttonText="Add a User" />
+          <UserFormDialog submitAction={addClubAction} buttonText="Add a User" clubs={clubsData} />
         </Grid>
         <Grid item>
           <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
