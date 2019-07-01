@@ -13,7 +13,7 @@ const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
   const handleSubmit = (data) => {
     console.log(data);
     setOpen(false);
-    //submitAction(data);
+    submitAction(data);
   };
 
   return (

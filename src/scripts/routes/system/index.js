@@ -16,6 +16,8 @@ const mapDispatchToProps = {
   fetchClubs: systemActions.fetchClubs,
   addClubAction: systemActions.addClub,
   editClubAction: systemActions.updateClub,
+  addUserAction: systemActions.addUser,
+  updateUserAction: systemActions.updateUser,
 };
 
 const enhance = compose(

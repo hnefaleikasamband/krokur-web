@@ -65,7 +65,7 @@ const UserSchema = Yup.object().shape({
     .required('Password confirmation is required!')
     .strict(),
   role: Yup.string().required(),
-  club: Yup.string().when(('role', { is: 'COACH', then: Yup.string().min(2).required() })),
+  club: Yup.string().when(('role', { is: 'COACH', then: Yup.string().required() })),
   disabled: Yup.bool().default(false),
 });
 

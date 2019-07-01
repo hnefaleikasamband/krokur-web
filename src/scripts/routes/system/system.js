@@ -20,12 +20,20 @@ const styles = (theme) => ({
   },
 });
 
-const System = ({ usersData, clubsData, addClubAction, editClubAction, classes }) => {
+const System = ({
+  usersData,
+  clubsData,
+  addClubAction,
+  editClubAction,
+  addUserAction,
+  updateUserAction,
+  classes,
+}) => {
   return (
     <Fragment>
       <Grid container spacing={1} direction="row" className={classes.buttonContainer}>
         <Grid item>
-          <UserFormDialog submitAction={addClubAction} buttonText="Add a User" clubs={clubsData} />
+          <UserFormDialog submitAction={addUserAction} buttonText="Add a User" clubs={clubsData} />
         </Grid>
         <Grid item>
           <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
