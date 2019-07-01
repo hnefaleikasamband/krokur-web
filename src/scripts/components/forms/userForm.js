@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { ClubsSelect } from './helpers';
 
 const styles = (theme) => ({
   container: {
@@ -50,7 +51,6 @@ const styles = (theme) => ({
   },
 });
 
-
 const UserSchema = Yup.object().shape({
   name: Yup.string().required(),
   email: Yup.string()
@@ -68,13 +68,6 @@ const UserSchema = Yup.object().shape({
   club: Yup.string().when(('role', { is: 'COACH', then: Yup.string().required() })),
   disabled: Yup.bool().default(false),
 });
-
-const clubsSelect = (clubs) =>
-  clubs.map((club) => (
-    <MenuItem key={club.id} value={club.id}>
-      {club.name}
-    </MenuItem>
-  ));
 
 const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, clubs }) => {
   const [disabledSwitch, setdisabledSwitch] = React.useState(initialValues.disabled || false);
@@ -144,7 +137,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
                 onChange={handleChange}
                 input={<Input name="club" id="club-helper" />}
               >
-                {clubsSelect(clubs.data)}
+                {ClubsSelect(clubs.data)}
               </Select>
             </FormControl>
           )}
@@ -168,7 +161,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
               onClick={onCancel}
             >
               Cancel
-          </Button>
+            </Button>
             <Button type="submit" variant="contained" className={classes.button} color="primary">
               {submitText}
             </Button>
@@ -176,7 +169,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
         </form>
       )}
     </Formik>
-  )
+  );
 };
 
 UserForm.propTypes = {
