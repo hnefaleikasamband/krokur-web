@@ -9,15 +9,6 @@ const styles = (theme) => ({
   buttonContainer: {
     margin: '0 0 24px',
   },
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  exampleWrapper: {
-    position: 'relative',
-    height: 380,
-  },
 });
 
 const System = ({
