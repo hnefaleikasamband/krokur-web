@@ -63,11 +63,35 @@ function* updateClub({ payload }) {
   }
 }
 
-export default function*() {
+function* addUser({ payload }) {
+  try {
+    const { token } = yield select((state) => state.user);
+    Object.keys(payload).forEach((key) => payload[key] === '' && delete payload[key]);
+
+    yield call(api.addUser, payload, token);
+    yield put(actions.fetchAllUsers());
+  } catch (e) {
+    console.log('addUser error:', e);
+  }
+}
+
+function* updateUser({ payload }) {
+  try {
+    const { token } = yield select((state) => state.user);
+    yield call(api.updateUser, payload, token);
+    yield put(actions.fetchAllUsers);
+  } catch (e) {
+    console.log('updateUser error:', e);
+  }
+}
+
+export default function* () {
   yield all([
     takeLatest(matchesType(actions.fetchAllUsers), fetchUsers),
     takeLatest(matchesType(actions.fetchClubs), fetchClubs),
     takeLatest(matchesType(actions.addClub), addClub),
     takeLatest(matchesType(actions.updateClub), updateClub),
+    takeLatest(matchesType(actions.addUser), addUser),
+    takeLatest(matchesType(actions.updateUser), updateUser),
   ]);
 }

@@ -29,4 +29,14 @@ const updateClub = (club, token) =>
     headers: { Authorization: `JWT ${token}` },
   });
 
-export default { getUsers, getClubs, addClub, updateClub };
+const addUser = (user, token) =>
+  axios.post(`${host}/api/v1/auth/register`, user, {
+    headers: { Authorization: `JWT ${token}` },
+  });
+
+const updateUser = (user, token) =>
+  Promise((resolve, reject) => {
+    reject('user update path does not exists yet');
+  });
+
+export default { getUsers, getClubs, addClub, updateClub, addUser, updateUser };
