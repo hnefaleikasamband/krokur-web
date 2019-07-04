@@ -8,46 +8,12 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import * as Yup from 'yup';
-import { ClubsSelect } from './helpers';
-
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: theme.spacing(2),
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '100%',
-  },
-  button: {
-    margin: theme.spacing(1),
-    width: '100%',
-  },
-  buttonContainer: {
-    marginTop: theme.spacing(2),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
-  },
-});
-
-const ClubSchema = Yup.object().shape({
-  name: Yup.string().required(),
-  personalIdentificationNumber: Yup.string()
-    .min(10)
-    .max(10)
-    .required(),
-  club: Yup.string().required(),
-});
+import { ClubsSelect } from '../helpers';
+import styles from './athleteFormStyles';
+import AthleteSchema from './athleteSchema';
 
 const AthleteForm = ({ initialValues, onSubmit, classes, submitText, onCancel, clubs }) => (
-  <Formik initialValues={initialValues} validationSchema={ClubSchema} onSubmit={onSubmit}>
+  <Formik initialValues={initialValues} validationSchema={AthleteSchema} onSubmit={onSubmit}>
     {({ values, errors, touched, handleSubmit, handleChange }) => (
       <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
         <TextField

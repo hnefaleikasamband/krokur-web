@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import * as Yup from 'yup';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,62 +11,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import { ClubsSelect } from './helpers';
-
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: theme.spacing(2),
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '100%',
-  },
-  formControl: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-    width: '100%',
-  },
-  switch: {
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(1),
-  },
-  button: {
-    margin: theme.spacing(1),
-    width: '100%',
-  },
-  buttonContainer: {
-    marginTop: theme.spacing(2),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
-  },
-});
-
-const UserSchema = Yup.object().shape({
-  name: Yup.string().required(),
-  email: Yup.string()
-    .email()
-    .required(),
-  password: Yup.string()
-    .min(5, 'Password has to be longer than 6 characters!')
-    .required('Password is required!')
-    .strict(),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords are not the same!')
-    .required('Password confirmation is required!')
-    .strict(),
-  role: Yup.string().required(),
-  club: Yup.string().when(('role', { is: 'COACH', then: Yup.string().required() })),
-  disabled: Yup.bool().default(false),
-});
+import { ClubsSelect } from '../helpers';
+import styles from './userFormStyles';
+import UserSchema from './userSchema';
 
 const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, clubs }) => {
   const [disabledSwitch, setdisabledSwitch] = React.useState(initialValues.disabled || false);
@@ -137,7 +83,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
                 onChange={handleChange}
                 input={<Input name="club" id="club-helper" />}
               >
-                {ClubsSelect(clubs.data)}
+                {ClubsSelect(clubs)}
               </Select>
             </FormControl>
           )}

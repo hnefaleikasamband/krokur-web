@@ -24,7 +24,11 @@ const System = ({
     <Fragment>
       <Grid container spacing={1} direction="row" className={classes.buttonContainer}>
         <Grid item>
-          <UserFormDialog submitAction={addUserAction} buttonText="Add a User" clubs={clubsData} />
+          <UserFormDialog
+            submitAction={addUserAction}
+            buttonText="Add a User"
+            clubs={clubsData.data}
+          />
         </Grid>
         <Grid item>
           <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />

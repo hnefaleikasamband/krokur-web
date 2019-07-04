@@ -4,41 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import * as Yup from 'yup';
-
-const styles = (theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: theme.spacing(2),
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '100%',
-  },
-  button: {
-    margin: theme.spacing(1),
-    width: '100%',
-  },
-  buttonContainer: {
-    marginTop: theme.spacing(2),
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
-  },
-});
-
-const ClubSchema = Yup.object().shape({
-  name: Yup.string().required(),
-  shorthand: Yup.string()
-    .min(2)
-    .max(5)
-    .required(),
-});
+import styles from './clubFormStyles';
+import ClubSchema from './clubSchema';
 
 const ClubForm = ({ initialValues, onSubmit, classes, submitText, onCancel }) => (
   <Formik initialValues={initialValues} validationSchema={ClubSchema} onSubmit={onSubmit}>
