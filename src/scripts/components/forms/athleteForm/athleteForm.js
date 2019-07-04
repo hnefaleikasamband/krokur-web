@@ -43,7 +43,7 @@ const AthleteForm = ({ initialValues, onSubmit, classes, submitText, onCancel, c
             onChange={handleChange}
             input={<Input name="club" id="club-helper" />}
           >
-            {ClubsSelect(clubs.data)}
+            {ClubsSelect(clubs)}
           </Select>
         </FormControl>
         <div className={classes.buttonContainer}>
@@ -81,7 +81,8 @@ AthleteForm.defaultProps = {
   initialValues: {
     id: null,
     name: '',
-    shorthand: '',
+    personalIdentificationNumber: '',
+    club: '',
   },
   clubs: [],
 };

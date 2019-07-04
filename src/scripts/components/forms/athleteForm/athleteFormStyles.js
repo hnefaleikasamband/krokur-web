@@ -9,6 +9,13 @@ export default (theme) => ({
     marginRight: theme.spacing(1),
     width: '100%',
   },
+  formControl: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    width: '100%',
+  },
   button: {
     margin: theme.spacing(1),
     width: '100%',

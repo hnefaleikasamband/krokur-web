@@ -10,7 +10,11 @@ const ManageAthletes = ({ isFetching, athletes, clubsData }) => {
       <Grid container spacing={4} direction="row-reverse">
         <Grid item xs={12} md={4}>
           <Paper>
-            <AthleteForm clubs={clubsData} />
+            <AthleteForm
+              clubs={clubsData.data}
+              submitText="Add new Athlete"
+              onSubmit={() => console.log('Submitted athlete form')}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
