@@ -27,6 +27,11 @@ const Summary = ({ isFetching, athletes }) => {
       options: { filter: false, sort: false },
     },
     {
+      name: 'club',
+      label: 'Club',
+      option: { filter: true, sort: true },
+    },
+    {
       name: 'achievements',
       label: 'Achievements',
       options: {
