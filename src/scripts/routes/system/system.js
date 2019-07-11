@@ -4,10 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { UsersSummary, UserFormDialog } from './users';
 import { ClubsSummary, ClubFormDialog } from './clubs';
+import { Header } from '../../components';
 
 const styles = (theme) => ({
   buttonContainer: {
     margin: '0 0 24px',
+  },
+  button: {
+    marginLeft: theme.spacing(1),
   },
 });
 
@@ -22,18 +26,25 @@ const System = ({
 }) => {
   return (
     <Fragment>
-      <Grid container spacing={1} direction="row" className={classes.buttonContainer}>
-        <Grid item>
-          <UserFormDialog
-            submitAction={addUserAction}
-            buttonText="Add a User"
-            clubs={clubsData.data}
-          />
-        </Grid>
-        <Grid item>
-          <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
-        </Grid>
-      </Grid>
+      <Header
+        title="Application"
+        subtitle="Manage system wide settings"
+        buttonsRight={
+          <>
+            <UserFormDialog
+              className={classes.button}
+              submitAction={addUserAction}
+              buttonText="Add a User"
+              clubs={clubsData.data}
+            />
+            <ClubFormDialog
+              submitAction={addClubAction}
+              buttonText="Add a Club"
+              className={classes.button}
+            />
+          </>
+        }
+      />
       <Grid container spacing={4} direction="row">
         <Grid item xs={12} lg={7}>
           <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />
