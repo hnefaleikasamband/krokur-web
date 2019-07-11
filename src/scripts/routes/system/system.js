@@ -32,16 +32,11 @@ const System = ({
         buttonsRight={
           <>
             <UserFormDialog
-              className={classes.button}
               submitAction={addUserAction}
               buttonText="Add a User"
               clubs={clubsData.data}
             />
-            <ClubFormDialog
-              submitAction={addClubAction}
-              buttonText="Add a Club"
-              className={classes.button}
-            />
+            <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
           </>
         }
       />

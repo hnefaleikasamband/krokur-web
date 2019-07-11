@@ -5,14 +5,16 @@ import Paper from '@material-ui/core/Paper';
 import { AthleteForm, Header } from '../../components';
 import Button from '@material-ui/core/Button';
 
-const tempDisplayButtons = [
-  <Button variant="contained" color="primary" disabled key="add-button">
-    Add Bout
-  </Button>,
-  <Button variant="contained" color="primary" disabled key="transfer-button">
-    Transfer Athlete
-  </Button>,
-];
+const tempDisplayButtons = (
+  <>
+    <Button variant="contained" color="primary" disabled key="add-button">
+      Add Bout
+    </Button>
+    <Button variant="contained" color="primary" disabled key="transfer-button">
+      Transfer Athlete
+    </Button>
+  </>
+);
 
 const ManageAthletes = ({ isFetching, athletes, clubsData }) => {
   return (

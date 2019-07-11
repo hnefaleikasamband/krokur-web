@@ -15,11 +15,10 @@ const styles = (theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     '& button': {
-      margin: '5px',
+      margin: theme.spacing(1),
     },
   },
   item: {
-    alignSelf: 'center',
     display: 'flex',
     flexFlow: 'row wrap',
   },
@@ -32,14 +31,10 @@ const Header = ({ title, subtitle, buttonsRight, classes }) => (
   <Paper className={classes.root}>
     <div className={classes.container}>
       <div>
-        <Typography className={classes.item} variant="h4">
-          {title}
-        </Typography>
-        <Typography className={classes.item} variant="subtitle1">
-          {subtitle}
-        </Typography>
+        <Typography variant="h4">{title}</Typography>
+        <Typography variant="subtitle1">{subtitle}</Typography>
       </div>
-      <div>{buttonsRight}</div>
+      <div className={classes.item}>{buttonsRight}</div>
     </div>
   </Paper>
 );
