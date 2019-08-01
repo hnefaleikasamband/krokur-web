@@ -2,18 +2,16 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import renderWithActions from '../../helpers/renderWithActions';
-import { athletes as athletesActions } from '../../actions';
-import AllAthletes from './allAthletes';
+import AthleteDetails from './athleteDetails';
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: state.athletes.isFetchingAllAthletes,
-  athletes: state.athletes.allAthletes,
-  isEmpty: state.athletes.allAthletes.length <= 0,
+  usersData: state.system.users,
+  clubsData: state.system.clubs,
   ...ownProps,
 });
 
 const mapDispatchToProps = {
-  getAllAthletes: athletesActions.getAllAthletes,
+  //fetchAllUsers: systemActions.fetchAllUsers,
 };
 
 const enhance = compose(
@@ -21,9 +19,9 @@ const enhance = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  renderWithActions(['getAllAthletes'])
+  renderWithActions([])
 );
 
-const MainComponent = enhance(AllAthletes);
+const MainComponent = enhance(AthleteDetails);
 
 export default withRouter(MainComponent);

@@ -2,19 +2,36 @@ import React from 'react';
 import Summary from './summary';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { AthleteForm } from '../../components';
+import { AthleteForm, Header } from '../../components';
+import Button from '@material-ui/core/Button';
 
-const ManageAthletes = ({ isFetching, athletes, club }) => {
+const tempDisplayButtons = (
+  <>
+    <Button variant="contained" color="primary" disabled key="add-button">
+      Add Bout
+    </Button>
+    <Button variant="contained" color="primary" disabled key="transfer-button">
+      Transfer Athlete
+    </Button>
+  </>
+);
+
+const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete }) => {
   return (
     <div>
-      <Grid container spacing={16} direction="row-reverse">
+      <Header
+        title="Manage Athletes"
+        subtitle="Manage all athletes information & bouts"
+        buttonsRight={tempDisplayButtons}
+      />
+      <Grid container spacing={4} direction="row-reverse">
         <Grid item xs={12} md={4}>
           <Paper>
-            <AthleteForm />
+            <AthleteForm clubs={clubsData} submitText="Add new Athlete" onSubmit={addAthlete} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Summary isfetching={isFetching} athletes={athletes} club={club} />
+          <Summary isfetching={isFetchingAthletes} athletes={athletes} />
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper>

@@ -16,7 +16,7 @@ const starHighlighterHelper = (tableMeta) => {
   );
 };
 
-const Summary = ({ isFetching, athletes, club }) => {
+const Summary = ({ isFetching, athletes }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -25,6 +25,11 @@ const Summary = ({ isFetching, athletes, club }) => {
       name: 'ssn',
       label: 'Kennitala',
       options: { filter: false, sort: false },
+    },
+    {
+      name: 'club',
+      label: 'Club',
+      option: { filter: true, sort: true },
     },
     {
       name: 'achievements',

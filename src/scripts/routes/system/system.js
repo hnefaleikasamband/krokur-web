@@ -2,35 +2,50 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import UsersSummary from './usersSummary';
-import ClubsSummary from './clubsSummary';
-import SpeedDial from './speedDial';
+import { UsersSummary, UserFormDialog } from './users';
+import { ClubsSummary, ClubFormDialog } from './clubs';
+import { Header } from '../../components';
 
 const styles = (theme) => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+  buttonContainer: {
+    margin: '0 0 24px',
   },
-  exampleWrapper: {
-    position: 'relative',
-    height: 380,
+  button: {
+    marginLeft: theme.spacing(1),
   },
 });
 
-const System = ({ usersData, clubsData, classes }) => {
-  console.log('classes:', classes);
+const System = ({
+  isFetchingUsers,
+  isFetchingClubs,
+  users,
+  clubs,
+  addClubAction,
+  editClubAction,
+  addUserAction,
+  updateUserAction,
+  classes,
+}) => {
   return (
     <Fragment>
-      <Grid container spacing={16} direction="row">
-        <Grid item xs={12} md={7}>
-          <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />
+      <Header
+        title="Application"
+        subtitle="Manage system wide settings"
+        buttonsRight={
+          <>
+            <UserFormDialog submitAction={addUserAction} buttonText="Add a User" clubs={clubs} />
+            <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
+          </>
+        }
+      />
+      <Grid container spacing={4} direction="row">
+        <Grid item xs={12} lg={7}>
+          <UsersSummary isFetching={isFetchingUsers} users={users} />
         </Grid>
-        <Grid item xs={12} md={5}>
-          <ClubsSummary isFetching={clubsData.isFetching} clubs={clubsData.data} />
+        <Grid item xs={12} lg={5}>
+          <ClubsSummary isFetching={isFetchingClubs} clubs={clubs} editAction={editClubAction} />
         </Grid>
       </Grid>
-      <SpeedDial />
     </Fragment>
   );
 };

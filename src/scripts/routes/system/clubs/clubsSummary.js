@@ -1,7 +1,8 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
+import { ClubFormDialog } from '../clubs';
 
-const UsersSummary = ({ isFetching, clubs }) => {
+const UsersSummary = ({ isFetching, clubs, editAction }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -13,6 +14,27 @@ const UsersSummary = ({ isFetching, clubs }) => {
     },
     { name: 'createdAt', options: hideColumnOptions },
     { name: 'updatedAt', options: hideColumnOptions },
+    {
+      name: 'edit',
+      label: 'Edit',
+      options: {
+        filter: false,
+        sort: false,
+        empty: true,
+        customBodyRender: (value, tableMeta) =>
+          tableMeta.rowData && (
+            <ClubFormDialog
+              submitAction={editAction}
+              buttonText="edit"
+              initialValues={{
+                id: tableMeta.rowData[0],
+                name: tableMeta.rowData[1],
+                shorthand: tableMeta.rowData[2],
+              }}
+            />
+          ),
+      },
+    },
   ];
 
   const tableOptions = {
@@ -23,7 +45,7 @@ const UsersSummary = ({ isFetching, clubs }) => {
     downloadOptions: {
       filename: 'clubs.csv',
     },
-    responsive: 'stacked',
+    responsive: 'scroll',
     print: false,
     viewColumns: false,
     filter: false,

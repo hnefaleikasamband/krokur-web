@@ -2,55 +2,30 @@ import { handleActions, combineActions } from 'redux-actions';
 import { athletes as actions } from '../../actions';
 
 const initialState = {
-  allAthletes: {
-    isFetching: false,
-    data: [],
-  },
-  managedAthletes: {
-    isFetching: false,
-    data: [],
-  },
+  isFetchingAllAthletes: false,
+  isFetchingManagedAthletes: false,
+  isFetchingAthlete: false,
+  allAthletes: [],
+  managedAthletes: [],
+  athlete: null,
 };
+
+const mergeState = (state, action) => ({
+  ...state,
+  ...action.payload,
+});
 
 const athletes = handleActions(
   new Map([
     [
-      combineActions(actions.getAllAthletes),
-      (state) => ({
-        ...state,
-        allAthletes: {
-          ...state.allAthletes,
-          isFetching: true,
-        },
-      }),
-    ],
-    [
-      combineActions(actions.receiveAllAthletes),
-      (state, action) => ({
-        ...state,
-        allAthletes: {
-          ...action.payload,
-        },
-      }),
-    ],
-    [
-      combineActions(actions.getManagedAthletes),
-      (state) => ({
-        ...state,
-        managedAthletes: {
-          ...state.managedAthletes,
-          isFetching: true,
-        },
-      }),
-    ],
-    [
-      combineActions(actions.receiveManagedAthletes),
-      (state, action) => ({
-        ...state,
-        managedAthletes: {
-          ...action.payload,
-        },
-      }),
+      combineActions(
+        actions.getAllAthletes,
+        actions.getManagedAthletes,
+        actions.getAthlete,
+        actions.receiveAllAthletes,
+        actions.receiveManagedAthletes
+      ),
+      mergeState,
     ],
   ]),
   initialState

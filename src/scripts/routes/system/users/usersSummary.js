@@ -1,5 +1,6 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
+import { UserFormDialog } from './index';
 
 const ClubsSummary = ({ isFetching, users }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
@@ -35,6 +36,29 @@ const ClubsSummary = ({ isFetching, users }) => {
       },
     },
     { name: 'club', options: hideColumnOptions },
+    {
+      name: 'edit',
+      label: 'Edit',
+      options: {
+        filter: false,
+        sort: false,
+        empty: true,
+        customBodyRender: (value, tableMeta) =>
+          tableMeta.rowData && (
+            <UserFormDialog
+              submitAction={() => console.log('set actual redux action')}
+              buttonText="edit"
+              initialValues={{
+                id: tableMeta.rowData[0],
+                name: tableMeta.rowData[1],
+                email: tableMeta.rowData[2],
+                role: tableMeta.rowData[3],
+                disabled: tableMeta.rowData[5],
+              }}
+            />
+          ),
+      },
+    },
   ];
 
   const tableOptions = {
@@ -45,7 +69,7 @@ const ClubsSummary = ({ isFetching, users }) => {
     downloadOptions: {
       filename: 'users.csv',
     },
-    responsive: 'stacked',
+    responsive: 'scroll',
     print: false,
     viewColumns: false,
   };

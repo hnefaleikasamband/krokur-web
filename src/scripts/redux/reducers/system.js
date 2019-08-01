@@ -2,43 +2,24 @@ import { handleActions, combineActions } from 'redux-actions';
 import { system as actions } from '../../actions';
 
 const initialState = {
-  clubs: {
-    isFetching: false,
-    data: [],
-  },
-  users: {
-    isFetching: false,
-    data: [],
-  },
+  isFetchingClubs: false,
+  isFetchingUsers: false,
+  clubs: [],
+  users: [],
 };
 
 const system = handleActions(
   new Map([
     [
-      combineActions(actions.receiveClubs, actions.receiveUsers),
+      combineActions(
+        actions.receiveClubs,
+        actions.receiveUsers,
+        actions.fetchAllUsers,
+        actions.fetchClubs
+      ),
       (state, action) => ({
         ...state,
         ...action.payload,
-      }),
-    ],
-    [
-      actions.fetchAllUsers,
-      (state) => ({
-        ...state,
-        users: {
-          ...state.users,
-          isFetching: true,
-        },
-      }),
-    ],
-    [
-      actions.fetchClubs,
-      (state) => ({
-        ...state,
-        clubs: {
-          ...state.clubs,
-          isFetching: true,
-        },
       }),
     ],
   ]),
