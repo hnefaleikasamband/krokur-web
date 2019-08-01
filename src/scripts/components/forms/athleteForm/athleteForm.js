@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import { ClubsSelect } from '../helpers';
 import styles from './athleteFormStyles';
 import AthleteSchema from './athleteSchema';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const AthleteForm = ({
   initialValues,

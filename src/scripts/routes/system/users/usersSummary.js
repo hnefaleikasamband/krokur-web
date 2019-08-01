@@ -44,7 +44,7 @@ const ClubsSummary = ({ isFetching, users }) => {
         sort: false,
         empty: true,
         customBodyRender: (value, tableMeta) =>
-          (console.log(tableMeta), tableMeta.rowData && (
+          tableMeta.rowData && (
             <UserFormDialog
               submitAction={() => console.log('set actual redux action')}
               buttonText="edit"
@@ -56,7 +56,7 @@ const ClubsSummary = ({ isFetching, users }) => {
                 disabled: tableMeta.rowData[5],
               }}
             />
-          )),
+          ),
       },
     },
   ];
