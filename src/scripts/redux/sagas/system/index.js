@@ -6,13 +6,11 @@ import { system as actions } from '../../../actions';
 function* fetchUsers() {
   try {
     const { token } = yield select((state) => state.user);
-    const {
-      clubs: { data },
-    } = yield select((state) => state.system);
+    const { clubs: currentClubs } = yield select((state) => state.system);
 
     const usersList = yield call(api.getUsers, token);
     // TODO: Remove unnecessary club shorthand addition as this should be returned from the api
-    const clubs = data.length <= 0 ? (yield call(api.getClubs, token)).clubs : data;
+    const clubs = currentClubs.length <= 0 ? (yield call(api.getClubs, token)).clubs : currentClubs;
     const users = usersList.users.map((user) => {
       const name = clubs.find((c) => c.id === user.club);
       return {
@@ -20,7 +18,7 @@ function* fetchUsers() {
         clubDisplayName: !name ? null : name.shorthand,
       };
     });
-    yield put(actions.receiveUsers({ data: users }));
+    yield put(actions.receiveUsers(users));
   } catch (e) {
     console.error('Error fetching Users:', e);
     // yield put(actions.receiveUserData({}));
@@ -30,8 +28,8 @@ function* fetchUsers() {
 function* fetchClubs() {
   try {
     const { token } = yield select((state) => state.user);
-    const data = yield call(api.getClubs, token);
-    yield put(actions.receiveClubs({ data: data.clubs }));
+    const { clubs } = yield call(api.getClubs, token);
+    yield put(actions.receiveClubs(clubs));
   } catch (e) {
     console.error('Error fetching clubs:', e);
     // yield put(actions.receiveUserData({}));
@@ -48,7 +46,7 @@ function* addClub({ payload }) {
     yield call(api.addClub, payload, token);
     yield put(actions.fetchClubs());
   } catch (e) {
-    console.log('addClub error:', e);
+    console.error('addClub error:', e);
   }
 }
 
@@ -59,7 +57,7 @@ function* updateClub({ payload }) {
     yield call(api.updateClub, payload, token);
     yield put(actions.fetchClubs());
   } catch (e) {
-    console.log('updateClub error:', e);
+    console.error('updateClub error:', e);
   }
 }
 
@@ -71,7 +69,7 @@ function* addUser({ payload }) {
     yield call(api.addUser, payload, token);
     yield put(actions.fetchAllUsers());
   } catch (e) {
-    console.log('addUser error:', e);
+    console.error('addUser error:', e);
   }
 }
 
@@ -81,11 +79,11 @@ function* updateUser({ payload }) {
     yield call(api.updateUser, payload, token);
     yield put(actions.fetchAllUsers);
   } catch (e) {
-    console.log('updateUser error:', e);
+    console.error('updateUser error:', e);
   }
 }
 
-export default function* () {
+export default function*() {
   yield all([
     takeLatest(matchesType(actions.fetchAllUsers), fetchUsers),
     takeLatest(matchesType(actions.fetchClubs), fetchClubs),

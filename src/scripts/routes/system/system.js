@@ -16,8 +16,10 @@ const styles = (theme) => ({
 });
 
 const System = ({
-  usersData,
-  clubsData,
+  isFetchingUsers,
+  isFetchingClubs,
+  users,
+  clubs,
   addClubAction,
   editClubAction,
   addUserAction,
@@ -31,25 +33,17 @@ const System = ({
         subtitle="Manage system wide settings"
         buttonsRight={
           <>
-            <UserFormDialog
-              submitAction={addUserAction}
-              buttonText="Add a User"
-              clubs={clubsData.data}
-            />
+            <UserFormDialog submitAction={addUserAction} buttonText="Add a User" clubs={clubs} />
             <ClubFormDialog submitAction={addClubAction} buttonText="Add a Club" />
           </>
         }
       />
       <Grid container spacing={4} direction="row">
         <Grid item xs={12} lg={7}>
-          <UsersSummary isFetching={usersData.isFetching} users={usersData.data} />
+          <UsersSummary isFetching={isFetchingUsers} users={users} />
         </Grid>
         <Grid item xs={12} lg={5}>
-          <ClubsSummary
-            isFetching={clubsData.isFetching}
-            clubs={clubsData.data}
-            editAction={editClubAction}
-          />
+          <ClubsSummary isFetching={isFetchingClubs} clubs={clubs} editAction={editClubAction} />
         </Grid>
       </Grid>
     </Fragment>

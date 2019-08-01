@@ -6,8 +6,10 @@ import { system as systemActions } from '../../actions';
 import System from './system';
 
 const mapStateToProps = (state, ownProps) => ({
-  usersData: state.system.users,
-  clubsData: state.system.clubs,
+  isFetchingUsers: state.system.isFetchingUsers,
+  isFetchingClubs: state.system.isFetchingClubs,
+  users: state.system.users,
+  clubs: state.system.clubs,
   ...ownProps,
 });
 
