@@ -16,7 +16,7 @@ const tempDisplayButtons = (
   </>
 );
 
-const ManageAthletes = ({ isFetching, athletes, clubsData }) => {
+const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete }) => {
   return (
     <div>
       <Header
@@ -27,15 +27,11 @@ const ManageAthletes = ({ isFetching, athletes, clubsData }) => {
       <Grid container spacing={4} direction="row-reverse">
         <Grid item xs={12} md={4}>
           <Paper>
-            <AthleteForm
-              clubs={clubsData.data}
-              submitText="Add new Athlete"
-              onSubmit={() => console.log('Submitted athlete form')}
-            />
+            <AthleteForm clubs={clubsData} submitText="Add new Athlete" onSubmit={addAthlete} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Summary isfetching={isFetching} athletes={athletes} />
+          <Summary isfetching={isFetchingAthletes} athletes={athletes} />
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper>

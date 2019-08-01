@@ -6,9 +6,9 @@ import { athletes as athletesActions } from '../../actions';
 import AllAthletes from './allAthletes';
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: state.athletes.allAthletes.isFetching,
-  athletes: state.athletes.allAthletes.data,
-  isEmpty: state.athletes.allAthletes.data.length <= 0,
+  isFetching: state.athletes.isFetchingAllAthletes,
+  athletes: state.athletes.allAthletes,
+  isEmpty: state.athletes.allAthletes.length <= 0,
   ...ownProps,
 });
 

@@ -11,60 +11,78 @@ import Button from '@material-ui/core/Button';
 import { ClubsSelect } from '../helpers';
 import styles from './athleteFormStyles';
 import AthleteSchema from './athleteSchema';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const AthleteForm = ({ initialValues, onSubmit, classes, submitText, onCancel, clubs }) => (
-  <Formik initialValues={initialValues} validationSchema={AthleteSchema} onSubmit={onSubmit}>
-    {({ values, errors, touched, handleSubmit, handleChange }) => (
-      <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="name"
-          label="Name"
-          className={classes.textField}
-          margin="normal"
-          value={values.name}
-          onChange={handleChange}
-          error={errors.name && touched.name}
-          required
-        />
-        <TextField
-          id="personalIdentificationNumber"
-          label="Personal Identification Number"
-          className={classes.textField}
-          margin="normal"
-          value={values.personalIdentificationNumber}
-          onChange={handleChange}
-          error={errors.personalIdentificationNumber && touched.personalIdentificationNumber}
-          required
-        />
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="club-helper">Club</InputLabel>
-          <Select
-            value={values.club}
+const AthleteForm = ({
+  initialValues,
+  onSubmit,
+  classes,
+  submitText,
+  onCancel,
+  clubs,
+  providedClub,
+}) => {
+  const handleSubmit = (data, formHandlers) => {
+    onSubmit(data);
+    formHandlers.resetForm();
+  };
+  const initValue = providedClub ? { ...initialValues, club: providedClub.id } : initialValues;
+  return (
+    <Formik initialValues={initValue} validationSchema={AthleteSchema} onSubmit={handleSubmit}>
+      {({ values, errors, touched, handleSubmit, handleChange }) => (
+        <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
+          <TextField
+            id="name"
+            label="Name"
+            className={classes.textField}
+            margin="normal"
+            value={values.name}
             onChange={handleChange}
-            input={<Input name="club" id="club-helper" />}
-          >
-            {ClubsSelect(clubs)}
-          </Select>
-        </FormControl>
-        <div className={classes.buttonContainer}>
-          {onCancel && (
-            <Button
-              variant="contained"
-              className={classes.button}
-              color="secondary"
-              onClick={onCancel}
+            error={errors.name && touched.name}
+            required
+          />
+          <TextField
+            id="personalIdentificationNumber"
+            label="Personal Identification Number"
+            className={classes.textField}
+            margin="normal"
+            value={values.personalIdentificationNumber}
+            onChange={handleChange}
+            error={errors.personalIdentificationNumber && touched.personalIdentificationNumber}
+            required
+          />
+
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="club-helper">Club</InputLabel>
+            <Select
+              value={values.club}
+              onChange={handleChange}
+              input={<Input name="club" id="club-helper" disabled={!!providedClub} />}
             >
-              Cancel
+              {ClubsSelect(providedClub ? [providedClub] : clubs)}
+            </Select>
+          </FormControl>
+
+          <div className={classes.buttonContainer}>
+            {onCancel && (
+              <Button
+                variant="contained"
+                className={classes.button}
+                color="secondary"
+                onClick={onCancel}
+              >
+                Cancel
+              </Button>
+            )}
+            <Button type="submit" variant="contained" className={classes.button} color="primary">
+              {submitText}
             </Button>
-          )}
-          <Button type="submit" variant="contained" className={classes.button} color="primary">
-            {submitText}
-          </Button>
-        </div>
-      </form>
-    )}
-  </Formik>
-);
+          </div>
+        </form>
+      )}
+    </Formik>
+  );
+};
 
 AthleteForm.propTypes = {
   initialValues: PropTypes.shape({
@@ -74,6 +92,7 @@ AthleteForm.propTypes = {
     club: PropTypes.string,
   }),
   clubs: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  providedClub: PropTypes.objectOf(PropTypes.string),
   onSubmit: PropTypes.func.isRequired,
 };
 

@@ -6,16 +6,17 @@ import { athletes as athletesActions, system as systemActions } from '../../acti
 import ManageAthletes from './manageAthletes';
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: state.athletes.managedAthletes.isFetching,
-  athletes: state.athletes.managedAthletes.data,
+  isFetchingAthletes: state.athletes.isFetchingManagedAthletes,
+  athletes: state.athletes.managedAthletes,
   clubsData: state.system.clubs,
-  isEmpty: state.athletes.managedAthletes.data.length <= 0,
+  isEmpty: state.athletes.managedAthletes.length <= 0,
   ...ownProps,
 });
 
 const mapDispatchToProps = {
   getManagedAthletes: athletesActions.getManagedAthletes,
   fetchClubs: systemActions.fetchClubs,
+  addAthlete: athletesActions.addAthlete,
 };
 
 const enhance = compose(

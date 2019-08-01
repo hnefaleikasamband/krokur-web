@@ -17,4 +17,9 @@ const getManagedAthletes = (token) =>
     })
     .then((response) => response.data);
 
-export default { getAllAthletes, getManagedAthletes };
+const addAthlete = (athlete, token) =>
+  axios.post(`${host}/api/v1/athletes`, athlete, {
+    headers: { Authorization: `JWT ${token}` },
+  });
+
+export default { getAllAthletes, getManagedAthletes, addAthlete };
