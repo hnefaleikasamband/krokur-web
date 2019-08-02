@@ -17,9 +17,23 @@ const getManagedAthletes = (token) =>
     })
     .then((response) => response.data);
 
+const getAthlete = (athleteId, token) =>
+  axios
+    .get(`${host}/api/v1/athletes/${athleteId}`, {
+      headers: { Authorization: `JWT ${token}` },
+    })
+    .then((response) => response.data);
+
 const addAthlete = (athlete, token) =>
   axios.post(`${host}/api/v1/athletes`, athlete, {
     headers: { Authorization: `JWT ${token}` },
   });
 
-export default { getAllAthletes, getManagedAthletes, addAthlete };
+const getAthleteBouts = (athleteId, token) =>
+  axios
+    .get(`${host}/api/v1/athletes/${athleteId}/bouts`, {
+      headers: { Authorization: `JWT ${token}` },
+    })
+    .then((response) => response.data);
+
+export default { getAllAthletes, getManagedAthletes, getAthlete, addAthlete, getAthleteBouts };

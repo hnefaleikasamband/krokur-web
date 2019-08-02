@@ -5,9 +5,11 @@ export const {
     getAllAthletes,
     getManagedAthletes,
     getAthlete,
+    getAthleteBouts,
     receiveAllAthletes,
     receiveManagedAthletes,
     receiveAthlete,
+    receiveAthleteBouts,
     addAthlete,
     updateAthlete,
   },
@@ -19,8 +21,15 @@ export const {
     GET_MANAGED_ATHLETES: () => ({
       isFetchingManagedAthletes: true,
     }),
-    GET_ATHLETE: () => ({
+    GET_ATHLETE: (athleteId) => ({
       isFetchingAthlete: true,
+      athleteDetailsId: athleteId,
+      athlete: null,
+    }),
+    GET_ATHLETE_BOUTS: (athleteId) => ({
+      isFetchingAthleteBouts: true,
+      athleteBoutFetchingId: athleteId,
+      athleteBouts: [],
     }),
     RECEIVE_ALL_ATHLETES: (allAthletes) => ({
       isFetchingAllAthletes: false,
@@ -33,6 +42,10 @@ export const {
     RECEIVE_ATHLETE: (athlete) => ({
       isFetchingAthlete: false,
       athlete,
+    }),
+    RECEIVE_ATHLETE_BOUTS: (athleteBouts) => ({
+      isFetchingAthleteBouts: false,
+      athleteBouts,
     }),
     ADD_ATHLETE: (athlete) => ({
       athlete,
