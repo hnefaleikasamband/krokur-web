@@ -1,29 +1,30 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import { Navigation } from "./scripts/components";
+import { Navigation } from './scripts/components';
 import {
   Dashboard,
   AllAthletes,
   MyAthletes,
   ManageAthletes,
-  System
-} from "./scripts/routes";
-import { CssBaseline } from "@material-ui/core";
-import { Login, PrivateRoute } from "./scripts/components";
+  System,
+  AthleteDetails,
+} from './scripts/routes';
+import { CssBaseline } from '@material-ui/core';
+import { Login, PrivateRoute } from './scripts/components';
 
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import themes from "./themes";
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import themes from './themes';
 
 const ProtectedApp = () => (
   <Navigation>
     <Route path="/" exact render={() => <Dashboard myText="Hello world" />} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/all-athletes" exact component={AllAthletes} />
-    <Route path="/my-athletes" component={MyAthletes} />
-    <Route path="/manage-athletes" component={ManageAthletes} />
-    <Route path="/my-athletes/:userId" component={Dashboard} />
+    <Route path="/my-athletes" exact component={MyAthletes} />
+    <Route path="/manage-athletes" exact component={ManageAthletes} />
+    <Route path="/athlete/:athleteId" exact component={AthleteDetails} />
     <Route path="/bout-logs" component={Dashboard} />
     <Route path="/system" component={System} />
     <Route path="/account" component={Dashboard} />
