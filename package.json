@@ -19,6 +19,7 @@
     "copy-to-clipboard": "^3.1.0",
     "formik": "^1.5.7",
     "ilenia": "^8.4.0",
+    "moment": "^2.24.0",
     "mui-datatables": "^2.2.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
