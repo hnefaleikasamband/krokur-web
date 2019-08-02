@@ -16,7 +16,7 @@ const tempDisplayButtons = (
   </>
 );
 
-const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete }) => {
+const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete, history }) => {
   return (
     <div>
       <Header
@@ -31,7 +31,7 @@ const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete })
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Summary isfetching={isFetchingAthletes} athletes={athletes} />
+          <Summary isfetching={isFetchingAthletes} athletes={athletes} history={history} />
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper>
