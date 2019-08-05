@@ -1,25 +1,30 @@
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import renderWithActions from '../../helpers/renderWithActions';
-import AthleteDetails from './athleteDetails';
-import { athletes as athletesActions } from '../../actions';
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import renderWithActions from "../../helpers/renderWithActions";
+import AthleteDetails from "./athleteDetails";
+import {
+  athletes as athletesActions,
+  system as systemActions
+} from "../../actions";
 
 const mapStateToProps = (state, ownProps) => ({
   isFetchingAthlete: state.athletes.isFetchingAthlete,
   isFetchingBouts: state.athletes.isFetchingAthleteBouts,
   athlete: state.athletes.athlete,
-  isAdmin: state.user.userInfo.role === 'ADMIN',
+  athletes: state.athletes.allAthletes,
+  isAdmin: state.user.userInfo.role === "ADMIN",
   bouts: state.athletes.athleteBouts,
-  ...ownProps,
+  clubs: state.system.clubs,
+  ...ownProps
 });
 
 const mapDispatchToProps = (dispatch, props) => {
   const { athleteId } = props.match.params;
-  const hasAthleteId = typeof athleteId !== 'undefined';
+  const hasAthleteId = typeof athleteId !== "undefined";
 
   return {
-    getAllAthletes: athletesActions.getAllAthletes,
+    getAllAthletes: () => dispatch(athletesActions.getAllAthletes()),
     getAthlete: () => {
       if (hasAthleteId) {
         dispatch(athletesActions.getAthlete(athleteId));
@@ -30,6 +35,8 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(athletesActions.getAthleteBouts(athleteId));
       }
     },
+    getClubs: componentProps =>
+      componentProps.clubs.length === 0 && dispatch(systemActions.fetchClubs())
   };
 };
 
@@ -38,7 +45,12 @@ const enhance = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  renderWithActions(['getAthlete', 'getAthleteBouts'])
+  renderWithActions([
+    "getAllAthletes",
+    "getAthlete",
+    "getAthleteBouts",
+    "getClubs"
+  ])
 );
 
 const MainComponent = enhance(AthleteDetails);
