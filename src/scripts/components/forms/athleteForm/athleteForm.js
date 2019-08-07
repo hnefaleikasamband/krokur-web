@@ -25,7 +25,9 @@ const AthleteForm = ({
     onSubmit(data);
     formHandlers.resetForm();
   };
-  const initValue = providedClub ? { ...initialValues, club: providedClub.id } : initialValues;
+  const initValue = providedClub
+    ? { ...initialValues, club: providedClub.shorthand }
+    : initialValues;
   return (
     <Formik initialValues={initValue} validationSchema={AthleteSchema} onSubmit={handleSubmit}>
       {({ values, errors, touched, handleSubmit, handleChange }) => (
