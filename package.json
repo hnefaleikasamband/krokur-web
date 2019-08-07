@@ -43,7 +43,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-trustpilot": "^4.3.0",
