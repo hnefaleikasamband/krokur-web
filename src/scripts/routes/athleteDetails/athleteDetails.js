@@ -1,10 +1,10 @@
-import React from "react";
-import { Header, AthleteBoutForm } from "../../components";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import BoutSummary from "./boutSummary";
-import AthleteBoutDialog from "./athleteBoutDialog";
+import React from 'react';
+import { Header } from '../../components';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import BoutSummary from './boutSummary';
+import AthleteBoutDialog from './athleteBoutDialog';
 
 const tempDisplayButtons = (athlete, athletes, clubs) => (
   <>
@@ -28,9 +28,9 @@ const AthleteDetails = ({
   bouts,
   isAdmin,
   clubs,
-  history
+  history,
 }) => {
-  console.log("Athlete in athleteDetails: ", athlete);
+  console.log('Athlete in athleteDetails: ', athlete);
   return isFetchingAthlete ? (
     <CircularProgress />
   ) : athlete ? (
@@ -40,20 +40,12 @@ const AthleteDetails = ({
         subtitle={`KT: ${athlete.ssn} - ${athlete.club}`}
         buttonsRight={isAdmin && tempDisplayButtons(athlete, athletes, clubs)}
       />
-      <BoutSummary
-        isFetching={isFetchingBouts}
-        athlete={athlete}
-        bouts={bouts}
-        history={history}
-      />
+      <BoutSummary isFetching={isFetchingBouts} athlete={athlete} bouts={bouts} history={history} />
     </>
   ) : (
     <>
       <Typography variant="h1"> 404 missing athlete...</Typography>
-      <Typography variant="h4">
-        {" "}
-        Maybe a fancy 404 page should be here
-      </Typography>
+      <Typography variant="h4"> Maybe a fancy 404 page should be here</Typography>
     </>
   );
 };
