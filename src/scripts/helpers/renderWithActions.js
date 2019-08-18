@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 class RenderWithActionsComponent extends React.Component {
   componentDidMount() {
     const { actions, componentProps } = this.props;
-    actions.forEach((action) => componentProps[action]());
+    actions.forEach((action) => componentProps[action](componentProps));
   }
   render() {
     return <Fragment>{this.props.children}</Fragment>;

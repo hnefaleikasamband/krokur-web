@@ -9,7 +9,7 @@ const starHighlighterFn = (tableMeta) => {
   return <StarHighlighter achievements={{ diploma, bronz, silver, gold }} />;
 };
 
-const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {
+const AllAthletes = ({ isFetching, isEmpty, athletes }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -43,25 +43,27 @@ const AllAthletes = ({ isFetching, isEmpty, athletes, match }) => {
     responsive: 'scroll',
     print: false,
     viewColumns: false,
-    onRowClick: (rowData, { dataIndex, rowIndex }) => {
-      console.log('rowData:', rowData);
+    onRowClick: (rowData) => {
       const data = rowData.reduce((acc, curr) => {
         acc += `\t${curr}`;
         return acc;
       }, '');
       copy(data.slice(data.indexOf(1)));
-      console.log('dataIndex:', dataIndex, '- rowIndex:', rowIndex);
     },
   };
   return (
     <div>
-      {!isEmpty && (
-        <MUIDataTable
-          title={'Athlete List'}
-          data={athletes}
-          columns={columns}
-          options={tableOptions}
-        />
+      {isFetching ? (
+        <p>Fetching data...</p>
+      ) : (
+        !isEmpty && (
+          <MUIDataTable
+            title={'Athlete List'}
+            data={athletes}
+            columns={columns}
+            options={tableOptions}
+          />
+        )
       )}
     </div>
   );

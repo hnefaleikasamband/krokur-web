@@ -66,6 +66,18 @@ function* fetchBouts({ payload }) {
   }
 }
 
+function* addBoutForAthlete({ payload }) {
+  try {
+    const { token } = yield select((state) => state.user);
+    const { bout } = payload;
+
+    yield call(api.addBoutForAthlete, bout, token);
+    yield put(actions.getAthleteBouts(bout.athleteId));
+  } catch (e) {
+    console.error(`Error in sagas when adding bout ..:`, e);
+  }
+}
+
 export default function*() {
   yield all([
     takeLatest(matchesType(actions.getAllAthletes), fetchAthletes),
@@ -73,5 +85,6 @@ export default function*() {
     takeLatest(matchesType(actions.addAthlete), addAthlete),
     takeLatest(matchesType(actions.getAthlete), fetchAthlete),
     takeLatest(matchesType(actions.getAthleteBouts), fetchBouts),
+    takeLatest(matchesType(actions.addBoutForAthlete), addBoutForAthlete),
   ]);
 }

@@ -46,7 +46,7 @@ const ClubsSummary = ({ isFetching, users }) => {
         customBodyRender: (value, tableMeta) =>
           tableMeta.rowData && (
             <UserFormDialog
-              submitAction={() => console.log('set actual redux action')}
+              submitAction={() => console.error('Action has not been set yet')}
               buttonText="edit"
               initialValues={{
                 id: tableMeta.rowData[0],

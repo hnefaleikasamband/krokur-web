@@ -1,0 +1,9 @@
+{
+  "extends": "trustpilot/react",
+  "globals": {
+    "process": true
+  },
+  "rules": {
+    "no-console": ["error", { "allow": ["error"] }]
+  }
+}

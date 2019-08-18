@@ -71,7 +71,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
               input={<Input name="role" id="role-helper" />}
             >
               <MenuItem value={'COACH'}>Coach</MenuItem>
-              <MenuItem value={'REFEREE'}>Referee</MenuItem>
+              <MenuItem value={'JUDGE'}>Judge</MenuItem>
               <MenuItem value={'ADMIN'}>Admin</MenuItem>
             </Select>
           </FormControl>

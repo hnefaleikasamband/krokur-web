@@ -36,4 +36,16 @@ const getAthleteBouts = (athleteId, token) =>
     })
     .then((response) => response.data);
 
-export default { getAllAthletes, getManagedAthletes, getAthlete, addAthlete, getAthleteBouts };
+const addBoutForAthlete = (boutData, token) =>
+  axios.post(`${host}/api/v1/athletes/${boutData.athleteId}/bouts`, boutData, {
+    headers: { Authorization: `JWT ${token}` },
+  });
+
+export default {
+  getAllAthletes,
+  getManagedAthletes,
+  getAthlete,
+  addAthlete,
+  getAthleteBouts,
+  addBoutForAthlete,
+};

@@ -5,9 +5,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { UserForm } from '../../../components';
+import { AthleteBoutForm } from '../../components';
 
-const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
+const FormDialog = ({ athlete, opponents, clubs, submitAction, buttonText, initialValues }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (data) => {
@@ -30,20 +30,20 @@ const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="form-dialog-title"
-        maxWidth="sm"
+        maxWidth="xs"
       >
         {initialValues ? (
-          <DialogTitle id="form-dialog-title">Edit user</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit match</DialogTitle>
         ) : (
-          <DialogTitle id="form-dialog-title">Add a new user</DialogTitle>
+          <DialogTitle id="form-dialog-title">Add a match</DialogTitle>
         )}
         <DialogContent>
-          <UserForm
-            onSubmit={handleSubmit}
-            submitText={initialValues ? 'Update' : 'Submit'}
-            onCancel={() => setOpen(false)}
-            initialValues={initialValues}
+          <AthleteBoutForm
+            athlete={athlete}
+            opponents={opponents}
             clubs={clubs}
+            submitText="Submit"
+            onSubmit={handleSubmit}
           />
         </DialogContent>
       </Dialog>

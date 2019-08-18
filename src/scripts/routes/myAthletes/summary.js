@@ -58,14 +58,12 @@ const Summary = ({ isFetching, athletes, club }) => {
     responsive: 'scroll',
     print: false,
     viewColumns: false,
-    onRowClick: (rowData, { dataIndex, rowIndex }) => {
-      console.log('rowData:', rowData);
+    onRowClick: (rowData) => {
       const data = rowData.reduce((acc, curr) => {
         acc += `\t${curr}`;
         return acc;
       }, '');
       copy(data.slice(data.indexOf(1)));
-      console.log('dataIndex:', dataIndex, '- rowIndex:', rowIndex);
     },
   };
   return (

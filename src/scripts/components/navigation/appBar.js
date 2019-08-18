@@ -50,7 +50,6 @@ class AppBar extends React.Component {
 
   logoutUser = () => {
     this.props.logout();
-    console.log("I've call dispatch fn");
     this.handleMenuClose();
   };
 
