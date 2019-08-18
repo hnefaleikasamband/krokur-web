@@ -40,7 +40,6 @@ const AllAthletes = ({ isFetching, isEmpty, athletes }) => {
     downloadOptions: {
       filename: 'athletes.csv',
     },
-    responsive: 'scroll',
     print: false,
     viewColumns: false,
     onRowClick: (rowData) => {
