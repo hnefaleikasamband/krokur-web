@@ -1,23 +1,18 @@
-import React from "react";
-import { Formik, Field } from "formik";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Formik, Field } from 'formik';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import Button from "@material-ui/core/Button";
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
-import styles from "./athleteBoutStyles";
-import BoutSingleSchema from "./athleteBoutSchema";
-import {
-  DatePickerField,
-  ClubsSelect,
-  OpponentSelect,
-  SelectWrapper
-} from "../helpers";
+import styles from './athleteBoutStyles';
+import BoutSingleSchema from './athleteBoutSchema';
+import { DatePickerField, ClubsSelect, OpponentSelect, SelectWrapper } from '../helpers';
 
 const BoutSingleForm = ({
   initialValues,
@@ -27,7 +22,7 @@ const BoutSingleForm = ({
   onCancel,
   athlete,
   opponents,
-  clubs
+  clubs,
 }) => {
   if (athlete) {
     initialValues.athleteId = athlete.id;
@@ -44,20 +39,12 @@ const BoutSingleForm = ({
   }, {});
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={BoutSingleSchema}
-      onSubmit={onSubmit}
-    >
+    <Formik initialValues={initialValues} validationSchema={BoutSingleSchema} onSubmit={onSubmit}>
       {({ values, errors, touched, handleSubmit, handleChange }) => {
         return (
-          <form
-            onSubmit={handleSubmit}
-            className={classes.container}
-            noValidate
-            autoComplete="off"
-          >
+          <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
             <Field
+              classes={classes}
               name="boutDate"
               component={DatePickerField}
               label="Match date"
@@ -84,17 +71,13 @@ const BoutSingleForm = ({
                 value={values.class}
                 onChange={handleChange}
                 input={
-                  <Input
-                    error={errors.class && touched.class}
-                    name="class"
-                    id="class-helper"
-                  />
+                  <Input error={errors.class && touched.class} name="class" id="class-helper" />
                 }
               >
                 {SelectWrapper([
-                  { id: "A", name: "A" },
-                  { id: "B", name: "B" },
-                  { id: "C", name: "C" }
+                  { id: 'A', name: 'A' },
+                  { id: 'B', name: 'B' },
+                  { id: 'C', name: 'C' },
                 ])}
               </Select>
             </FormControl>
@@ -128,12 +111,7 @@ const BoutSingleForm = ({
               >
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                className={classes.button}
-                color="primary"
-              >
+              <Button type="submit" variant="contained" className={classes.button} color="primary">
                 {submitText}
               </Button>
             </div>
@@ -156,31 +134,31 @@ BoutSingleForm.propTypes = {
     class: PropTypes.string,
     boutDate: PropTypes.instanceOf(Date),
     points: PropTypes.string,
-    organizer: PropTypes.string
+    organizer: PropTypes.string,
   }),
   onSubmit: PropTypes.func.isRequired,
   athlete: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
-    clubShortHand: PropTypes.string
+    clubShortHand: PropTypes.string,
   }).isRequired,
-  opponents: PropTypes.array.isRequired
+  opponents: PropTypes.array.isRequired,
 };
 
 BoutSingleForm.defaultProps = {
   initialValues: {
     id: null,
-    athleteId: "",
-    athleteName: "",
-    athleteClubShorthand: "",
-    opponentId: "",
-    opponentName: "",
-    opponentClubShortHand: "",
-    class: "",
+    athleteId: '',
+    athleteName: '',
+    athleteClubShorthand: '',
+    opponentId: '',
+    opponentName: '',
+    opponentClubShortHand: '',
+    class: '',
     boutDate: new Date(),
-    points: "",
-    organizer: ""
-  }
+    points: '',
+    organizer: '',
+  },
 };
 
 export default withStyles(styles)(BoutSingleForm);

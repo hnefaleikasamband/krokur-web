@@ -47,12 +47,14 @@ export const OpponentSelect = ({ form, opponents, error, classes, value }) => (
   </FormControl>
 );
 
-export const DatePickerField = ({ field, form, ...other }) => {
+export const DatePickerField = ({ field, form, classes, ...other }) => {
   const currentError = form.errors[field.name];
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <KeyboardDatePicker
+        className={classes.textField}
         disableFuture
+        autoOk
         variant="inline"
         name={field.name}
         value={field.value}
