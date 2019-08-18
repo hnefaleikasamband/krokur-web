@@ -11,7 +11,6 @@ const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (data) => {
-    console.log(data);
     setOpen(false);
     submitAction(data);
   };
@@ -23,10 +22,10 @@ const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
           <EditIcon fontSize="small" />
         </IconButton>
       ) : (
-          <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-            {buttonText}
-          </Button>
-        )}
+        <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+          {buttonText}
+        </Button>
+      )}
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -36,8 +35,8 @@ const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
         {initialValues ? (
           <DialogTitle id="form-dialog-title">Edit user</DialogTitle>
         ) : (
-            <DialogTitle id="form-dialog-title">Add a new user</DialogTitle>
-          )}
+          <DialogTitle id="form-dialog-title">Add a new user</DialogTitle>
+        )}
         <DialogContent>
           <UserForm
             onSubmit={handleSubmit}

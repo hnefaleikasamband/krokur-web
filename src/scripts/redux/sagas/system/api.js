@@ -34,7 +34,7 @@ const addUser = (user, token) =>
     headers: { Authorization: `JWT ${token}` },
   });
 
-const updateUser = (user, token) =>
+const updateUser = () =>
   Promise((resolve, reject) => {
     reject('user update path does not exists yet');
   });

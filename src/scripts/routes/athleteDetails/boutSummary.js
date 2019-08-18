@@ -51,7 +51,6 @@ const Summary = ({ isFetching, athlete, bouts, history }) => {
     print: false,
     viewColumns: false,
     onRowClick: (rowData) => {
-      console.log('rowData:', rowData);
       history.push(`/athlete/${rowData[0]}`);
     },
   };

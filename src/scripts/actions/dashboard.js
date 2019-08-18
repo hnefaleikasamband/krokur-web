@@ -4,7 +4,7 @@ export const {
   dashboard: { refreshDashboard, receiveDashboard },
 } = createActions({
   DASHBOARD: {
-    REFRESH_DASHBOARD: null,
+    REFRESH_DASHBOARD: () => ({ isFetching: true }),
     RECEIVE_DASHBOARD: (data) => ({
       isFetching: false,
       data,

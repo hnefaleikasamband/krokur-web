@@ -71,9 +71,7 @@ function* addBoutForAthlete({ payload }) {
     const { token } = yield select((state) => state.user);
     const { bout } = payload;
 
-    console.log('bout:', bout);
-    const status = yield call(api.addBoutForAthlete, bout, token);
-    console.log('Status of adding bout:', status);
+    yield call(api.addBoutForAthlete, bout, token);
     yield put(actions.getAthleteBouts(bout.athleteId));
   } catch (e) {
     console.error(`Error in sagas when adding bout ..:`, e);

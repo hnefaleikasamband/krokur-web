@@ -13,7 +13,6 @@ function* login({ payload }) {
   try {
     const authedUser = yield call(api.signIn, payload);
     authedUser.isLoggedIn = true;
-    console.log(authedUser);
     yield put(actions.receiveUserData(authedUser));
     yield call(updateLocalStorage, 'token', authedUser.token);
   } catch (e) {

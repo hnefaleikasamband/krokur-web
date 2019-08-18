@@ -64,8 +64,7 @@ const Summary = ({ isFetching, athletes, history }) => {
     responsive: 'stacked',
     print: false,
     viewColumns: false,
-    onRowClick: (rowData, { dataIndex, rowIndex }) => {
-      console.log('rowData:', rowData);
+    onRowClick: (rowData) => {
       history.push(`/athlete/${rowData[0]}`);
       /*const data = rowData.reduce((acc, curr) => {
         acc += `\t${curr}`;

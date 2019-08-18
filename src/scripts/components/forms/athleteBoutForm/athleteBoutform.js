@@ -142,7 +142,7 @@ BoutSingleForm.propTypes = {
     name: PropTypes.string,
     clubShortHand: PropTypes.string,
   }).isRequired,
-  opponents: PropTypes.array.isRequired,
+  opponents: PropTypes.arrayOf(Object).isRequired,
 };
 
 BoutSingleForm.defaultProps = {

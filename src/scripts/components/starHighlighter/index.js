@@ -40,10 +40,10 @@ const getDateStrings = (locale) => (dates) =>
   Object.keys(dates).map((key) =>
     dates[key]
       ? `- ${new Date(dates[key]).toLocaleDateString(locale, {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      })}`
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })}`
       : '- not achieved'
   );
 

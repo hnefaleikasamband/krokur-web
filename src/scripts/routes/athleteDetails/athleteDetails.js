@@ -32,7 +32,6 @@ const AthleteDetails = ({
   history,
   addBoutForAthlete,
 }) => {
-  console.log('Athlete in athleteDetails: ', athlete);
   return isFetchingAthlete ? (
     <CircularProgress />
   ) : athlete ? (
