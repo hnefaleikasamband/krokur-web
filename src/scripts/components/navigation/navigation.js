@@ -12,12 +12,12 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import SettingsIcon from '@material-ui/icons/Settings';
+//import SettingsIcon from '@material-ui/icons/Settings';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import SupervisedUserCircle from '@material-ui/icons/SupervisedUserCircle';
 import MemoryIcon from '@material-ui/icons/Memory';
-import ViewList from '@material-ui/icons/ViewList';
-import SchoolIcon from '@material-ui/icons/School';
+//import ViewList from '@material-ui/icons/ViewList';
+//import SchoolIcon from '@material-ui/icons/School';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import styles from './navStyles';
@@ -65,20 +65,20 @@ const drawer = (classes, user) => (
     </MenuList>
     <Divider />
     <MenuList>
-      <NavItem
+      {/*<NavItem
         path="/bout-logs"
         navText="Bout logs"
         show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<ViewList />}
-      />
-      <NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />
+      />*/}
+      {/*<NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />*/}
       <NavItem
         path="/system"
         navText="System"
         show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<MemoryIcon />}
       />
-      <NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />
+      {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
     </MenuList>
   </div>
 );
