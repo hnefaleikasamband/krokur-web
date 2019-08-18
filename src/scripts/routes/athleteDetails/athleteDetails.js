@@ -6,13 +6,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import BoutSummary from './boutSummary';
 import AthleteBoutDialog from './athleteBoutDialog';
 
-const tempDisplayButtons = (athlete, athletes, clubs) => (
+const tempDisplayButtons = (athlete, athletes, clubs, addBoutForAthlete) => (
   <>
     <AthleteBoutDialog
       athlete={athlete}
       opponents={athletes}
       clubs={clubs}
       buttonText="Add a match"
+      submitAction={addBoutForAthlete}
     />
     <Button variant="contained" color="primary" disabled key="transfer-button">
       Transfer Athlete
@@ -29,6 +30,7 @@ const AthleteDetails = ({
   isAdmin,
   clubs,
   history,
+  addBoutForAthlete,
 }) => {
   console.log('Athlete in athleteDetails: ', athlete);
   return isFetchingAthlete ? (
@@ -38,7 +40,7 @@ const AthleteDetails = ({
       <Header
         title={athlete.name}
         subtitle={`KT: ${athlete.ssn} - ${athlete.club}`}
-        buttonsRight={isAdmin && tempDisplayButtons(athlete, athletes, clubs)}
+        buttonsRight={isAdmin && tempDisplayButtons(athlete, athletes, clubs, addBoutForAthlete)}
       />
       <BoutSummary isFetching={isFetchingBouts} athlete={athlete} bouts={bouts} history={history} />
     </>

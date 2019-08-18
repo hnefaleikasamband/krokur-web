@@ -10,6 +10,7 @@ const Summary = ({ isFetching, athlete, bouts, history }) => {
       name: 'boutDate',
       label: 'Date',
       options: {
+        sortDirection: 'desc',
         filter: true,
         sort: true,
         customBodyRender: (data) => moment(data).format('DD MMM YYYY'),
@@ -44,7 +45,7 @@ const Summary = ({ isFetching, athlete, bouts, history }) => {
     rowsPerPage: 15,
     rowsPerPageOptions: [10, 15, 20, 40, 80],
     downloadOptions: {
-      filename: `${athlete ? athlete.name : 'athlete'}-bouts.csv`,
+      filename: `${athlete ? athlete.name : 'athlete'}-matches.csv`,
     },
     responsive: 'stacked',
     print: false,
@@ -57,7 +58,7 @@ const Summary = ({ isFetching, athlete, bouts, history }) => {
   return (
     <div>
       {!isFetching && (
-        <MUIDataTable title={`Bouts`} data={bouts} columns={columns} options={tableOptions} />
+        <MUIDataTable title={`Matches`} data={bouts} columns={columns} options={tableOptions} />
       )}
     </div>
   );

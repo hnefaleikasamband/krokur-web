@@ -12,6 +12,8 @@ export const {
     receiveAthleteBouts,
     addAthlete,
     updateAthlete,
+    addAthleteMatch,
+    addBoutForAthlete,
   },
 } = createActions({
   ATHLETES: {
@@ -47,11 +49,8 @@ export const {
       isFetchingAthleteBouts: false,
       athleteBouts,
     }),
-    ADD_ATHLETE: (athlete) => ({
-      athlete,
-    }),
-    UPDATE_ATHLETE: (athlete) => ({
-      athlete,
-    }),
+    ADD_ATHLETE: (athlete) => ({ athlete }),
+    UPDATE_ATHLETE: (athlete) => ({ athlete }),
+    ADD_BOUT_FOR_ATHLETE: (bout) => ({ bout }),
   },
 });
