@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { Navigation } from './scripts/components';
 import {
-  Dashboard,
+  // Dashboard,
   AllAthletes,
   MyAthletes,
   ManageAthletes,
@@ -12,22 +12,28 @@ import {
   AthleteDetails,
 } from './scripts/routes';
 import { CssBaseline } from '@material-ui/core';
-import { Login, PrivateRoute } from './scripts/components';
+import { Login, PrivateRoute, ProtectedComponent } from './scripts/components';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import themes from './themes';
 
 const ProtectedApp = () => (
   <Navigation>
-    <Route path="/" exact render={() => <Dashboard myText="Hello world" />} />
-    <Route path="/dashboard" component={Dashboard} />
+    <Route path="/" exact component={AllAthletes} />
     <Route path="/all-athletes" exact component={AllAthletes} />
-    <Route path="/my-athletes" exact component={MyAthletes} />
-    <Route path="/manage-athletes" exact component={ManageAthletes} />
+    <ProtectedComponent path="/my-athletes" exact component={MyAthletes} roles={['COACH']} />
+    <ProtectedComponent
+      path="/manage-athletes"
+      exact
+      component={ManageAthletes}
+      roles={['ADMIN']}
+    />
     <Route path="/athlete/:athleteId" exact component={AthleteDetails} />
-    <Route path="/bout-logs" component={Dashboard} />
-    <Route path="/system" component={System} />
-    <Route path="/account" component={Dashboard} />
+    <ProtectedComponent path="/system" exact component={System} roles={['ADMIN']} />
+    {/*<Route path="/" exact render={() => <Dashboard myText="Hello world" />} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/bout-logs" component={Dashboard} />
+      <Route path="/account" component={Dashboard} />*/}
   </Navigation>
 );
 

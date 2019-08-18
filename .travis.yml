@@ -3,13 +3,14 @@ node_js: 10
 
 script:
   - yarn
-  #- yarn lint
+  - yarn lint
   #- yarn test
   - yarn build
 
 branches:
   only:
     - master
+    - /^v\d+.\d+(.\d+)?(-\S*)?$/
 
 deploy:
   - provider: script
