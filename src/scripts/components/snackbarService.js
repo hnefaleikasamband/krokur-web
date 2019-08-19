@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import PropTypes from 'prop-types';
 import { snackbar as snackbarActions } from '../actions';
 
 import { amber, green } from '@material-ui/core/colors';
