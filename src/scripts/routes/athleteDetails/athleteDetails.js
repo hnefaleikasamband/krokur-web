@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Header } from '../../components';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -31,7 +32,12 @@ const AthleteDetails = ({
   clubs,
   history,
   addBoutForAthlete,
+  userClub,
+  ...props
 }) => {
+  if (!isAdmin && userClub && athlete && userClub.shorthand !== athlete.clubShorthand) {
+    return <Redirect to={{ pathname: '/', state: { from: props.location } }} />;
+  }
   return isFetchingAthlete ? (
     <CircularProgress />
   ) : athlete ? (
