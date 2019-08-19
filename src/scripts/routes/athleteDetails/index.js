@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
   athlete: state.athletes.athlete,
   athletes: state.athletes.allAthletes,
   isAdmin: state.user.userInfo.role === 'ADMIN',
+  userClub: state.user.userInfo.club,
   bouts: state.athletes.athleteBouts,
   clubs: state.system.clubs,
   ...ownProps,
