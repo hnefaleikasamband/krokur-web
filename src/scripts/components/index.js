@@ -8,3 +8,4 @@ export { default as ClubForm } from './forms/clubForm/clubForm';
 export { default as UserForm } from './forms/userForm/userForm';
 export { default as AthleteBoutForm } from './forms/athleteBoutForm/athleteBoutform';
 export { default as Header } from './header';
+export { default as SnackbarService } from './snackbarService';

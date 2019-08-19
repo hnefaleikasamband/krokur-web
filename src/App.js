@@ -16,6 +16,7 @@ import { Login, PrivateRoute, ProtectedComponent } from './scripts/components';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import themes from './themes';
+import { SnackbarService } from './scripts/components';
 
 const ProtectedApp = () => (
   <Navigation>
@@ -41,6 +42,7 @@ const App = () => {
   return (
     <MuiThemeProvider theme={themes.lightTheme}>
       <CssBaseline />
+      <SnackbarService />
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
