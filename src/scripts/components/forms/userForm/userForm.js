@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import { ClubsSelect } from '../helpers';
+import { SelectWrapper } from '../helpers';
 import styles from './userFormStyles';
 import UserSchema from './userSchema';
 
@@ -83,7 +83,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
                 onChange={handleChange}
                 input={<Input name="club" id="club-helper" />}
               >
-                {ClubsSelect(clubs)}
+                {SelectWrapper(clubs)}
               </Select>
             </FormControl>
           )}

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import { ClubsSelect } from '../helpers';
+import { SelectWrapper } from '../helpers';
 import styles from './athleteFormStyles';
 import AthleteSchema from './athleteSchema';
 
@@ -25,9 +25,7 @@ const AthleteForm = ({
     onSubmit(data);
     formHandlers.resetForm();
   };
-  const initValue = providedClub
-    ? { ...initialValues, club: providedClub.shorthand }
-    : initialValues;
+  const initValue = providedClub ? { ...initialValues, club: providedClub.id } : initialValues;
   return (
     <Formik initialValues={initValue} validationSchema={AthleteSchema} onSubmit={handleSubmit}>
       {({ values, errors, touched, handleSubmit, handleChange }) => (
@@ -60,7 +58,7 @@ const AthleteForm = ({
               onChange={handleChange}
               input={<Input name="club" id="club-helper" disabled={!!providedClub} />}
             >
-              {ClubsSelect(providedClub ? [providedClub] : clubs)}
+              {SelectWrapper(providedClub ? [providedClub] : clubs)}
             </Select>
           </FormControl>
 
