@@ -13,12 +13,17 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { SelectWrapper } from '../helpers';
 import styles from './userFormStyles';
-import UserSchema from './userSchema';
+import { userSchema, editUserSchema } from './userSchema';
 
 const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, clubs }) => {
   const [disabledSwitch, setdisabledSwitch] = React.useState(initialValues.disabled || false);
+  // Form setup
+  const isEdit = !!initialValues.id;
+  initialValues.club = isEdit ? initialValues.club : '';
+  const schema = isEdit ? editUserSchema : userSchema;
+
   return (
-    <Formik initialValues={initialValues} validationSchema={UserSchema} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={schema} onSubmit={onSubmit}>
       {({ values, errors, touched, handleSubmit, handleChange }) => (
         <form onSubmit={handleSubmit} className={classes.container} noValidate autoComplete="off">
           <TextField
@@ -41,28 +46,32 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
             error={errors.email && touched.email}
             required
           />
-          <TextField
-            id="password"
-            label="Password"
-            className={classes.textField}
-            margin="normal"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            error={errors.password && touched.password}
-            required
-          />
-          <TextField
-            id="confirmPassword"
-            label="Confirm Password"
-            className={classes.textField}
-            margin="normal"
-            type="password"
-            value={values.confirmPassword}
-            onChange={handleChange}
-            error={errors.confirmPassword && touched.confirmPassword}
-            required
-          />
+          {!isEdit && (
+            <>
+              <TextField
+                id="password"
+                label="Password"
+                className={classes.textField}
+                margin="normal"
+                type="password"
+                value={values.password}
+                onChange={handleChange}
+                error={errors.password && touched.password}
+                required
+              />
+              <TextField
+                id="confirmPassword"
+                label="Confirm Password"
+                className={classes.textField}
+                margin="normal"
+                type="password"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                error={errors.confirmPassword && touched.confirmPassword}
+                required
+              />
+            </>
+          )}
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="role-helper">Role</InputLabel>
             <Select
@@ -91,8 +100,12 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
             control={
               <Switch
                 className={classes.switch}
+                name="disabled"
                 checked={disabledSwitch}
-                onChange={() => setdisabledSwitch(!disabledSwitch)}
+                onChange={(e) => {
+                  handleChange(e);
+                  setdisabledSwitch(!disabledSwitch);
+                }}
                 value="disabled"
                 color="secondary"
               />
@@ -130,6 +143,7 @@ UserForm.propTypes = {
     disabled: PropTypes.bool,
   }),
   onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 UserForm.defaultProps = {

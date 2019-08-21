@@ -20,6 +20,8 @@ const mapDispatchToProps = {
   editClubAction: systemActions.updateClub,
   addUserAction: systemActions.addUser,
   updateUserAction: systemActions.updateUser,
+  toggleUserDisabledValue: systemActions.toggleUserDisabledValue,
+  receiveUser: systemActions.receiveUser,
 };
 
 const enhance = compose(

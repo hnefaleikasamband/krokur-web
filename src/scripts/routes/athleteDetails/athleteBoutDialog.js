@@ -44,6 +44,7 @@ const FormDialog = ({ athlete, opponents, clubs, submitAction, buttonText, initi
             clubs={clubs}
             submitText="Submit"
             onSubmit={handleSubmit}
+            onCancel={() => setOpen(false)}
           />
         </DialogContent>
       </Dialog>

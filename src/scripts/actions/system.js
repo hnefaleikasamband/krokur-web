@@ -3,6 +3,7 @@ import { createActions } from 'redux-actions';
 export const {
   system: {
     receiveUsers,
+    receiveUser,
     fetchAllUsers,
     receiveClubs,
     fetchClubs,
@@ -10,12 +11,17 @@ export const {
     updateClub,
     addUser,
     updateUser,
+    toggleUserDisabledValue,
+    updateUserPassword,
   },
 } = createActions({
   SYSTEM: {
     RECEIVE_USERS: (users) => ({
       isFetchingUsers: false,
       users,
+    }),
+    RECEIVE_USER: (user) => ({
+      user,
     }),
     FETCH_ALL_USERS: () => ({
       isFetchingUsers: true,
@@ -37,6 +43,12 @@ export const {
       ...user,
     }),
     UPDATE_USER: (user) => ({
+      ...user,
+    }),
+    TOGGLE_USER_DISABLED_VALUE: (userIdAndValue) => ({
+      ...userIdAndValue,
+    }),
+    UPDATE_USER_PASSWORD: (user) => ({
       ...user,
     }),
   },

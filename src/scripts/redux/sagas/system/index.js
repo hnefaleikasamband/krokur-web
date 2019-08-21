@@ -1,7 +1,13 @@
 import { takeLatest, all, put, select, call } from 'redux-saga/effects';
 import { matchesType } from '../helpers';
 import api from './api';
-import { system as actions } from '../../../actions';
+import { system as actions, snackbar } from '../../../actions';
+
+const somethingWentWrong = {
+  duration: '4000',
+  message: 'Oops, somethign went wrong.. try again later',
+  variant: 'error',
+};
 
 function* fetchUsers() {
   try {
@@ -20,8 +26,7 @@ function* fetchUsers() {
     });
     yield put(actions.receiveUsers(users));
   } catch (e) {
-    console.error('Error fetching Users:', e);
-    // yield put(actions.receiveUserData({}));
+    yield put(snackbar.addSnack(somethingWentWrong));
   }
 }
 
@@ -31,8 +36,7 @@ function* fetchClubs() {
     const { clubs } = yield call(api.getClubs, token);
     yield put(actions.receiveClubs(clubs));
   } catch (e) {
-    console.error('Error fetching clubs:', e);
-    // yield put(actions.receiveUserData({}));
+    yield put(snackbar.addSnack(somethingWentWrong));
   }
 }
 
@@ -46,7 +50,7 @@ function* addClub({ payload }) {
     yield call(api.addClub, payload, token);
     yield put(actions.fetchClubs());
   } catch (e) {
-    console.error('addClub error:', e);
+    yield put(snackbar.addSnack(somethingWentWrong));
   }
 }
 
@@ -57,7 +61,7 @@ function* updateClub({ payload }) {
     yield call(api.updateClub, payload, token);
     yield put(actions.fetchClubs());
   } catch (e) {
-    console.error('updateClub error:', e);
+    yield put(snackbar.addSnack(somethingWentWrong));
   }
 }
 
@@ -69,17 +73,46 @@ function* addUser({ payload }) {
     yield call(api.addUser, payload, token);
     yield put(actions.fetchAllUsers());
   } catch (e) {
-    console.error('addUser error:', e);
+    yield put(snackbar.addSnack(somethingWentWrong));
   }
 }
 
-function* updateUser({ payload }) {
+function* updateUser({ payload: user }) {
   try {
     const { token } = yield select((state) => state.user);
-    yield call(api.updateUser, payload, token);
-    yield put(actions.fetchAllUsers);
+    yield call(api.updateUser, user, token);
+
+    yield put(actions.receiveUser(user));
+    yield put(
+      snackbar.addSnack({ duration: '3000', message: 'User has been updated', variant: 'success' })
+    );
   } catch (e) {
-    console.error('updateUser error:', e);
+    yield put(snackbar.addSnack(somethingWentWrong));
+  }
+}
+
+function* setDisabledStatus({ payload }) {
+  try {
+    const { token } = yield select((state) => state.user);
+    const { id, disabled } = payload;
+    yield call(api.toggleUserDisabledValue, id, disabled, token);
+  } catch (error) {
+    yield put(snackbar.addSnack(somethingWentWrong));
+  }
+}
+
+function* updateUserPassword({ payload: user }) {
+  try {
+    const { token } = yield select((state) => state.user);
+    yield call(api.updateUserPassword, user, token);
+    const snack = {
+      message: 'Updated password',
+      duration: 3000,
+      variation: 'success',
+    };
+    yield put(snackbar.addSnack(snack));
+  } catch (error) {
+    yield put(snackbar.addSnack(somethingWentWrong));
   }
 }
 
@@ -91,5 +124,7 @@ export default function*() {
     takeLatest(matchesType(actions.updateClub), updateClub),
     takeLatest(matchesType(actions.addUser), addUser),
     takeLatest(matchesType(actions.updateUser), updateUser),
+    takeLatest(matchesType(actions.toggleUserDisabledValue), setDisabledStatus),
+    takeLatest(matchesType(actions.updateUserPassword), updateUserPassword),
   ]);
 }

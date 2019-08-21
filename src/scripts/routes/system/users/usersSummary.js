@@ -1,8 +1,9 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { UserFormDialog } from './index';
+import { DisabledSwitch } from '../../../components/forms/helpers';
 
-const ClubsSummary = ({ isFetching, users }) => {
+const ClubsSummary = ({ isFetching, users, editAction, setDisabledValue, updateUser, clubs }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -22,7 +23,7 @@ const ClubsSummary = ({ isFetching, users }) => {
       label: 'Club',
       options: {
         filter: true,
-        sort: false,
+        sort: true,
         customBodyRender: (value) => (!value ? 'n/a' : value),
       },
     },
@@ -30,9 +31,16 @@ const ClubsSummary = ({ isFetching, users }) => {
       name: 'disabled',
       label: 'Disabled',
       options: {
-        filter: true,
+        filter: false,
         sort: true,
-        customBodyRender: (value) => value.toString(),
+        customBodyRender: (value, tableMeta) => (
+          <DisabledSwitch
+            initValue={value}
+            id={tableMeta.rowData[0]}
+            onChange={setDisabledValue}
+            updateUser={updateUser}
+          />
+        ),
       },
     },
     { name: 'club', options: hideColumnOptions },
@@ -46,13 +54,15 @@ const ClubsSummary = ({ isFetching, users }) => {
         customBodyRender: (value, tableMeta) =>
           tableMeta.rowData && (
             <UserFormDialog
-              submitAction={() => console.error('Action has not been set yet')}
+              submitAction={editAction}
               buttonText="edit"
+              clubs={clubs}
               initialValues={{
                 id: tableMeta.rowData[0],
                 name: tableMeta.rowData[1],
                 email: tableMeta.rowData[2],
                 role: tableMeta.rowData[3],
+                club: tableMeta.rowData[6],
                 disabled: tableMeta.rowData[5],
               }}
             />
@@ -69,7 +79,6 @@ const ClubsSummary = ({ isFetching, users }) => {
     downloadOptions: {
       filename: 'users.csv',
     },
-    responsive: 'scroll',
     print: false,
     viewColumns: false,
   };
