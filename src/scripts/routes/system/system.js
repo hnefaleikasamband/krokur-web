@@ -24,6 +24,8 @@ const System = ({
   editClubAction,
   addUserAction,
   updateUserAction,
+  toggleUserDisabledValue,
+  receiveUser,
 }) => {
   return (
     <Fragment>
@@ -38,10 +40,17 @@ const System = ({
         }
       />
       <Grid container spacing={4} direction="row">
-        <Grid item xs={12} lg={7}>
-          <UsersSummary isFetching={isFetchingUsers} users={users} editAction={updateUserAction} />
+        <Grid item xs={12} xl={7}>
+          <UsersSummary
+            isFetching={isFetchingUsers}
+            users={users}
+            editAction={updateUserAction}
+            setDisabledValue={toggleUserDisabledValue}
+            updateUser={receiveUser}
+            clubs={clubs}
+          />
         </Grid>
-        <Grid item xs={12} lg={5}>
+        <Grid item xs={12} xl={5}>
           <ClubsSummary isFetching={isFetchingClubs} clubs={clubs} editAction={editClubAction} />
         </Grid>
       </Grid>

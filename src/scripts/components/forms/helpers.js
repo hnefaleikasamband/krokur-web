@@ -4,9 +4,11 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import MomentUtils from '@date-io/moment';
 
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
 
 export const ClubsSelect = (clubs) =>
   clubs.map((club) => (
@@ -66,5 +68,32 @@ export const DatePickerField = ({ field, form, classes, ...other }) => {
         {...other}
       />
     </MuiPickersUtilsProvider>
+  );
+};
+
+export const DisabledSwitch = ({ onChange, id, initValue = false, updateUser, className }) => {
+  const [value, setValue] = React.useState(initValue);
+  React.useEffect(() => {
+    setValue(initValue);
+  }, [initValue]);
+  return (
+    <FormControlLabel
+      control={
+        <Switch
+          className={className}
+          name="disabled"
+          checked={value}
+          onChange={() => {
+            const newValue = !value;
+            const user = { id, disabled: newValue };
+            setValue(newValue);
+            onChange(user);
+            updateUser(user);
+          }}
+          value={value}
+          color="secondary"
+        />
+      }
+    />
   );
 };

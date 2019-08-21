@@ -34,9 +34,32 @@ const addUser = (user, token) =>
     headers: { Authorization: `JWT ${token}` },
   });
 
-const updateUser = () =>
-  Promise((resolve, reject) => {
-    reject('user update path does not exists yet');
+const updateUser = (user, token) =>
+  axios.put(`${host}/api/v1/users/${user.id}`, user, {
+    headers: { Authorization: `JWT ${token}` },
   });
 
-export default { getUsers, getClubs, addClub, updateClub, addUser, updateUser };
+const toggleUserDisabledValue = (id, disabled, token) =>
+  axios.put(
+    `${host}/api/v1/users/${id}/disable`,
+    { disabled },
+    {
+      headers: { Authorization: `JWT ${token}` },
+    }
+  );
+
+const updateUserPassword = (userData, token) =>
+  axios.put(`${host}/api/v1/users/${userData.id}/password`, userData, {
+    headers: { Authorization: `JWT ${token}` },
+  });
+
+export default {
+  getUsers,
+  getClubs,
+  addClub,
+  updateClub,
+  addUser,
+  updateUser,
+  toggleUserDisabledValue,
+  updateUserPassword,
+};
