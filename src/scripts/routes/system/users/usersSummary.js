@@ -69,7 +69,6 @@ const ClubsSummary = ({ isFetching, users }) => {
     downloadOptions: {
       filename: 'users.csv',
     },
-    responsive: 'scroll',
     print: false,
     viewColumns: false,
   };
