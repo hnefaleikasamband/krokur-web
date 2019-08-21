@@ -91,8 +91,12 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
             control={
               <Switch
                 className={classes.switch}
+                name="disabled"
                 checked={disabledSwitch}
-                onChange={() => setdisabledSwitch(!disabledSwitch)}
+                onChange={(e) => {
+                  handleChange(e);
+                  setdisabledSwitch(!disabledSwitch);
+                }}
                 value="disabled"
                 color="secondary"
               />
@@ -130,6 +134,7 @@ UserForm.propTypes = {
     disabled: PropTypes.bool,
   }),
   onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 UserForm.defaultProps = {
