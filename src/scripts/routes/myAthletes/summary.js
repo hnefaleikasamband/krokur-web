@@ -48,7 +48,7 @@ const Summary = ({ isFetching, athletes, club }) => {
   ];
 
   const tableOptions = {
-    selectableRows: false,
+    selectableRows: 'none',
     filterType: 'checkbox',
     rowsPerPage: 20,
     rowsPerPageOptions: [10, 20, 40],

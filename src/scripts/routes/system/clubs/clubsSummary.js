@@ -38,9 +38,9 @@ const UsersSummary = ({ isFetching, clubs, editAction }) => {
   ];
 
   const tableOptions = {
-    selectableRows: false,
+    selectableRows: 'none',
     filterType: 'checkbox',
-    rowsPerPage: 10,
+    rowsPerPage: 5,
     rowsPerPageOptions: [5, 10, 15],
     downloadOptions: {
       filename: 'clubs.csv',

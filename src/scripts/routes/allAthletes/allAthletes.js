@@ -33,7 +33,7 @@ const AllAthletes = ({ isFetching, isEmpty, athletes }) => {
   ];
 
   const tableOptions = {
-    selectableRows: false,
+    selectableRows: 'none',
     filterType: 'checkbox',
     rowsPerPage: 20,
     rowsPerPageOptions: [10, 20, 40],
