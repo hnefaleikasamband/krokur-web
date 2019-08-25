@@ -12,4 +12,16 @@ const combineSagas = (sagas) =>
     yield all([...sagas].map((saga) => saga()));
   };
 
-export { matchesType, removeDuplicates, combineSagas };
+const SnackErrorMessage = (message) => ({
+  duration: '4000',
+  variant: 'error',
+  message: message || 'Oops, somethign went wrong.. try again later',
+});
+
+const SnackSuccessMessage = (message) => ({
+  duration: '3000',
+  variant: 'success',
+  message,
+});
+
+export { matchesType, removeDuplicates, combineSagas, SnackErrorMessage, SnackSuccessMessage };

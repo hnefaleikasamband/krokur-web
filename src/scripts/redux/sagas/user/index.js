@@ -1,13 +1,12 @@
 import { takeLatest, all, put, call } from 'redux-saga/effects';
-import { matchesType } from '../helpers';
-import { user as actions } from '../../../actions';
+import { matchesType, SnackErrorMessage, SnackSuccessMessage } from '../helpers';
+import { user as actions, snackbar } from '../../../actions';
 import api from './api';
 import {
   updateLocalStorage,
   getFromLocalStorage,
   removeFromLocalStorage,
 } from '../../../helpers/localStorage';
-import { receiveUserData } from '../../../actions/user';
 
 function* login({ payload }) {
   try {
@@ -16,8 +15,8 @@ function* login({ payload }) {
     yield put(actions.receiveUserData(authedUser));
     yield call(updateLocalStorage, 'token', authedUser.token);
   } catch (e) {
-    console.error('Error Logging in:', e);
     yield put(actions.receiveUserData({}));
+    yield put(snackbar.addSnack(SnackErrorMessage('Error logging in, please try again')));
   }
 }
 
@@ -46,7 +45,8 @@ function* getUserIfTokenPresent() {
 function* logout() {
   try {
     yield call(removeFromLocalStorage, 'token');
-    yield put(receiveUserData({}));
+    yield put(actions.receiveUserData({}));
+    yield put(snackbar.addSnack(SnackSuccessMessage('Logged out')));
   } catch (e) {
     console.error('Error logging out.');
   }

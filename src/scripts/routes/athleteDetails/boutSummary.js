@@ -40,7 +40,7 @@ const Summary = ({ isFetching, athlete, bouts, history }) => {
   ];
 
   const tableOptions = {
-    selectableRows: false,
+    selectableRows: 'none',
     filterType: 'checkbox',
     rowsPerPage: 15,
     rowsPerPageOptions: [10, 15, 20, 40, 80],
