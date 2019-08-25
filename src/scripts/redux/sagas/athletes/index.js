@@ -1,7 +1,7 @@
 import { takeLatest, all, put, select, call } from 'redux-saga/effects';
-import { matchesType } from '../helpers';
+import { matchesType, SnackErrorMessage, SnackSuccessMessage } from '../helpers';
 import api from './api';
-import { athletes as actions } from '../../../actions';
+import { athletes as actions, snackbar } from '../../../actions';
 
 function* fetchAthletes() {
   try {
@@ -9,8 +9,7 @@ function* fetchAthletes() {
     const { athletes } = yield call(api.getAllAthletes, token);
     yield put(actions.receiveAllAthletes(athletes));
   } catch (e) {
-    console.error('Error fetching athletes:', e);
-    // yield put(actions.receiveUserData({}));
+    yield put(snackbar.addSnack(SnackErrorMessage()));
   }
 }
 
@@ -20,8 +19,7 @@ function* fetchManagedAthletes() {
     const { athletes } = yield call(api.getManagedAthletes, token);
     yield put(actions.receiveManagedAthletes(athletes));
   } catch (e) {
-    console.error('Error fetching managed athletes:', e);
-    // yield put(actions.receiveUserData({}));
+    yield put(snackbar.addSnack(SnackErrorMessage()));
   }
 }
 
@@ -37,8 +35,9 @@ function* addAthlete({ payload }) {
     };
     yield call(api.addAthlete, newAthlete, token);
     yield put(actions.getManagedAthletes());
+    yield put(snackbar.addSnack(SnackSuccessMessage('Successfully added athlete')));
   } catch (e) {
-    console.error('Error in sagas when adding athlete:', e);
+    yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
 }
 
@@ -48,7 +47,7 @@ function* fetchAthlete({ payload }) {
     const { athlete } = yield call(api.getAthlete, payload.athleteDetailsId, token);
     yield put(actions.receiveAthlete(athlete));
   } catch (e) {
-    console.error(`Error in sagas when getting athlete id ${payload.athleteDetailsId}.. :`, e);
+    yield put(snackbar.addSnack(SnackErrorMessage()));
     yield put(actions.receiveAthlete(null));
   }
 }
@@ -59,10 +58,7 @@ function* fetchBouts({ payload }) {
     const { bouts } = yield call(api.getAthleteBouts, payload.athleteBoutFetchingId, token);
     yield put(actions.receiveAthleteBouts(bouts));
   } catch (e) {
-    console.error(
-      `Error in sagas when getting bouts for id ${payload.athleteBoutFetchingId}..:`,
-      e
-    );
+    yield put(snackbar.addSnack(SnackErrorMessage()));
   }
 }
 
@@ -73,8 +69,9 @@ function* addBoutForAthlete({ payload }) {
 
     yield call(api.addBoutForAthlete, bout, token);
     yield put(actions.getAthleteBouts(bout.athleteId));
+    yield put(snackbar.addSnack(SnackSuccessMessage('Successfully added a new match')));
   } catch (e) {
-    console.error(`Error in sagas when adding bout ..:`, e);
+    yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
 }
 
