@@ -33,83 +33,66 @@ const styles = (theme) => ({
   },
 });
 
-class AppBar extends React.Component {
-  state = {
-    mobileOpen: false,
-    profileMenuEl: null,
+const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
+  const [profileMenuEl, setProfileMenuEl] = React.useState(false);
+  const isProfileMenuOpen = Boolean(profileMenuEl);
+
+  const logoutUser = () => {
+    logout();
+    setProfileMenuEl(null);
   };
 
-  handleProfileMenuOpen = (event) => {
-    this.setState({ profileMenuEl: event.currentTarget });
-  };
+  const profileMenu = (
+    <Menu
+      anchorEl={profileMenuEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isProfileMenuOpen}
+      onClose={() => setProfileMenuEl(null)}
+    >
+      <MenuItem onClick={() => setProfileMenuEl(null)}>My account</MenuItem>
+      <MenuItem onClick={logoutUser}>Log out</MenuItem>
+    </Menu>
+  );
 
-  handleMenuClose = () => {
-    const state = this.state;
-    this.setState({ ...state, profileMenuEl: null });
-  };
-
-  logoutUser = () => {
-    this.props.logout();
-    this.handleMenuClose();
-  };
-
-  render() {
-    const { classes, openDrawer, userInfo } = this.props;
-    const { profileMenuEl } = this.state;
-    const isMenuOpen = Boolean(profileMenuEl);
-
-    const renderMenu = (
-      <Menu
-        anchorEl={profileMenuEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={this.logoutUser}>Log out</MenuItem>
-      </Menu>
-    );
-
-    return (
-      <Fragment>
-        <ApplicationBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={() => openDrawer()}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              Krókur
-            </Typography>
-            <div className={classes.grow} />
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <Typography className={classes.displayName} variant="subtitle1" color="inherit" noWrap>
-              {userInfo.name}
-            </Typography>
-            <IconButton
-              aria-owns={isMenuOpen ? 'material-appbar' : null}
-              aria-haspopup="true"
-              onClick={this.handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Toolbar>
-        </ApplicationBar>
-        {renderMenu}
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <ApplicationBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={() => openDrawer()}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit" noWrap>
+            Krókur
+          </Typography>
+          <div className={classes.grow} />
+          <IconButton color="inherit">
+            <Badge badgeContent={0} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <Typography className={classes.displayName} variant="subtitle1" color="inherit" noWrap>
+            {userInfo.name}
+          </Typography>
+          <IconButton
+            aria-owns={isProfileMenuOpen ? 'material-appbar' : null}
+            aria-haspopup="true"
+            onClick={(e) => setProfileMenuEl(e.currentTarget)}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+        </Toolbar>
+      </ApplicationBar>
+      {profileMenu}
+    </Fragment>
+  );
+};
 
 AppBar.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
