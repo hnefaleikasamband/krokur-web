@@ -14,6 +14,41 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+
+const AlignItemsList = ({ classes, unread }) => {
+  return (
+    <ListItem alignItems="flex-start" className={unread ? classes.unread : ''}>
+      <ListItemAvatar>
+        <Avatar alt="Notification bell">
+          <NotificationsIcon />
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText
+        primary="Test notification"
+        secondary={
+          <React.Fragment>
+            <Typography
+              component="span"
+              variant="body2"
+              className={classes.inline}
+              color="textPrimary"
+            >
+              System
+            </Typography>
+            {' — This is a test notification, you can safely ignore this message…'}
+          </React.Fragment>
+        }
+      />
+    </ListItem>
+  );
+};
+
 const styles = (theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -31,11 +66,39 @@ const styles = (theme) => ({
   displayName: {
     paddingLeft: '5px',
   },
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    maxHeight: 520,
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+  unread: {
+    backgroundColor: 'lightgray',
+  },
 });
 
+const NotificationMenu = ({ classes, notificationMenuEl, setNotificationMenuEl }) => (
+  <Menu
+    id="notification-menu"
+    anchorEl={notificationMenuEl}
+    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+    getContentAnchorEl={null}
+    open={Boolean(notificationMenuEl)}
+    onClose={() => setNotificationMenuEl(null)}
+  >
+    <List className={classes.root}>
+      <AlignItemsList classes={classes} />
+      <Divider variant="inset" component="li" />
+    </List>
+  </Menu>
+);
+
 const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
-  const [profileMenuEl, setProfileMenuEl] = React.useState(false);
-  const isProfileMenuOpen = Boolean(profileMenuEl);
+  const [profileMenuEl, setProfileMenuEl] = React.useState(null);
+  const [notificationMenuEl, setNotificationMenuEl] = React.useState(null);
 
   const logoutUser = () => {
     logout();
@@ -44,10 +107,11 @@ const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
 
   const profileMenu = (
     <Menu
+      id="profile-menu"
       anchorEl={profileMenuEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isProfileMenuOpen}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      getContentAnchorEl={null}
+      open={Boolean(profileMenuEl)}
       onClose={() => setProfileMenuEl(null)}
     >
       <MenuItem onClick={() => setProfileMenuEl(null)}>My account</MenuItem>
@@ -71,7 +135,12 @@ const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
             Krókur
           </Typography>
           <div className={classes.grow} />
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            aria-controls="notification-menu"
+            aria-haspopup="listbox"
+            onClick={(e) => setNotificationMenuEl(e.currentTarget)}
+          >
             <Badge badgeContent={0} color="secondary">
               <NotificationsIcon />
             </Badge>
@@ -80,7 +149,7 @@ const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
             {userInfo.name}
           </Typography>
           <IconButton
-            aria-owns={isProfileMenuOpen ? 'material-appbar' : null}
+            aria-controls="profile-menu"
             aria-haspopup="true"
             onClick={(e) => setProfileMenuEl(e.currentTarget)}
             color="inherit"
@@ -90,6 +159,11 @@ const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
         </Toolbar>
       </ApplicationBar>
       {profileMenu}
+      <NotificationMenu
+        classes={classes}
+        notificationMenuEl={notificationMenuEl}
+        setNotificationMenuEl={setNotificationMenuEl}
+      />
     </Fragment>
   );
 };
