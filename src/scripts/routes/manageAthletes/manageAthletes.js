@@ -33,11 +33,6 @@ const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete, h
         <Grid item xs={12} md={8}>
           <Summary isfetching={isFetchingAthletes} athletes={athletes} history={history} />
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper>
-            <h2>Transfer Athlete</h2>
-          </Paper>
-        </Grid>
       </Grid>
     </div>
   );

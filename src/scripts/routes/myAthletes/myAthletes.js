@@ -17,11 +17,6 @@ const MyAthletes = ({ isFetching, addAthlete, athletes, club }) => {
         <Grid item xs={12} md={8}>
           <Summary isfetching={isFetching} athletes={athletes} club={userClub} />
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper>
-            <h2>Request transfer</h2>
-          </Paper>
-        </Grid>
       </Grid>
     </div>
   );
