@@ -3,7 +3,6 @@ import { createActions } from 'redux-actions';
 export const {
   system: {
     receiveUsers,
-    receiveUser,
     fetchAllUsers,
     receiveClubs,
     fetchClubs,
@@ -19,9 +18,6 @@ export const {
     RECEIVE_USERS: (users) => ({
       isFetchingUsers: false,
       users,
-    }),
-    RECEIVE_USER: (user) => ({
-      user,
     }),
     FETCH_ALL_USERS: () => ({
       isFetchingUsers: true,

@@ -22,18 +22,6 @@ const system = handleActions(
         ...action.payload,
       }),
     ],
-    [
-      actions.receiveUser,
-      (state, { payload }) => {
-        const users = state.users.map((u) =>
-          u.id === payload.user.id ? { ...u, ...payload.user } : u
-        );
-        return {
-          ...state,
-          users,
-        };
-      },
-    ],
   ]),
   initialState
 );
