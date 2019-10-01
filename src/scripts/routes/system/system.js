@@ -25,7 +25,7 @@ const System = ({
   addUserAction,
   updateUserAction,
   toggleUserDisabledValue,
-  receiveUser,
+  updateUserPassword,
 }) => {
   return (
     <Fragment>
@@ -46,8 +46,8 @@ const System = ({
             users={users}
             editAction={updateUserAction}
             setDisabledValue={toggleUserDisabledValue}
-            updateUser={receiveUser}
             clubs={clubs}
+            changePassword={updateUserPassword}
           />
         </Grid>
         <Grid item xs={12} xl={5}>

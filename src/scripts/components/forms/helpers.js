@@ -71,26 +71,20 @@ export const DatePickerField = ({ field, form, classes, ...other }) => {
   );
 };
 
-export const DisabledSwitch = ({ onChange, id, initValue = false, updateUser, className }) => {
-  const [value, setValue] = React.useState(initValue);
-  React.useEffect(() => {
-    setValue(initValue);
-  }, [initValue]);
+export const DisabledSwitch = ({ onChange, id, initValue = false, className }) => {
   return (
     <FormControlLabel
       control={
         <Switch
           className={className}
           name="disabled"
-          checked={value}
+          checked={initValue}
           onChange={() => {
-            const newValue = !value;
+            const newValue = !initValue;
             const user = { id, disabled: newValue };
-            setValue(newValue);
             onChange(user);
-            updateUser(user);
           }}
-          value={value}
+          value={initValue}
           color="secondary"
         />
       }

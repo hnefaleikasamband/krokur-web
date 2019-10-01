@@ -83,8 +83,8 @@ function* updateUser({ payload: user }) {
     const { token } = yield select((state) => state.user);
     yield call(api.updateUser, user, token);
 
-    yield put(actions.receiveUser(user));
     yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully updated user ${user.name}`)));
+    yield put(actions.fetchAllUsers());
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
@@ -95,6 +95,7 @@ function* setDisabledStatus({ payload }) {
     const { token } = yield select((state) => state.user);
     const { id, disabled } = payload;
     yield call(api.toggleUserDisabledValue, id, disabled, token);
+    yield put(actions.fetchAllUsers());
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage()));
   }

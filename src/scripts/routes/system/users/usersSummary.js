@@ -1,9 +1,24 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
-import { UserFormDialog } from './index';
+import { makeStyles } from '@material-ui/core';
+import { UserFormDialog, UpdatePasswordDialog } from './index';
 import { DisabledSwitch } from '../../../components/forms/helpers';
 
-const ClubsSummary = ({ isFetching, users, editAction, setDisabledValue, updateUser, clubs }) => {
+const useStyles = makeStyles({
+  actionContainer: {
+    display: 'flex',
+  },
+});
+
+const UsersSummary = ({
+  isFetching,
+  users,
+  editAction,
+  setDisabledValue,
+  clubs,
+  changePassword,
+}) => {
+  const classes = useStyles();
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -34,38 +49,40 @@ const ClubsSummary = ({ isFetching, users, editAction, setDisabledValue, updateU
         filter: false,
         sort: true,
         customBodyRender: (value, tableMeta) => (
-          <DisabledSwitch
-            initValue={value}
-            id={tableMeta.rowData[0]}
-            onChange={setDisabledValue}
-            updateUser={updateUser}
-          />
+          <DisabledSwitch initValue={value} id={tableMeta.rowData[0]} onChange={setDisabledValue} />
         ),
       },
     },
     { name: 'club', options: hideColumnOptions },
     {
-      name: 'edit',
-      label: 'Edit',
+      name: 'actions',
+      label: 'Actions',
       options: {
         filter: false,
         sort: false,
         empty: true,
         customBodyRender: (value, tableMeta) =>
           tableMeta.rowData && (
-            <UserFormDialog
-              submitAction={editAction}
-              buttonText="edit"
-              clubs={clubs}
-              initialValues={{
-                id: tableMeta.rowData[0],
-                name: tableMeta.rowData[1],
-                email: tableMeta.rowData[2],
-                role: tableMeta.rowData[3],
-                club: tableMeta.rowData[6],
-                disabled: tableMeta.rowData[5],
-              }}
-            />
+            <div className={classes.actionContainer}>
+              <UserFormDialog
+                submitAction={editAction}
+                buttonText="edit"
+                clubs={clubs}
+                initialValues={{
+                  id: tableMeta.rowData[0],
+                  name: tableMeta.rowData[1],
+                  email: tableMeta.rowData[2],
+                  role: tableMeta.rowData[3],
+                  club: tableMeta.rowData[6],
+                  disabled: tableMeta.rowData[5],
+                }}
+              />
+              <UpdatePasswordDialog
+                userId={tableMeta.rowData[0]}
+                userName={tableMeta.rowData[1]}
+                submitAction={changePassword}
+              />
+            </div>
           ),
       },
     },
@@ -91,4 +108,4 @@ const ClubsSummary = ({ isFetching, users, editAction, setDisabledValue, updateU
   );
 };
 
-export default ClubsSummary;
+export default UsersSummary;

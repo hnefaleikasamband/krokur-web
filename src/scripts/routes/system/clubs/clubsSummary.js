@@ -2,7 +2,7 @@ import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { ClubFormDialog } from '../clubs';
 
-const UsersSummary = ({ isFetching, clubs, editAction }) => {
+const ClubsSummary = ({ isFetching, clubs, editAction }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -58,4 +58,4 @@ const UsersSummary = ({ isFetching, clubs, editAction }) => {
   );
 };
 
-export default UsersSummary;
+export default ClubsSummary;

@@ -18,7 +18,7 @@ const FormDialog = ({ submitAction, buttonText, initialValues, clubs }) => {
   return (
     <div>
       {initialValues ? (
-        <IconButton aria-label="edit" onClick={() => setOpen(true)}>
+        <IconButton aria-label="edit" onClick={() => setOpen(true)} title="edit">
           <EditIcon fontSize="small" />
         </IconButton>
       ) : (
