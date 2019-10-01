@@ -22,6 +22,7 @@ const mapDispatchToProps = {
   updateUserAction: systemActions.updateUser,
   toggleUserDisabledValue: systemActions.toggleUserDisabledValue,
   receiveUser: systemActions.receiveUser,
+  updateUserPassword: systemActions.updateUserPassword,
 };
 
 const enhance = compose(
