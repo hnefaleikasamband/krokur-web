@@ -114,6 +114,14 @@ class SignIn extends Component {
               </Button>
             </form>
           )}
+          <Button
+            type="button"
+            fullWidth
+            color="secondary"
+            href="http://localhost:3000/api/v1/auth/google"
+          >
+            Login with Google
+          </Button>
         </Paper>
       </main>
     );

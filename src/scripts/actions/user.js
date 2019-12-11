@@ -1,7 +1,7 @@
 import { createActions } from 'redux-actions';
 
 export const {
-  user: { login, receiveUserData, getUserByToken, setRedirectUrl, logout },
+  user: { login, receiveUserData, getUserByToken, setToken, logout },
 } = createActions({
   USER: {
     LOGIN: null,
@@ -12,8 +12,8 @@ export const {
     GET_USER_BY_TOKEN: () => ({
       isFetching: true,
     }),
-    SET_REDIRECT_URL: (url) => ({
-      setRedirectUrl: url,
+    SET_TOKEN: (token) => ({
+      token,
     }),
     LOGOUT: null,
   },

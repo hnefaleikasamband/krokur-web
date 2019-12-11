@@ -1,4 +1,4 @@
-import { takeLatest, all, put, call } from 'redux-saga/effects';
+import { takeLatest, all, put, call, select } from 'redux-saga/effects';
 import { matchesType, SnackErrorMessage, SnackSuccessMessage } from '../helpers';
 import { user as actions, snackbar } from '../../../actions';
 import api from './api';
@@ -22,7 +22,9 @@ function* login({ payload }) {
 
 function* getUserIfTokenPresent() {
   try {
-    const token = yield call(getFromLocalStorage, 'token');
+    const tokenStorage = yield call(getFromLocalStorage, 'token');
+    const tokenState = yield select((state) => state.user.token);
+    const token = tokenState || tokenStorage;
     if (!token) {
       yield put(actions.receiveUserData({}));
       return;
