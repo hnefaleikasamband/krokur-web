@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   AppBar as ApplicationBar,
@@ -96,13 +97,18 @@ const NotificationMenu = ({ classes, notificationMenuEl, setNotificationMenuEl }
   </Menu>
 );
 
-const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
+const AppBar = ({ classes, openDrawer, userInfo, logout, history }) => {
   const [profileMenuEl, setProfileMenuEl] = React.useState(null);
   const [notificationMenuEl, setNotificationMenuEl] = React.useState(null);
 
   const logoutUser = () => {
     logout();
     setProfileMenuEl(null);
+  };
+
+  const goToRoute = () => {
+    setProfileMenuEl(null);
+    history.push('/account');
   };
 
   const profileMenu = (
@@ -114,7 +120,7 @@ const AppBar = ({ classes, openDrawer, userInfo, logout }) => {
       open={Boolean(profileMenuEl)}
       onClose={() => setProfileMenuEl(null)}
     >
-      <MenuItem onClick={() => setProfileMenuEl(null)}>My account</MenuItem>
+      <MenuItem onClick={goToRoute}>My account</MenuItem>
       <MenuItem onClick={logoutUser}>Log out</MenuItem>
     </Menu>
   );
@@ -172,4 +178,4 @@ AppBar.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
 };
 
-export default withStyles(styles, { withTheme: true })(AppBar);
+export default withRouter(withStyles(styles, { withTheme: true })(AppBar));

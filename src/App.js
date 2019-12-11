@@ -10,6 +10,7 @@ import {
   ManageAthletes,
   System,
   AthleteDetails,
+  AccountSettings,
 } from './scripts/routes';
 import { CssBaseline } from '@material-ui/core';
 import { Login, PrivateRoute, ProtectedComponent } from './scripts/components';
@@ -31,6 +32,7 @@ const ProtectedApp = () => (
     />
     <Route path="/athlete/:athleteId" exact component={AthleteDetails} />
     <ProtectedComponent path="/system" exact component={System} roles={['ADMIN']} />
+    <Route path="/account" exact component={AccountSettings} />
     {/*<Route path="/" exact render={() => <Dashboard myText="Hello world" />} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/bout-logs" component={Dashboard} />
@@ -45,7 +47,7 @@ const App = () => {
       <SnackbarService />
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route path="/login" exact component={Login} />
           <PrivateRoute path="/" component={ProtectedApp} />
         </Switch>
       </Router>
