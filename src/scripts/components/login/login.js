@@ -20,6 +20,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from './styles';
 
+import config from '../../appConfiguration';
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -114,6 +116,14 @@ class SignIn extends Component {
               </Button>
             </form>
           )}
+          <Button
+            type="button"
+            fullWidth
+            color="secondary"
+            href={`${config.krokurApi}/api/v1/auth/google`}
+          >
+            Login with Google
+          </Button>
         </Paper>
       </main>
     );

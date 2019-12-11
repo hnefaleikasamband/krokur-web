@@ -17,7 +17,7 @@ const initialState = {
 const user = handleActions(
   new Map([
     [
-      combineActions(actions.receiveUserData, actions.getUserByToken),
+      combineActions(actions.receiveUserData, actions.getUserByToken, actions.setToken),
       (state, action) => ({
         ...state,
         ...action.payload,
