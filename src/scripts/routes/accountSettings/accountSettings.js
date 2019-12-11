@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from '../../components';
 import Button from '@material-ui/core/Button';
+import config from '../../appConfiguration';
 
 const AccountSettings = ({ user }) => {
   return (
@@ -12,7 +13,7 @@ const AccountSettings = ({ user }) => {
           <Button
             variant="contained"
             color="primary"
-            href={`http://localhost:3000/api/v1/auth/google?id=${user.userInfo.id}`}
+            href={`${config.krokurApi}/api/v1/auth/google?id=${user.userInfo.id}`}
           >
             link google
           </Button>
