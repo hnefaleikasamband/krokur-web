@@ -1,9 +1,8 @@
 import React from 'react';
 import { Header } from '../../components';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-const AccountSettings = ({ isFetchingUser, user, clubs, ...props }) => {
+const AccountSettings = ({ user }) => {
   return (
     <>
       <Header
