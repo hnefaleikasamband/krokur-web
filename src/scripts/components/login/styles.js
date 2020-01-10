@@ -17,9 +17,9 @@ export default (theme) => ({
     alignItems: 'center',
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  logo: {
+    marginBottom: theme.spacing(1),
+    width: '100%',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
