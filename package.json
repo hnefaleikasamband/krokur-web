@@ -16,7 +16,7 @@
     }
   },
   "dependencies": {
-    "@date-io/moment": "^1.3.8",
+    "@date-io/moment": "1.3.13",
     "@material-ui/core": "^4.8.1",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.37",
@@ -28,7 +28,7 @@
     "ilenia": "^9.0.4",
     "moment": "^2.24.0",
     "mui-datatables": "^2.7.0",
-    "react": "^16.8.6",
+    "react": "^16.12.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
