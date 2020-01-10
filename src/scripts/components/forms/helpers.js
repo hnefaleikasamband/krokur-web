@@ -63,7 +63,11 @@ export const DatePickerField = ({ field, form, classes, ...other }) => {
         format="DD-MM-YYYY"
         helperText={currentError}
         error={Boolean(currentError)}
-        onError={(error) => form.setFieldError(field.name, error)}
+        onError={(error) => {
+          if (error !== currentError) {
+            form.setFieldError(field.name, error);
+          }
+        }}
         onChange={(date) => date && form.setFieldValue(field.name, date, true)}
         {...other}
       />
