@@ -25,11 +25,11 @@ export const SelectWrapper = (data) =>
   ));
 
 const OpponentSelectHelper = (opponents) =>
-  Object.keys(opponents).map((key) => (
+  Object.keys(opponents).map((key) =>
     <MenuItem key={key} value={key}>
       {opponents[key].name} - {opponents[key].club}
     </MenuItem>
-  ));
+  );
 
 export const OpponentSelect = ({ form, opponents, error, classes, value }) => (
   <FormControl className={classes.formControl}>
@@ -45,6 +45,24 @@ export const OpponentSelect = ({ form, opponents, error, classes, value }) => (
       input={<Input error={error} id="opponent-helper" name="opponent" />}
     >
       {OpponentSelectHelper(opponents)}
+    </Select>
+  </FormControl>
+);
+
+export const AthleteSelect = ({ form, athletes, inputId, label, keyId, keyName, keyClub, error, classes, value }) => (
+  <FormControl className={classes.formControl}>
+    <InputLabel htmlFor={inputId}>{label}</InputLabel>
+    <Select
+      value={value}
+      onChange={(e) => {
+        const id = e.target.value;
+        form.setFieldValue(keyId, id);
+        form.setFieldValue(keyName, athletes[id].name);
+        form.setFieldValue(keyClub, athletes[id].club);
+      }}
+      input={<Input error={error} id={inputId} name={inputId} />}
+    >
+      {OpponentSelectHelper(athletes)}
     </Select>
   </FormControl>
 );
