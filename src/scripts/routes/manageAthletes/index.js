@@ -2,7 +2,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import renderWithActions from '../../helpers/renderWithActions';
-import { athletes as athletesActions, system as systemActions } from '../../actions';
+import { athletes as athletesActions, system as systemActions, matches as matchesActions } from '../../actions';
 import ManageAthletes from './manageAthletes';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -17,6 +17,7 @@ const mapDispatchToProps = {
   getManagedAthletes: athletesActions.getManagedAthletes,
   fetchClubs: systemActions.fetchClubs,
   addAthlete: athletesActions.addAthlete,
+  addMatch: matchesActions.addMatch,
 };
 
 const enhance = compose(

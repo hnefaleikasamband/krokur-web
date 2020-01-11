@@ -3,18 +3,24 @@ import Summary from './summary';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { AthleteForm, Header } from '../../components';
-import Button from '@material-ui/core/Button';
 
-const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete, history }) => {
+import MatchDialog from './matchDialog';
+
+const ManageAthletes = ({ isFetchingAthletes, athletes, clubsData, addAthlete, addMatch, history }) => {
   return (
     <div>
       <Header
         title="Manage Athletes"
         subtitle="Manage all athletes information & bouts"
         buttonsRight={
-          <Button variant="contained" color="primary" disabled>
+          <MatchDialog
+            athletes={athletes}
+            clubs={clubsData}
+            buttonText="Add a match"
+            submitAction={addMatch}
+          >
             Add Match
-          </Button>
+          </MatchDialog>
         }
       />
       <Grid container spacing={4} direction="row-reverse">
