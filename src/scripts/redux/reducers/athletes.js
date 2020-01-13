@@ -25,13 +25,25 @@ const athletes = handleActions(
         actions.getManagedAthletes,
         actions.getAthlete,
         actions.getAthleteBouts,
-        actions.receiveAllAthletes,
-        actions.receiveManagedAthletes,
         actions.receiveAthlete,
         actions.receiveAthleteBouts
       ),
       mergeState,
-    ],
+    ], [
+      actions.receiveAllAthletes,
+      (state, action) => (console.log(action.payload), {
+        ...state,
+        ...action.payload,
+        allAthletes: action.payload.allAthletes.sort((a, b) => a.name.localeCompare(b.name))
+      })
+    ], [
+      actions.receiveManagedAthletes,
+      (state, action) => ({
+        ...state,
+        ...action.payload,
+        managedAthletes: action.payload.managedAthletes.sort((a, b) => a.name.localeCompare(b.name))
+      })
+    ]
   ]),
   initialState
 );
