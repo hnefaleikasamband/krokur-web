@@ -22,10 +22,10 @@ const FormDialog = ({ athlete, opponents, clubs, submitAction, buttonText, initi
           <EditIcon fontSize="small" />
         </IconButton>
       ) : (
-        <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-          {buttonText}
-        </Button>
-      )}
+          <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+            {buttonText}
+          </Button>
+        )}
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -35,8 +35,8 @@ const FormDialog = ({ athlete, opponents, clubs, submitAction, buttonText, initi
         {initialValues ? (
           <DialogTitle id="form-dialog-title">Edit match</DialogTitle>
         ) : (
-          <DialogTitle id="form-dialog-title">Add a match</DialogTitle>
-        )}
+            <DialogTitle id="form-dialog-title">Add a match for {athlete.name.split(" ")[0]}</DialogTitle>
+          )}
         <DialogContent>
           <AthleteBoutForm
             athlete={athlete}
