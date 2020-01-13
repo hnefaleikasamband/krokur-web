@@ -8,8 +8,6 @@ function* addFullMatch({ payload }) {
     const { token } = yield select((state) => state.user);
     const { match } = payload;
 
-    console.log('match in saga:', match);
-
     yield call(api.addFullMatch, match, token);
     yield put(athletesAction.getAllAthletes());
     yield put(snackbar.addSnack(SnackSuccessMessage('Successfully added a new match')));

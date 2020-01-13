@@ -86,7 +86,7 @@ export const DatePickerField = ({ field, form, classes, ...other }) => {
             form.setFieldError(field.name, error);
           }
         }}
-        onChange={(date) => date && form.setFieldValue(field.name, date, true)}
+        onChange={(date) => date && form.setFieldValue(field.name, date.format('YYYY-MM-DDT00:00:00.000') + 'Z', true)}
         {...other}
       />
     </MuiPickersUtilsProvider>
