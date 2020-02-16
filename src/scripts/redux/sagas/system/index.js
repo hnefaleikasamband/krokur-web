@@ -81,11 +81,6 @@ function* addUser({ payload }) {
 function* updateUser({ payload: user }) {
   try {
     const { token } = yield select((state) => state.user);
-    
-    const userObject = {
-      ...user,
-      ...(user.role !== 'COACH' && user.club === null ? {club: null} : {})
-    };
     yield call(api.updateUser, user, token);
 
     yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully updated user ${user.name}`)));

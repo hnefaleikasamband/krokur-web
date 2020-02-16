@@ -14,7 +14,7 @@ export const userSchema = Yup.object().shape({
     .required('Password confirmation is required!')
     .strict(),
   role: Yup.string().required(),
-  club: Yup.string().nullable().when(('role', { is: 'COACH', then: Yup.string().required() })),
+  club: Yup.string().nullable().when('role', { is: 'COACH', then: Yup.string().required() }),
   disabled: Yup.bool().default(false),
 });
 
@@ -35,6 +35,6 @@ export const editUserSchema = Yup.object().shape({
     .email()
     .required(),
   role: Yup.string().required(),
-  club: Yup.string().nullable().when(('role', { is: 'COACH', then: Yup.string().required() })),
+  club: Yup.string().nullable().when('role', { is: 'COACH', then: Yup.string().required() }),
   disabled: Yup.bool().default(false),
 });
