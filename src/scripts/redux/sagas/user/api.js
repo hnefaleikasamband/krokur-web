@@ -5,7 +5,7 @@ const host = config.krokurApi;
 
 const signIn = ({ email, password }) =>
   axios
-    .post(`${host}/api/v1/auth/login`, {
+    .post(`${host}/v1/auth/login`, {
       email,
       password,
     })
@@ -13,7 +13,7 @@ const signIn = ({ email, password }) =>
 
 const getUserByToken = (token) =>
   axios
-    .get(`${host}/api/v1/auth/user`, {
+    .get(`${host}/v1/auth/user`, {
       headers: { Authorization: `JWT ${token}` },
     })
     .then((response) => response.data);

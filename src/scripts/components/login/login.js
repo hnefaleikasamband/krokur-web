@@ -108,7 +108,7 @@ class SignIn extends Component {
               </Button>
               </form>
             )}
-          <GoogleLoginButton href={`${config.krokurApi}/api/v1/auth/google`} />
+          <GoogleLoginButton href={`${config.krokurApi}/v1/auth/google`} />
         </Paper>
       </main>
     );

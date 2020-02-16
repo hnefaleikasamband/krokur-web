@@ -86,6 +86,7 @@ function* updateUser({ payload: user }) {
     yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully updated user ${user.name}`)));
     yield put(actions.fetchAllUsers());
   } catch (e) {
+    console.log('err:', e)
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
 }
