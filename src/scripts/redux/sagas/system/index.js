@@ -65,14 +65,16 @@ function* updateClub({ payload }) {
   }
 }
 
-function* addUser({ payload }) {
+function* addUser({ payload: user }) {
   try {
     const { token } = yield select((state) => state.user);
-    Object.keys(payload).forEach((key) => payload[key] === '' && delete payload[key]);
+    if (user.roles !== 'COACH') {
+      user.club = null;
+    }
 
-    yield call(api.addUser, payload, token);
+    yield call(api.addUser, user, token);
     yield put(actions.fetchAllUsers());
-    yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully added user ${payload.name}`)));
+    yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully added user ${user.name}`)));
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
