@@ -16,7 +16,7 @@ import styles from './userFormStyles';
 import { userSchema, editUserSchema } from './userSchema';
 
 const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, clubs }) => {
-  const [disabledSwitch, setdisabledSwitch] = React.useState(initialValues.disabled || false);
+  const [disabledSwitch, setDisabledSwitch] = React.useState(initialValues.disabled || false);
   // Form setup
   const isEdit = !!initialValues.id;
   initialValues.club = isEdit ? initialValues.club : '';
@@ -104,7 +104,7 @@ const UserForm = ({ initialValues, onSubmit, classes, submitText, onCancel, club
                 checked={disabledSwitch}
                 onChange={(e) => {
                   handleChange(e);
-                  setdisabledSwitch(!disabledSwitch);
+                  setDisabledSwitch(!disabledSwitch);
                 }}
                 value="disabled"
                 color="secondary"
