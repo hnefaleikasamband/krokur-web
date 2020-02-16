@@ -13,7 +13,7 @@ const AccountSettings = ({ user }) => {
           <Button
             variant="contained"
             color="primary"
-            href={`${config.krokurApi}/api/v1/auth/google?id=${user.userInfo.id}`}
+            href={`${config.krokurApi}/v1/auth/google?id=${user.userInfo.id}`}
           >
             link google
           </Button>
