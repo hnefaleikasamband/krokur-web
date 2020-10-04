@@ -30,7 +30,12 @@ const ProtectedApp = () => (
       component={ManageAthletes}
       roles={['ADMIN']}
     />
-    <Route path="/athlete/:athleteId" exact component={AthleteDetails} />
+    <ProtectedComponent
+      path="/athlete/:athleteId"
+      exact
+      component={AthleteDetails}
+      roles={['ADMIN', 'COACH']}
+    />
     <ProtectedComponent path="/system" exact component={System} roles={['ADMIN']} />
     <Route path="/account" exact component={AccountSettings} />
     {/*<Route path="/" exact render={() => <Dashboard myText="Hello world" />} />

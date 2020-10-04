@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { AthleteForm } from '../../components';
 
-const MyAthletes = ({ isFetching, addAthlete, athletes, club }) => {
+const MyAthletes = ({ isFetching, addAthlete, athletes, club, history }) => {
   const userClub = club || { name: 'Club data missing..' };
   return (
     <div>
@@ -15,7 +15,7 @@ const MyAthletes = ({ isFetching, addAthlete, athletes, club }) => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Summary isfetching={isFetching} athletes={athletes} club={userClub} />
+          <Summary isFetching={isFetching} athletes={athletes} club={userClub} history={history} />
         </Grid>
       </Grid>
     </div>
