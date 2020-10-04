@@ -1,7 +1,6 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { StarHighlighter } from '../../components';
-import copy from 'copy-to-clipboard';
 
 const starHighlighterHelper = (tableMeta) => {
   const dates = tableMeta.rowData ? tableMeta.rowData.slice(-8, -4) : [];
@@ -16,7 +15,7 @@ const starHighlighterHelper = (tableMeta) => {
   );
 };
 
-const Summary = ({ isFetching, athletes, club }) => {
+const Summary = ({ isFetching, athletes, club, history }) => {
   const hideColumnOptions = { sort: false, filter: false, display: false };
   const columns = [
     { name: 'id', options: hideColumnOptions },
@@ -59,11 +58,7 @@ const Summary = ({ isFetching, athletes, club }) => {
     print: false,
     viewColumns: false,
     onRowClick: (rowData) => {
-      const data = rowData.reduce((acc, curr) => {
-        acc += `\t${curr}`;
-        return acc;
-      }, '');
-      copy(data.slice(data.indexOf(1)));
+      history.push(`/athlete/${rowData[0]}`);
     },
   };
   return (

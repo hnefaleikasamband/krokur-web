@@ -50,11 +50,11 @@ const AthleteDetails = ({
       <BoutSummary isFetching={isFetchingBouts} athlete={athlete} bouts={bouts} history={history} />
     </>
   ) : (
-    <>
-      <Typography variant="h1"> 404 missing athlete...</Typography>
-      <Typography variant="h4"> Maybe a fancy 404 page should be here</Typography>
-    </>
-  );
+        <>
+          <Typography variant="h1"> 404 missing athlete...</Typography>
+          <Typography variant="h4"> If the system led you here, please contact an administrator with details how to reproduce</Typography>
+        </>
+      );
 };
 
 export default AthleteDetails;
