@@ -2,10 +2,10 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Header } from '../../components';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import BoutSummary from './boutSummary';
 import AthleteBoutDialog from './athleteBoutDialog';
+import PageNotFound from '../../components/pageNotFound';
 
 const tempDisplayButtons = (athlete, athletes, clubs, addBoutForAthlete) => (
   <>
@@ -50,10 +50,7 @@ const AthleteDetails = ({
       <BoutSummary isFetching={isFetchingBouts} athlete={athlete} bouts={bouts} history={history} />
     </>
   ) : (
-        <>
-          <Typography variant="h1"> 404 missing athlete...</Typography>
-          <Typography variant="h4"> If the system led you here, please contact an administrator with details how to reproduce</Typography>
-        </>
+        <PageNotFound />
       );
 };
 
