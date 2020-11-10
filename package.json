@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run postbuild",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/scripts/"
+    "lint": "eslint src/scripts/",
+    "postbuild": "cp scripts/_redirect build/_redirect"
   },
   "proxy": "http://localhost:4000",
   "husky": {
