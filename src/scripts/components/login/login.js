@@ -15,6 +15,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import HniLogo from '../../../assets/hni-logo.png';
+import Poweredby from '../../../assets/powered-by-vercel.svg';
 import styles from './styles';
 import GoogleLoginButton from './googleLoginButton';
 
@@ -110,6 +111,11 @@ class SignIn extends Component {
             )}
           <GoogleLoginButton href={`${config.krokurApi}/v1/auth/google`} />
         </Paper>
+        <div className={classes.poweredBy}>
+          <a href="https://vercel.com?utm_source=krokur&utm_campaign=oss">
+            <img src={Poweredby} alt="powered-by-vercel" />
+          </a>
+        </div>
       </main>
     );
   }
