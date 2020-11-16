@@ -21,8 +21,8 @@ esac
 
 export REACT_APP_API_GATEWAY="$REACT_APP_API_GATEWAY"
 
-yarn add global caprover
+npm i --global caprover
 rm -r ./build
-yarn build --prod
+npm run build --production
 tar -cvf ./deploy.tar --exclude="*.map" ./captain-definition ./build/*
 caprover deploy -t ./deploy.tar -h $CAP_HOST -a $APP_NAME -p $CAP_PASS > /dev/null 2>&1

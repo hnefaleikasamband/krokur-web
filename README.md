@@ -1,64 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Krókur 
 
-## Available Scripts
 
-In the project directory, you can run:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and is generously sponsored by [Vercel](https://vercel.com?utm_source=krokur&utm_campaign=oss)
 
-### `yarn start`
+This is the front-end of the application Krókur, which stores and represents data for Diploma Boxing managed by the Icelandic Boxing Association.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## `prerequisite`
+To run the frontend you only need node with npm.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+However, if you want to get further then displaying the login screen you'll need to [host your own API](https://github.com/hnefaleikasamband/krokur-api) and populate it.
 
-In order to tell the app what path to call for the API gateway we use `.env.local`. It should at least hold a value for `REACT_APP_API_GATEWAY` f.e.
+When you have your API up and running, point development build to it by creating a file in the root directory called `.env.local`. It should host the variable `REACT_APP_API_GATEWAY` and point to the api f.e.
 
 ```
 REACT_APP_API_GATEWAY='pathToApi.com'
 ```
 
-### `yarn test`
+## `Up and running`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install dependencies with
+```
+npm install
+```
 
-### `yarn build`
+and if all is well
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm start
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+This runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) (or the port shown in terminal) to view it in the browser.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Learn More
+## `Building`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To build the project for production run 
+```
+npm run build --production
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## License
+[GPL-3.0](https://github.com/hnefaleikasamband/krokur-web/blob/master/LICENSE)
 
-### Analyzing the Bundle Size
+<br>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![Powered by Vercel](src/assets/powered-by-vercel.svg?raw=true "Powered by Vercel")

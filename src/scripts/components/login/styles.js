@@ -31,4 +31,10 @@ export default (theme) => ({
   progress: {
     margin: theme.spacing(2),
   },
+  poweredBy: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
+    marginTop: '16px'
+  }
 });

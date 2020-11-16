@@ -10,6 +10,16 @@ export default (theme) => ({
       flexShrink: 0,
     },
   },
+  drawerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%'
+  },
+  logoWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
