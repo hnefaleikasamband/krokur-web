@@ -49,4 +49,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 <br>
 
-![Powered by Vercel](src/assets/powered-by-vercel.svg?raw=true "Powered by Vercel")
+[![Powered by Vercel](src/assets/powered-by-vercel.svg?raw=true "Powered by Vercel")](https://vercel.com?utm_source=krokur&utm_campaign=oss)
+
+
