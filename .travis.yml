@@ -2,10 +2,10 @@ language: node_js
 node_js: null
 
 script:
-  - yarn
-  - yarn lint
-  #- yarn test
-  - yarn build
+  - npm ci
+  - npm run lint
+  #- npm run test
+  - npm run build
 
 branches:
   only:

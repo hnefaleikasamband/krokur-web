@@ -22,6 +22,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import styles from './navStyles';
 import AppBar from './appBar';
+import PoweredByVercel from '../../../assets/powered-by-vercel.svg'
 
 const NavItem = ({ path, navText, show = true, icon }) => {
   return (
@@ -37,7 +38,8 @@ const NavItem = ({ path, navText, show = true, icon }) => {
 const showNavItem = (roles = [], role) => roles.includes(role);
 
 const drawer = (classes, user) => (
-  <div>
+  <div className={classes.drawerContainer} >
+    <div>
     <Hidden xsDown>
       <div className={classes.toolbar} />
     </Hidden>
@@ -80,6 +82,12 @@ const drawer = (classes, user) => (
       />
       {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
     </MenuList>
+    </div>
+    <div className={classes.logoWrapper} >
+      <a href="https://vercel.com?utm_source=krokur&utm_campaign=oss">
+        <img src={PoweredByVercel} alt="powered-by-vercel" />
+      </a>
+    </div>
   </div>
 );
 
