@@ -38,53 +38,57 @@ const NavItem = ({ path, navText, show = true, icon }) => {
 const showNavItem = (roles = [], role) => roles.includes(role);
 
 const drawer = (classes, user) => (
-  <div className={classes.drawerContainer} >
+  <div className={classes.drawerContainer}>
     <div>
-    <Hidden xsDown>
-      <div className={classes.toolbar} />
-    </Hidden>
-    <Hidden smUp>
-      <ListItem>
-        <ListItemText primary={'Krókur'} />
-      </ListItem>
-    </Hidden>
-    <Divider />
-    <MenuList>
-      <NavItem path="/" navText="Dashboard" icon={<DashboardIcon />} />
-      <NavItem path="/all-athletes" navText="All Athletes" icon={<SupervisorAccountIcon />} />
-      <NavItem
-        path="/my-athletes"
-        navText="My Athletes"
-        show={showNavItem(['COACH'], user.userInfo.role)}
-        icon={<SupervisedUserCircle />}
-      />
-      <NavItem
-        path="/manage-athletes"
-        navText="Manage Athletes"
-        show={showNavItem(['ADMIN'], user.userInfo.role)}
-        icon={<SupervisedUserCircle />}
-      />
-    </MenuList>
-    <Divider />
-    <MenuList>
-      {/*<NavItem
+      <Hidden xsDown>
+        <div className={classes.toolbar} />
+      </Hidden>
+      <Hidden smUp>
+        <ListItem>
+          <ListItemText primary={"Krókur"} />
+        </ListItem>
+      </Hidden>
+      <Divider />
+      <MenuList>
+        <NavItem path="/" navText="Dashboard" icon={<DashboardIcon />} />
+        <NavItem
+          path="/all-athletes"
+          navText="All Athletes"
+          icon={<SupervisorAccountIcon />}
+        />
+        <NavItem
+          path="/my-athletes"
+          navText="My Athletes"
+          show={showNavItem(["COACH"], user.userInfo.role)}
+          icon={<SupervisedUserCircle />}
+        />
+        <NavItem
+          path="/manage-athletes"
+          navText="Manage Athletes"
+          show={showNavItem(["ADMIN"], user.userInfo.role)}
+          icon={<SupervisedUserCircle />}
+        />
+      </MenuList>
+      <Divider />
+      <MenuList>
+        {/*<NavItem
         path="/bout-logs"
         navText="Bout logs"
         show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<ViewList />}
       />*/}
-      {/*<NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />*/}
-      <NavItem
-        path="/system"
-        navText="System"
-        show={showNavItem(['ADMIN'], user.userInfo.role)}
-        icon={<MemoryIcon />}
-      />
-      {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
-    </MenuList>
+        {/*<NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />*/}
+        <NavItem
+          path="/system"
+          navText="System"
+          show={showNavItem(["ADMIN"], user.userInfo.role)}
+          icon={<MemoryIcon />}
+        />
+        {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
+      </MenuList>
     </div>
-    <div className={classes.logoWrapper} >
-      <a href="https://vercel.com?utm_source=krokur&utm_campaign=oss">
+    <div className={classes.logoWrapper}>
+      <a href="https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss">
         <img src={PoweredByVercel} alt="powered-by-vercel" />
       </a>
     </div>

@@ -62,57 +62,61 @@ class SignIn extends Component {
           {isLoading ? (
             <CircularProgress className={classes.progress} />
           ) : (
-              <form className={classes.form} onSubmit={this.handleSubmit}>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="email">Email Address</InputLabel>
-                  <Input
-                    id="email"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={this.handleChange('email')}
-                    value={email}
-                  />
-                </FormControl>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    onChange={this.handleChange('password')}
-                    autoComplete="current-password"
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                          onClick={this.handleClickShowPassword}
-                        >
-                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                {/*
+            <form className={classes.form} onSubmit={this.handleSubmit}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Email Address</InputLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  onChange={this.handleChange("email")}
+                  value={email}
+                />
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={this.handleChange("password")}
+                  autoComplete="current-password"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="Toggle password visibility"
+                        onClick={this.handleClickShowPassword}
+                      >
+                        {showPassword ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              {/*
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />*/}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="outlined"
-                  color="default"
-                  className={classes.submit}
-                >
-                  Sign in
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                color="default"
+                className={classes.submit}
+              >
+                Sign in
               </Button>
-              </form>
-            )}
+            </form>
+          )}
           <GoogleLoginButton href={`${config.krokurApi}/v1/auth/google`} />
         </Paper>
         <div className={classes.poweredBy}>
-          <a href="https://vercel.com?utm_source=krokur&utm_campaign=oss">
+          <a href="https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss">
             <img src={Poweredby} alt="powered-by-vercel" />
           </a>
         </div>
