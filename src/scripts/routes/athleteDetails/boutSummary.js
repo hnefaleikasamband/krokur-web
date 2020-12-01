@@ -47,7 +47,7 @@ const Summary = ({ isFetching, athlete, bouts, history }) => {
     downloadOptions: {
       filename: `${athlete ? athlete.name : 'athlete'}-matches.csv`,
     },
-    responsive: 'stacked',
+    responsive: 'vertical',
     print: false,
     viewColumns: false,
     onRowClick: (rowData) => {
