@@ -36,7 +36,7 @@ const Summary = ({ isFetching, athletes, history }) => {
       name: 'achievements',
       label: 'Achievements',
       options: {
-        hint: 'Diploma / Bronz / Silver / Gold',
+        hint: 'Diploma / Bronze / Silver / Gold',
         filter: false,
         sort: false,
         empty: true,
@@ -61,7 +61,7 @@ const Summary = ({ isFetching, athletes, history }) => {
     downloadOptions: {
       filename: 'athletes.csv',
     },
-    responsive: 'stacked',
+    responsive: 'vertical',
     print: false,
     viewColumns: false,
     onRowClick: (rowData) => {
