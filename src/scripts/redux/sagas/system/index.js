@@ -1,7 +1,11 @@
-import { takeLatest, all, put, select, call } from 'redux-saga/effects';
-import { matchesType, SnackErrorMessage, SnackSuccessMessage } from '../helpers';
-import api from './api';
-import { system as actions, snackbar } from '../../../actions';
+import { takeLatest, all, put, select, call } from "redux-saga/effects";
+import {
+  matchesType,
+  SnackErrorMessage,
+  SnackSuccessMessage,
+} from "../helpers";
+import api from "./api";
+import { system as actions, snackbar } from "../../../actions";
 
 function* fetchUsers() {
   try {
@@ -10,7 +14,10 @@ function* fetchUsers() {
 
     const usersList = yield call(api.getUsers, token);
     // TODO: Remove unnecessary club shorthand addition as this should be returned from the api
-    const clubs = currentClubs.length <= 0 ? (yield call(api.getClubs, token)).clubs : currentClubs;
+    const clubs =
+      currentClubs.length <= 0
+        ? (yield call(api.getClubs, token)).clubs
+        : currentClubs;
     const users = usersList.users.map((user) => {
       const name = clubs.find((c) => c.id === user.club);
       return {
@@ -44,7 +51,9 @@ function* addClub({ payload }) {
     yield call(api.addClub, payload, token);
     yield put(actions.fetchClubs());
     yield put(
-      snackbar.addSnack(SnackSuccessMessage(`Successfully added club ${payload.shorthand}`))
+      snackbar.addSnack(
+        SnackSuccessMessage(`Successfully added club ${payload.shorthand}`)
+      )
     );
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
@@ -58,7 +67,9 @@ function* updateClub({ payload }) {
     yield call(api.updateClub, payload, token);
     yield put(actions.fetchClubs());
     yield put(
-      snackbar.addSnack(SnackSuccessMessage(`Successfully updated club ${payload.shorthand}`))
+      snackbar.addSnack(
+        SnackSuccessMessage(`Successfully updated club ${payload.shorthand}`)
+      )
     );
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
@@ -68,13 +79,17 @@ function* updateClub({ payload }) {
 function* addUser({ payload: user }) {
   try {
     const { token } = yield select((state) => state.user);
-    if (user.roles !== 'COACH') {
+    if (user.role !== "COACH") {
       user.club = null;
     }
 
     yield call(api.addUser, user, token);
     yield put(actions.fetchAllUsers());
-    yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully added user ${user.name}`)));
+    yield put(
+      snackbar.addSnack(
+        SnackSuccessMessage(`Successfully added user ${user.name}`)
+      )
+    );
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
@@ -85,10 +100,14 @@ function* updateUser({ payload: user }) {
     const { token } = yield select((state) => state.user);
     yield call(api.updateUser, user, token);
 
-    yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully updated user ${user.name}`)));
+    yield put(
+      snackbar.addSnack(
+        SnackSuccessMessage(`Successfully updated user ${user.name}`)
+      )
+    );
     yield put(actions.fetchAllUsers());
   } catch (e) {
-    console.log('err:', e)
+    console.log("err:", e);
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
 }
@@ -108,7 +127,9 @@ function* updateUserPassword({ payload: user }) {
   try {
     const { token } = yield select((state) => state.user);
     yield call(api.updateUserPassword, user, token);
-    yield put(snackbar.addSnack(SnackSuccessMessage(`Successfully updated password`)));
+    yield put(
+      snackbar.addSnack(SnackSuccessMessage(`Successfully updated password`))
+    );
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage(e.response.data.error)));
   }
