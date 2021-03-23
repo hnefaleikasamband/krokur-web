@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CssBaseline,
@@ -38,112 +38,111 @@ const NavItem = ({ path, navText, show = true, icon }) => {
 const showNavItem = (roles = [], role) => roles.includes(role);
 
 const drawer = (classes, user) => (
-  <div className={classes.drawerContainer} >
+  <div className={classes.drawerContainer}>
     <div>
-    <Hidden xsDown>
-      <div className={classes.toolbar} />
-    </Hidden>
-    <Hidden smUp>
-      <ListItem>
-        <ListItemText primary={'Krókur'} />
-      </ListItem>
-    </Hidden>
-    <Divider />
-    <MenuList>
-      <NavItem path="/" navText="Dashboard" icon={<DashboardIcon />} />
-      <NavItem path="/all-athletes" navText="All Athletes" icon={<SupervisorAccountIcon />} />
-      <NavItem
-        path="/my-athletes"
-        navText="My Athletes"
-        show={showNavItem(['COACH'], user.userInfo.role)}
-        icon={<SupervisedUserCircle />}
-      />
-      <NavItem
-        path="/manage-athletes"
-        navText="Manage Athletes"
-        show={showNavItem(['ADMIN'], user.userInfo.role)}
-        icon={<SupervisedUserCircle />}
-      />
-    </MenuList>
-    <Divider />
-    <MenuList>
-      {/*<NavItem
+      <Hidden xsDown>
+        <div className={classes.toolbar} />
+      </Hidden>
+      <Hidden smUp>
+        <ListItem>
+          <ListItemText primary={"Krókur"} />
+        </ListItem>
+      </Hidden>
+      <Divider />
+      <MenuList>
+        <NavItem path="/" navText="Dashboard" icon={<DashboardIcon />} />
+        <NavItem
+          path="/all-athletes"
+          navText="All Athletes"
+          icon={<SupervisorAccountIcon />}
+        />
+        <NavItem
+          path="/my-athletes"
+          navText="My Athletes"
+          show={showNavItem(["COACH"], user.userInfo.role)}
+          icon={<SupervisedUserCircle />}
+        />
+        <NavItem
+          path="/manage-athletes"
+          navText="Manage Athletes"
+          show={showNavItem(["ADMIN"], user.userInfo.role)}
+          icon={<SupervisedUserCircle />}
+        />
+      </MenuList>
+      <Divider />
+      <MenuList>
+        {/*<NavItem
         path="/bout-logs"
         navText="Bout logs"
         show={showNavItem(['ADMIN'], user.userInfo.role)}
         icon={<ViewList />}
       />*/}
-      {/*<NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />*/}
-      <NavItem
-        path="/system"
-        navText="System"
-        show={showNavItem(['ADMIN'], user.userInfo.role)}
-        icon={<MemoryIcon />}
-      />
-      {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
-    </MenuList>
+        {/*<NavItem path="/guide" navText="Diploma guide" icon={<SchoolIcon />} />*/}
+        <NavItem
+          path="/system"
+          navText="System"
+          show={showNavItem(["ADMIN"], user.userInfo.role)}
+          icon={<MemoryIcon />}
+        />
+        {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
+      </MenuList>
     </div>
-    <div className={classes.logoWrapper} >
-      <a href="https://vercel.com?utm_source=krokur&utm_campaign=oss">
+    <div className={classes.logoWrapper}>
+      <a href="https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss">
         <img src={PoweredByVercel} alt="powered-by-vercel" />
       </a>
     </div>
   </div>
 );
 
-class ResponsiveDrawer extends React.Component {
-  state = {
-    mobileOpen: false,
-  };
+const ResponsiveDrawer = ({children, classes, user, logout}) => {
 
-  handleDrawerToggle = () => {
-    this.setState((state) => ({ mobileOpen: !state.mobileOpen }));
-  };
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  render() {
-    const { children, classes, user, logout } = this.props;
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar openDrawer={() => setMobileOpen(!mobileOpen)} userInfo={user.userInfo} logout={logout} />
+      <nav className={classes.drawer}>
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={() => setMobileOpen(!mobileOpen)}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            {drawer(classes, user)}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer(classes, user)}
+          </Drawer>
+        </Hidden>
+      </nav>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        {children}
+      </main>
+    </div>
+  );
+};
 
-    return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar openDrawer={this.handleDrawerToggle} userInfo={user.userInfo} logout={logout} />
-        <nav className={classes.drawer}>
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              variant="temporary"
-              open={this.state.mobileOpen}
-              onClose={this.handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-            >
-              {drawer(classes, user)}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer(classes, user)}
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          {children}
-        </main>
-      </div>
-    );
-  }
-}
+
 
 ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired, // eslint-disable-line
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);

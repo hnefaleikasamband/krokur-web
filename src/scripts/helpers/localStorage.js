@@ -45,6 +45,6 @@ export const removeFromLocalStorage = (name) => {
   try {
     localStorage.removeItem(name);
   } catch (error) {
-    console.error('Somethign went wront clearing data in local storage');
+    console.error("Something went wrong clearing data in local storage");
   }
 };

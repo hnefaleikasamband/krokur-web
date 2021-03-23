@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -21,110 +21,96 @@ import GoogleLoginButton from './googleLoginButton';
 
 import config from '../../appConfiguration';
 
-class SignIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirectToReferrer: false,
-      email: '',
-      password: '',
-      showPassword: false,
-    };
-  }
+const SignIn = ({ classes, location, isLoading, isLoggedIn, attemptLogin}) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  handleChange = (name) => (event) => {
-    this.setState({ ...this.state, [name]: event.target.value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = this.state;
-    this.props.attemptLogin({ email, password });
+    attemptLogin({ email, password });
   };
-
-  handleClickShowPassword = () => {
-    this.setState({ ...this.state, showPassword: !this.state.showPassword });
-  };
-
-  render() {
-    const { classes, isLoading, isLoggedIn } = this.props;
-    const { showPassword, email } = this.state;
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-
-    if (isLoggedIn) {
-      return <Redirect to={from} />;
-    }
-
-    return (
-      <main className={classes.main}>
-        <Paper className={classes.paper}>
-          <img src={HniLogo} alt="HNÍ logo" className={classes.logo} />
-          {isLoading ? (
-            <CircularProgress className={classes.progress} />
-          ) : (
-              <form className={classes.form} onSubmit={this.handleSubmit}>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="email">Email Address</InputLabel>
-                  <Input
-                    id="email"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={this.handleChange('email')}
-                    value={email}
-                  />
-                </FormControl>
-                <FormControl margin="normal" required fullWidth>
-                  <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    onChange={this.handleChange('password')}
-                    autoComplete="current-password"
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                          onClick={this.handleClickShowPassword}
-                        >
-                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                {/*
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />*/}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="outlined"
-                  color="default"
-                  className={classes.submit}
-                >
-                  Sign in
-              </Button>
-              </form>
-            )}
-          <GoogleLoginButton href={`${config.krokurApi}/v1/auth/google`} />
-        </Paper>
-        <div className={classes.poweredBy}>
-          <a href="https://vercel.com?utm_source=krokur&utm_campaign=oss">
-            <img src={Poweredby} alt="powered-by-vercel" />
-          </a>
-        </div>
-      </main>
-    );
+  
+  if (isLoggedIn) {
+    const { from } = location.state || { from: { pathname: '/' } };
+    return <Redirect to={from} />;
   }
-}
+
+  return (
+    <main className={classes.main}>
+      <Paper className={classes.paper}>
+        <img src={HniLogo} alt="HNÍ logo" className={classes.logo} />
+        {isLoading ? (
+          <CircularProgress className={classes.progress} />
+        ) : (
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                variant="outlined"
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="Toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+            {/*
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />*/}
+            <Button
+              type="submit"
+              fullWidth
+              variant="outlined"
+              color="default"
+              className={classes.submit}
+            >
+              Sign in
+            </Button>
+          </form>
+        )}
+        <GoogleLoginButton href={`${config.krokurApi}/v1/auth/google`} />
+      </Paper>
+      <div className={classes.poweredBy}>
+        <a href="https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss">
+          <img src={Poweredby} alt="powered-by-vercel" />
+        </a>
+      </div>
+    </main>
+  );
+};
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
   isLoading: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  attemptLogin: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SignIn);
