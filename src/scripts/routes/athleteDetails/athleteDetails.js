@@ -1,11 +1,19 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { Header } from '../../components';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import BoutSummary from './boutSummary';
-import AthleteBoutDialog from './athleteBoutDialog';
-import PageNotFound from '../../components/pageNotFound';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { Header, NumberHighlighter } from "../../components";
+import { Button, CircularProgress, makeStyles } from "@material-ui/core";
+import BoutSummary from "./boutSummary";
+import AthleteBoutDialog from "./athleteBoutDialog";
+import PageNotFound from "../../components/pageNotFound";
+
+const useStyles = makeStyles({
+  headerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: "24px",
+  },
+});
 
 const tempDisplayButtons = (athlete, athletes, clubs, addBoutForAthlete) => (
   <>
@@ -35,23 +43,41 @@ const AthleteDetails = ({
   userClub,
   ...props
 }) => {
-  if (!isAdmin && userClub && athlete && userClub.shorthand !== athlete.clubShorthand) {
-    return <Redirect to={{ pathname: '/', state: { from: props.location } }} />;
+  const classes = useStyles();
+  console.log(athlete);
+  if (
+    !isAdmin &&
+    userClub &&
+    athlete &&
+    userClub.shorthand !== athlete.clubShorthand
+  ) {
+    return <Redirect to={{ pathname: "/", state: { from: props.location } }} />;
   }
   return isFetchingAthlete ? (
     <CircularProgress />
   ) : athlete ? (
     <>
-      <Header
-        title={athlete.name}
-        subtitle={`KT: ${athlete.ssn} - ${athlete.club}`}
-        buttonsRight={isAdmin && tempDisplayButtons(athlete, athletes, clubs, addBoutForAthlete)}
+      <div className={classes.headerContainer}>
+        <Header
+          title={athlete.name}
+          subtitle={`KT: ${athlete.ssn} - ${athlete.club}`}
+          buttonsRight={
+            isAdmin &&
+            tempDisplayButtons(athlete, athletes, clubs, addBoutForAthlete)
+          }
+        />
+        <NumberHighlighter value={bouts.length} text="Bout Count" />
+      </div>
+      <BoutSummary
+        isFetching={isFetchingBouts}
+        athlete={athlete}
+        bouts={bouts}
+        history={history}
       />
-      <BoutSummary isFetching={isFetchingBouts} athlete={athlete} bouts={bouts} history={history} />
     </>
   ) : (
-        <PageNotFound />
-      );
+    <PageNotFound />
+  );
 };
 
 export default AthleteDetails;
