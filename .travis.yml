@@ -19,8 +19,3 @@ deploy:
     on:
       branch: master
       tags: true
-  # - provider: script
-  #   skip_cleanup: true
-  #   script: bash scripts/deploy.sh staging
-  #   on:
-  #     branch: master
