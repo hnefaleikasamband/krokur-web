@@ -26,6 +26,16 @@ const Summary = ({ isFetching, athletes, club, history }) => {
       options: { filter: false, sort: false },
     },
     {
+      name: "class",
+      label: "Class",
+      option: { filter: true, sort: true },
+    },
+    {
+      name: "bouts",
+      label: "Bouts",
+      option: { filter: false, sort: true },
+    },
+    {
       name: 'achievements',
       label: 'Achievements',
       options: {
