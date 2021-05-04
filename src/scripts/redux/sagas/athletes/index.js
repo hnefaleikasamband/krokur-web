@@ -2,6 +2,7 @@ import { takeLatest, all, put, select, call } from 'redux-saga/effects';
 import { matchesType, SnackErrorMessage, SnackSuccessMessage } from '../helpers';
 import api from './api';
 import { athletes as actions, snackbar } from '../../../actions';
+import { CalculateClassFromSSN } from '../../../helpers/utils';
 
 function* fetchAthletes() {
   try {
@@ -17,7 +18,11 @@ function* fetchManagedAthletes() {
   try {
     const { token } = yield select((state) => state.user);
     const { athletes } = yield call(api.getManagedAthletes, token);
-    yield put(actions.receiveManagedAthletes(athletes));
+    const enrichAthletes = athletes.map((athlete) => ({
+      ...athlete,
+      class: CalculateClassFromSSN(athlete.ssn),
+    }));
+    yield put(actions.receiveManagedAthletes(enrichAthletes));
   } catch (e) {
     yield put(snackbar.addSnack(SnackErrorMessage()));
   }
