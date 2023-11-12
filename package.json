@@ -22,7 +22,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.3.10",
     "@material-ui/styles": "^4.11.3",
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "copy-to-clipboard": "^3.2.0",
     "formik": "^1.5.8",
     "ilenia": "^9.0.4",
