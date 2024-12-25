@@ -1,9 +1,9 @@
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import renderWithActions from '../../helpers/renderWithActions';
-import { system as systemActions } from '../../actions';
-import System from './system';
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import renderWithActions from "../../helpers/renderWithActions";
+import { system as systemActions } from "../../actions";
+import System from "./system";
 
 const mapStateToProps = (state, ownProps) => ({
   isFetchingUsers: state.system.isFetchingUsers,
@@ -21,16 +21,13 @@ const mapDispatchToProps = {
   addUserAction: systemActions.addUser,
   updateUserAction: systemActions.updateUser,
   toggleUserDisabledValue: systemActions.toggleUserDisabledValue,
-  receiveUser: systemActions.receiveUser,
+  receiveUser: systemActions.receiveUsers,
   updateUserPassword: systemActions.updateUserPassword,
 };
 
 const enhance = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  renderWithActions(['fetchAllUsers', 'fetchClubs'])
+  connect(mapStateToProps, mapDispatchToProps),
+  renderWithActions(["fetchAllUsers", "fetchClubs"])
 );
 
 const MainComponent = enhance(System);
