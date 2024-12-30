@@ -2,23 +2,19 @@ const drawerWidth = 240;
 
 export default (theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   drawerContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%'
-  },
-  logoWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {

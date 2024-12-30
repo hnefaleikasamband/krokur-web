@@ -1,38 +1,37 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Paper from '@material-ui/core/Paper';
-import withStyles from '@material-ui/core/styles/withStyles';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import HniLogo from '../../../assets/hni-logo.png';
-import Poweredby from '../../../assets/powered-by-vercel.svg';
-import styles from './styles';
-import GoogleLoginButton from './googleLoginButton';
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import Paper from "@material-ui/core/Paper";
+import withStyles from "@material-ui/core/styles/withStyles";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import HniLogo from "../../../assets/hni-logo.png";
+import styles from "./styles";
+import GoogleLoginButton from "./googleLoginButton";
 
-import config from '../../appConfiguration';
+import config from "../../appConfiguration";
 
-const SignIn = ({ classes, location, isLoading, isLoggedIn, attemptLogin}) => {
+const SignIn = ({ classes, location, isLoading, isLoggedIn, attemptLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     attemptLogin({ email, password });
   };
-  
+
   if (isLoggedIn) {
-    const { from } = location.state || { from: { pathname: '/' } };
+    const { from } = location.state || { from: { pathname: "/" } };
     return <Redirect to={from} />;
   }
 
@@ -97,11 +96,6 @@ const SignIn = ({ classes, location, isLoading, isLoggedIn, attemptLogin}) => {
         )}
         <GoogleLoginButton href={`${config.krokurApi}/v1/auth/google`} />
       </Paper>
-      <div className={classes.poweredBy}>
-        <a href="https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss">
-          <img src={Poweredby} alt="powered-by-vercel" />
-        </a>
-      </div>
     </main>
   );
 };
@@ -110,7 +104,7 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line
   isLoading: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  attemptLogin: PropTypes.func.isRequired
+  attemptLogin: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(SignIn);

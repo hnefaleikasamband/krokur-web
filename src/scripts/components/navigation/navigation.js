@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   CssBaseline,
   Divider,
@@ -10,19 +10,18 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+} from "@material-ui/core";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 //import SettingsIcon from '@material-ui/icons/Settings';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import SupervisedUserCircle from '@material-ui/icons/SupervisedUserCircle';
-import MemoryIcon from '@material-ui/icons/Memory';
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import SupervisedUserCircle from "@material-ui/icons/SupervisedUserCircle";
+import MemoryIcon from "@material-ui/icons/Memory";
 //import ViewList from '@material-ui/icons/ViewList';
 //import SchoolIcon from '@material-ui/icons/School';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import styles from './navStyles';
-import AppBar from './appBar';
-import PoweredByVercel from '../../../assets/powered-by-vercel.svg'
+import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import styles from "./navStyles";
+import AppBar from "./appBar";
 
 const NavItem = ({ path, navText, show = true, icon }) => {
   return (
@@ -87,22 +86,20 @@ const drawer = (classes, user) => (
         {/*<NavItem path="/account" navText="My Account" icon={<SettingsIcon />} />*/}
       </MenuList>
     </div>
-    <div className={classes.logoWrapper}>
-      <a href="https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss">
-        <img src={PoweredByVercel} alt="powered-by-vercel" />
-      </a>
-    </div>
   </div>
 );
 
-const ResponsiveDrawer = ({children, classes, user, logout}) => {
-
+const ResponsiveDrawer = ({ children, classes, user, logout }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar openDrawer={() => setMobileOpen(!mobileOpen)} userInfo={user.userInfo} logout={logout} />
+      <AppBar
+        openDrawer={() => setMobileOpen(!mobileOpen)}
+        userInfo={user.userInfo}
+        logout={logout}
+      />
       <nav className={classes.drawer}>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -136,8 +133,6 @@ const ResponsiveDrawer = ({children, classes, user, logout}) => {
     </div>
   );
 };
-
-
 
 ResponsiveDrawer.propTypes = {
   classes: PropTypes.object.isRequired,

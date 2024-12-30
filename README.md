@@ -1,6 +1,6 @@
 # Krókur
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and is generously sponsored by [Vercel](https://vercel.com?utm_source=krokur&utm_campaign=oss)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
 This is the front-end of the application Krókur, which stores and represents data for Diploma Boxing managed by the Icelandic Boxing Association.
 
@@ -48,7 +48,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 
 [GPL-3.0](https://github.com/hnefaleikasamband/krokur-web/blob/master/LICENSE)
-
-<br>
-
-[![Powered by Vercel](src/assets/powered-by-vercel.svg?raw=true "Powered by Vercel")](https://vercel.com?utm_source=hnefaleikasamband&utm_campaign=oss)
